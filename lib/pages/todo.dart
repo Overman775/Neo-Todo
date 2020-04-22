@@ -17,6 +17,24 @@ class _TodoPageState extends State<TodoPage> {
         appBar: AppBar(
           title: Text('Todo List'),
         ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.blue,
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            // open add dialog
+          },
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          color: Colors.white,
+          child: Container(
+            height: 50,
+          ),
+        ),
         body: Container(
           child: Consumer<TodoModel>(builder: (context, todo, child) {
             List<Widget> getTasks() {
