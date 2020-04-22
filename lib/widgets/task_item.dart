@@ -20,6 +20,7 @@ class TaskItem extends StatelessWidget {
             },
           ),
           title: Text(task.title),
+          subtitle: task.description != null ? Text(task.description) : null,
         ),
         secondaryBackground: Container(
           alignment: Alignment.centerRight,

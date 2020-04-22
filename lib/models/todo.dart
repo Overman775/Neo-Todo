@@ -6,7 +6,7 @@ import 'package:todolist/models/task.dart';
 class TodoModel extends ChangeNotifier {
   final List<Task> _tasks = [
     Task(title: 'Задача 1'),
-    Task(title: 'Задача 2'),
+    Task(title: 'Задача 2', description: 'Описание задачи'),
     Task(title: 'Задача 3'),
   ];
 
