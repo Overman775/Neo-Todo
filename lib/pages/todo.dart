@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todolist/models/todo.dart';
+import 'package:todolist/widgets/task_item.dart';
 
 class TodoPage extends StatefulWidget {
   TodoPage({Key key}) : super(key: key);
@@ -10,8 +13,19 @@ class TodoPage extends StatefulWidget {
 class _TodoPageState extends State<TodoPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-       child: null,
-    );
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Todo List'),
+        ),
+        body: Container(
+          child: Consumer<TodoModel>(builder: (context, todo, child) {
+            List<Widget> getTasks() {
+              return todo.tasks.map((task) => TaskItem(task)).toList();
+            }
+            return ListView(
+              children: getTasks(),
+            );
+          }),
+        ));
   }
 }

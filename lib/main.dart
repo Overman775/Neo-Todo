@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         home: MultiProvider(
-          providers: [ChangeNotifierProvider(create: (_) => ToDo())],
+          providers: [ChangeNotifierProvider(create: (_) => TodoModel())],
           child: TodoPage(),
         ));
   }
