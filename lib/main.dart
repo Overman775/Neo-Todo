@@ -17,9 +17,13 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
         ),
         initialRoute: '/',
-        routes: {
-          '/': (context) => TodoPage(),
-          '/task': (context) => AddTask(),
+        onGenerateRoute: (RouteSettings settings) {
+          var routes = <String, WidgetBuilder>{
+            "/": (context) => TodoPage(),
+            "/task": (context) => AddTask(settings.arguments),
+          };
+          WidgetBuilder builder = routes[settings.name];
+          return MaterialPageRoute(builder: (context) => builder(context));
         },
       ),
     );
