@@ -7,30 +7,52 @@ import 'package:todolist/models/task.dart';
 import 'package:todolist/models/todo.dart';
 
 class AddTask extends StatefulWidget {
-  AddTask({Key key}) : super(key: key);
+  final PageArguments args;
+  AddTask(this.args, {Key key}) : super(key: key);
 
   @override
-  _AddTaskState createState() => _AddTaskState();
+  _AddTaskState createState() => _AddTaskState(args);
 }
 
 class _AddTaskState extends State<AddTask> {
+  PageArguments args;
+
+  _AddTaskState(this.args);
+
   final _formKey = GlobalKey<FormState>();
   final _titleFormController = TextEditingController();
   final _descriptionFormController = TextEditingController();
-
+  
   TodoModel todo;
 
   @override
   void initState() {
     super.initState();
     todo = Provider.of<TodoModel>(context, listen: false);
+    _initForm();
   }
+
+  void _initForm() {
+    if (_argsHaveTask) {
+      _titleFormController.text = args.task.title;
+      _descriptionFormController.text = args.task.description;
+    }
+  }
+
+  bool get _argsHaveTask => args?.task != null;
 
   void _saveForm() {
     if (_formKey.currentState.validate()) {
-      todo.addTodo(Task(
-          title: _titleFormController.text,
-          description: _descriptionFormController.text));
+      if (_argsHaveTask) {
+        todo.editTodo(args.task, Task(
+            title: _titleFormController.text,
+            description: _descriptionFormController.text));
+      } else {
+        todo.addTodo(Task(
+            title: _titleFormController.text,
+            description: _descriptionFormController.text));
+      }
+
       //go back
       Navigator.of(context).pop();
     }
@@ -45,11 +67,10 @@ class _AddTaskState extends State<AddTask> {
 
   @override
   Widget build(BuildContext context) {
-    final PageArguments args = ModalRoute.of(context).settings.arguments;
     log('Open task ${args?.task?.title}');
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Task'),
+        title: _argsHaveTask? Text(args.task.title) : Text('Add Task'),
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 16),
