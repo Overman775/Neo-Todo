@@ -29,4 +29,10 @@ class TodoModel extends ChangeNotifier {
     log('Task delete ${task.title}');
     notifyListeners();
   }
+
+  void editTodo(Task old_task,Task new_task) {
+    _tasks[_tasks.indexOf(old_task)] = new_task;
+    log('Task edited ${old_task.title}');
+    notifyListeners();
+  }
 }
