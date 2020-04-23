@@ -24,7 +24,7 @@ class _TodoPageState extends State<TodoPage> {
             color: Colors.white,
           ),
           onPressed: () {
-            // open add dialog
+            Navigator.pushNamed(context, '/task');
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

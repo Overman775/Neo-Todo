@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todolist/models/pages_arguments.dart';
 import 'package:todolist/models/task.dart';
 import 'package:todolist/models/todo.dart';
 
@@ -43,6 +44,7 @@ class TaskItem extends StatelessWidget {
         confirmDismiss: (direction) async {
           if (direction == DismissDirection.startToEnd) {
             /// edit
+            await Navigator.pushNamed(context, '/task', arguments: PageArguments(task: task));
             return false;
           } else {
             /// delete
@@ -52,6 +54,8 @@ class TaskItem extends StatelessWidget {
         onDismissed: (direction){
           if (direction == DismissDirection.endToStart) {
               Provider.of<TodoModel>(context, listen: false).deleteTodo(task);
+          }else{
+            
           }        
         },
         );
