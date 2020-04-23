@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/models/pages_arguments.dart';
 import 'package:todolist/models/task.dart';
@@ -44,7 +45,7 @@ class TaskItem extends StatelessWidget {
         confirmDismiss: (direction) async {
           if (direction == DismissDirection.startToEnd) {
             /// edit
-            await Navigator.pushNamed(context, '/task', arguments: PageArguments(task: task));
+            unawaited(Navigator.pushNamed(context, '/task', arguments: PageArguments(task: task))); 
             return false;
           } else {
             /// delete
