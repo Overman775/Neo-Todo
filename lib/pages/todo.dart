@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/models/todo.dart';
+import 'package:todolist/widgets/empty.dart';
 import 'package:todolist/widgets/task_item.dart';
 
 import '../style.dart';
@@ -21,15 +22,14 @@ class _TodoPageState extends State<TodoPage> {
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Style.primaryColor,
-          elevation: 0,         
+          elevation: 0,
           child: Container(
             height: 50,
             width: 50,
             decoration: BoxDecoration(
-              gradient: Style.addButtonGradient,
-              shape: BoxShape.circle,
-              boxShadow: Style.buttonGlow
-            ),
+                gradient: Style.addButtonGradient,
+                shape: BoxShape.circle,
+                boxShadow: Style.buttonGlow),
             child: const Icon(
               Icons.add,
               color: Colors.white,
@@ -45,10 +45,14 @@ class _TodoPageState extends State<TodoPage> {
             List<Widget> getTasks() {
               return todo.tasks.map((task) => TaskItem(task)).toList();
             }
-            return ListView(
-              padding: EdgeInsets.only(bottom: 80),
-              children: getTasks(),
-            );
+            if (todo.tasks.isNotEmpty) {
+              return ListView(
+                padding: EdgeInsets.only(bottom: 80),
+                children: getTasks(),
+              );
+            } else {
+              return EmpltyTodo();
+            }
           }),
         ));
   }
