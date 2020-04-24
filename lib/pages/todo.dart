@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:todolist/models/todo.dart';
 import 'package:todolist/widgets/task_item.dart';
 
+import '../style.dart';
+
 class TodoPage extends StatefulWidget {
   TodoPage({Key key}) : super(key: key);
 
@@ -18,29 +20,33 @@ class _TodoPageState extends State<TodoPage> {
           title: Text('Todo List'),
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.blue,
-          child: const Icon(
-            Icons.add,
-            color: Colors.white,
+          backgroundColor: Style.primaryColor,
+          elevation: 0,         
+          child: Container(
+            height: 50,
+            width: 50,
+            decoration: BoxDecoration(
+              gradient: Style.addButtonGradient,
+              shape: BoxShape.circle,
+              boxShadow: Style.buttonGlow
+            ),
+            child: const Icon(
+              Icons.add,
+              color: Colors.white,
+            ),
           ),
           onPressed: () {
             Navigator.pushNamed(context, '/task');
           },
         ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        bottomNavigationBar: BottomAppBar(
-          shape: CircularNotchedRectangle(),
-          color: Colors.white,
-          child: Container(
-            height: 50,
-          ),
-        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Container(
           child: Consumer<TodoModel>(builder: (context, todo, child) {
             List<Widget> getTasks() {
               return todo.tasks.map((task) => TaskItem(task)).toList();
             }
             return ListView(
+              padding: EdgeInsets.only(bottom: 80),
               children: getTasks(),
             );
           }),

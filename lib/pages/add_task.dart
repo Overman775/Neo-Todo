@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:todolist/models/pages_arguments.dart';
 import 'package:todolist/models/task.dart';
 import 'package:todolist/models/todo.dart';
+import 'package:todolist/style.dart';
 
 class AddTask extends StatefulWidget {
   final PageArguments args;
@@ -22,7 +23,7 @@ class _AddTaskState extends State<AddTask> {
   final _formKey = GlobalKey<FormState>();
   final _titleFormController = TextEditingController();
   final _descriptionFormController = TextEditingController();
-  
+
   TodoModel todo;
 
   @override
@@ -44,9 +45,11 @@ class _AddTaskState extends State<AddTask> {
   void _saveForm() {
     if (_formKey.currentState.validate()) {
       if (_argsHaveTask) {
-        todo.editTodo(args.task, Task(
-            title: _titleFormController.text,
-            description: _descriptionFormController.text));
+        todo.editTodo(
+            args.task,
+            Task(
+                title: _titleFormController.text,
+                description: _descriptionFormController.text));
       } else {
         todo.addTodo(Task(
             title: _titleFormController.text,
@@ -70,38 +73,78 @@ class _AddTaskState extends State<AddTask> {
     log('Open task ${args?.task?.title}');
     return Scaffold(
       appBar: AppBar(
-        title: _argsHaveTask? Text(args.task.title) : Text('Add Task'),
+        title: _argsHaveTask ? Text(args.task.title) : Text('Новая задача'),
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 16),
         child: Form(
           key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Wrap(
+            direction: Axis.horizontal,
+            runSpacing: Style.doublePadding,
             children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Заголовок'),
-                controller: _titleFormController,
-                autofocus: true,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Введите текст';
-                  } else {
-                    return null;
-                  }
-                },
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: Style.mainBorderRadius,
+                    color: Style.bgColor,
+                    boxShadow: Style.boxShadows),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      labelText: 'Заголовок',
+                      contentPadding: EdgeInsets.all(Style.mainPadding),
+                      border: OutlineInputBorder(
+                        borderRadius: Style.mainBorderRadius,
+                      )),
+                  controller: _titleFormController,
+                  autofocus: true,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Введите текст';
+                    } else {
+                      return null;
+                    }
+                  },
+                ),
               ),
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Описание'),
-                keyboardType: TextInputType.multiline,
-                maxLines: 3,
-                controller: _descriptionFormController,
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: Style.mainBorderRadius,
+                    color: Style.bgColor,
+                    boxShadow: Style.boxShadows),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                      labelText: 'Описание',
+                      contentPadding: EdgeInsets.all(Style.mainPadding),
+                      border: OutlineInputBorder(
+                          borderRadius: Style.mainBorderRadius)),
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 3,
+                  controller: _descriptionFormController,
+                ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: RaisedButton(
-                  onPressed: _saveForm,
-                  child: Text('Сохранить'),
+              Center(
+                child: ClipRRect(
+                    borderRadius: Style.mainBorderRadius,
+                    child: FlatButton(
+                    color: Style.primaryColor,
+                    onPressed: _saveForm,
+                    padding: const EdgeInsets.all(0.0),
+                    child: Container(
+                        padding: EdgeInsets.symmetric(vertical: Style.mainPadding, horizontal:  Style.doublePadding),
+                        decoration: BoxDecoration(
+                          gradient: Style.addButtonGradient,
+                          borderRadius: Style.mainBorderRadius,
+                          border: Border.all(
+                            color: Style.primaryColor,
+                            width: 3
+                          ),
+                          boxShadow: Style.buttonGlow
+                        ),
+                        child: Text(
+                          'Сохранить',
+                          style: Style.buttonTextStyle,
+                          )),
+                  ),
                 ),
               ),
             ],
