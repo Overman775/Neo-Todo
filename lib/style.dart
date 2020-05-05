@@ -42,6 +42,15 @@ abstract class Style {
     static const TextStyle buttonTextStyle =
       TextStyle(color: Colors.white, fontSize: 16.00);
 
+  static const TextStyle mainDateTextStyle =
+      TextStyle(color: Style.textColor, fontSize: 32.00);
+
+  static TextStyle mainDateSubTextStyle =
+      TextStyle(color: Style.textColor.withOpacity(0.5), fontSize: 32.00);
+
+  static TextStyle mainTasksTextStyle =
+      TextStyle(color: Style.textColor.withOpacity(0.5), fontSize: 16.00);
+
   static const List<BoxShadow> boxShadows = [
     BoxShadow(
         color: Color.fromRGBO(0, 0, 0, 0.1),
