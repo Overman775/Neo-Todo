@@ -52,15 +52,15 @@ class NeumorphicWidget extends StatelessWidget {
         usedTheme: UsedTheme.LIGHT,
         theme: NeumorphicThemeData(
           baseColor: Style.bgColor,
-          intensity: 0.5,
-          lightSource: LightSource.topLeft,
+          intensity: 1,
+          lightSource: LightSource.topRight,
           depth: 10,
         ),
         darkTheme: NeumorphicThemeData(
           //TODO Add black theme
           baseColor: Color(0xFF3E3E3E),
           intensity: 0.5,
-          lightSource: LightSource.topLeft,
+          lightSource: LightSource.topRight,
           depth: 6,
         ),
         child: child);
