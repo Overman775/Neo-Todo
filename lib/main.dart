@@ -23,15 +23,15 @@ class MyApp extends StatelessWidget {
             appBarTheme: AppBarTheme(
                 elevation: 0.0,
                 color: Style.bgColor,
-                textTheme: TextTheme(title: Style.headerTextStyle),
+                textTheme: TextTheme(headline6: Style.headerTextStyle),
                 iconTheme: IconThemeData(color: Style.primaryColor)),
             scaffoldBackgroundColor: Style.bgColor),
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
           var routes = <String, Widget>{
-            "/": MainPage(),
-            "/list": TodoPage(),
-            "/task": AddTask(settings.arguments),
+            '/': MainPage(),
+            '/list': TodoPage(),
+            '/task': AddTask(settings.arguments),
           };
           WidgetBuilder builder = (context) => NeumorphicWidget(routes[settings.name]);
           return MaterialPageRoute(builder: (context) => builder(context));

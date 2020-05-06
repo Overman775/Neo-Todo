@@ -26,7 +26,7 @@ class TaskCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Neumorphic(
-      boxShape: NeumorphicBoxShape.roundRect(borderRadius: Style.mainBorderRadius),
+      boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
       padding: EdgeInsets.all(18.0),
       margin: EdgeInsets.fromLTRB(0, Style.doublePadding, Style.doublePadding, Style.doublePadding),
       child: GestureDetector(

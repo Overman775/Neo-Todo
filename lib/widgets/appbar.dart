@@ -10,8 +10,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double statusbarHeight = MediaQuery.of(context).padding.top;
-    final bool canPop = Navigator.canPop(context);
+    final statusbarHeight = MediaQuery.of(context).padding.top;
+    final canPop = Navigator.canPop(context);
 
     return Padding(
       padding: EdgeInsets.only(top: statusbarHeight),
