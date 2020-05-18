@@ -13,7 +13,6 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: NeumorphicTheme.baseColor(context),
-      //extendBodyBehindAppBar: true,
       appBar: CustomAppBar(
         child:           NeumorphicButton(
             boxShape: NeumorphicBoxShape.circle(),

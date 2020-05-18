@@ -2,13 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/models/pages_arguments.dart';
 import 'package:todolist/models/task.dart';
 import 'package:todolist/models/todo.dart';
 import 'package:todolist/style.dart';
 
 class AddTask extends StatefulWidget {
-  final PageArguments args;
+  final args;
   AddTask(this.args, {Key key}) : super(key: key);
 
   @override
@@ -16,7 +15,7 @@ class AddTask extends StatefulWidget {
 }
 
 class _AddTaskState extends State<AddTask> {
-  PageArguments args;
+  final args;
 
   _AddTaskState(this.args);
 

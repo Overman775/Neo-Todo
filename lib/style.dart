@@ -34,7 +34,8 @@ abstract class Style {
   static const double mainPadding = 16.00;
   static const double doublePadding = 32.00;
   static const double halfPadding = 8.00;
-  static BorderRadius mainBorderRadius = BorderRadius.circular(16.0);
+  static double mainBorderRadiusValue = 16.0;
+  static BorderRadius mainBorderRadius = BorderRadius.circular(mainBorderRadiusValue);
 
   static const TextStyle headerTextStyle =
       TextStyle(color: Style.textColor, fontSize: 24.00);
