@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => TodoModel())],
+      providers: [ChangeNotifierProvider(create: (_) => Todo())],
       child: NeumorphicWidget(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,

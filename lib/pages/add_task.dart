@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/models/task.dart';
-import 'package:todolist/models/todo.dart';
-import 'package:todolist/style.dart';
+import '../bloc/todo.dart';
+import '../models/task.dart';
+import '../style.dart';
 
 class AddTask extends StatefulWidget {
   final args;
@@ -23,12 +23,12 @@ class _AddTaskState extends State<AddTask> {
   final _titleFormController = TextEditingController();
   final _descriptionFormController = TextEditingController();
 
-  TodoModel todo;
+  Todo todo;
 
   @override
   void initState() {
     super.initState();
-    todo = Provider.of<TodoModel>(context, listen: false);
+    todo = Provider.of<Todo>(context, listen: false);
     _initForm();
   }
 

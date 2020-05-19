@@ -30,7 +30,7 @@ class TaskItem extends StatelessWidget {
               leading: Checkbox(
                 value: task.completed,
                 onChanged: (bool checked) {
-                  Provider.of<TodoModel>(context, listen: false)
+                  Provider.of<Todo>(context, listen: false)
                       .toggleTodo(task);
                 },
               ),
@@ -69,7 +69,7 @@ class TaskItem extends StatelessWidget {
             },
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
-                Provider.of<TodoModel>(context, listen: false).deleteTodo(task);
+                Provider.of<Todo>(context, listen: false).deleteTodo(task);
               } else {}
             },
           ),

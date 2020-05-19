@@ -41,7 +41,7 @@ class _TodoPageState extends State<TodoPage> {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Container(
-          child: Consumer<TodoModel>(builder: (context, todo, child) {
+          child: Consumer<Todo>(builder: (context, todo, child) {
             List<Widget> getTasks() {
               return todo.tasks.map((task) => TaskItem(task)).toList();
             }

@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:todolist/db/db_hive.dart';
 import 'package:todolist/models/task.dart';
 
-class TodoModel extends ChangeNotifier {
+class Todo extends ChangeNotifier {
   final TaskDbHive db = TaskDbHive();
 
-  TodoModel(){
+  Todo(){
     _init();
   }
 
