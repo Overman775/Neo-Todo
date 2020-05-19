@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/models/todo.dart';
-import 'package:todolist/style.dart';
+import 'bloc/todo.dart';
+import 'style.dart';
 
 import 'router.dart';
 import 'widgets/neumorphic.dart';

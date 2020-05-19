@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:todolist/models/task.dart';
+import '../models/task.dart';
 
 class PageArguments {
   final Task task;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/models/pages_arguments.dart';
-import 'package:todolist/models/task.dart';
-import 'package:todolist/models/todo.dart';
+import '../models/pages_arguments.dart';
+import '../models/task.dart';
+import '../bloc/todo.dart';
 
 import '../style.dart';
 

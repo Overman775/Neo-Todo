@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/models/todo.dart';
-import 'package:todolist/widgets/empty.dart';
-import 'package:todolist/widgets/task_item.dart';
+import '../bloc/todo.dart';
+import '../widgets/empty.dart';
+import '../widgets/task_item.dart';
 
 import '../style.dart';
 
