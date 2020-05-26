@@ -1,13 +1,24 @@
-import 'package:todolist/models/task.dart';
+//DB interface
+import 'package:todolist/models/todo_models.dart';
 
-class Db {
-  void add(Task task) {}
+class DbInterface {
+  Future initDB() {
+    return null;
+  }
 
-  void delete(int index) {}
+  Future<List<Map<String, dynamic>>> select(String table, {List arguments}) {
+    return null;
+  }
 
-  List getAll() {return [];}
+  Future<int> insert(String table, TodoModel model) {
+    return null;
+  }
 
-  void edit(int index, Task new_task) {}
+  Future<int> update(String table, TodoModel model) {
+    return null;
+  }
 
-  void init() async {}
+  Future<int> delete(String table, TodoModel model) {
+    return null;
+  }
 }
