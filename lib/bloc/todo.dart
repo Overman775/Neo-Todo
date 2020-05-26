@@ -1,58 +1,72 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:todolist/db/db_hive.dart';
-import 'package:todolist/models/task.dart';
+import 'package:todolist/db/sqlite.dart';
+import 'package:todolist/models/todo_models.dart';
 
 class Todo extends ChangeNotifier {
-  final TaskDbHive db = TaskDbHive();
-
-  Todo(){
+  Todo() {
     _init();
   }
 
-  final List<Task> _tasks = [];
+  List<TodoItem> items = [];
+  List<TodoCategory> categoryes = [];
 
-  List<Task> get tasks => _tasks;
+  void _init() async {
+    await getCategoryes();
+  }
 
-  void _init() async{
-    await db.init();
+  Future getCategoryes() async {
+    var _results = await SQLiteProvider.db.select(TodoCategory.table);
+    categoryes = _results
+        .map<TodoCategory>((item) => TodoCategory.fromMap(item))
+        .toList();
+    notifyListeners();
+  }
 
-    for (var task in db.getAll()) {
-      print(task.title);
-      _tasks.add(Task(title: task.title, description: task.description, completed: task.completed));
+  Future addCategory() async {
+    await SQLiteProvider.db
+        .insert(TodoCategory.table, TodoCategory(title: 'test'));
+    log('Category added');
+    await getCategoryes();
+  }
+
+  Future getItems(int categoryId) async {
+    var _results = await SQLiteProvider.db.select(TodoItem.table,
+        where: '"category" = ?', whereArgs: [categoryId]);
+    items = _results.map<TodoItem>((item) => TodoItem.fromMap(item)).toList();
+    notifyListeners();
+  }
+
+  Future addItem(TodoItem item) async {
+    await SQLiteProvider.db.insert(TodoItem.table, item);
+    log('Item add ${item.title}');
+    await getItems(item.category);
+  }
+
+  Future toggleItem(TodoItem item) async {
+    var new_item = TodoItem(
+        id: item.id,
+        category: item.category,
+        title: item.title,
+        description: item.description,
+        completed: !item.completed);
+    await SQLiteProvider.db.update(TodoItem.table, new_item);
+    await getItems(item.category);
+    log('Item toggle ${item.title}');
+  }
+
+  Future deleteItem(TodoItem item) async {
+    await SQLiteProvider.db.delete(TodoItem.table, item);
+    await getItems(item.category);
+    log('Item delete ${item.title}');
+  }
+
+  Future editItem(TodoItem old_item, TodoItem new_item) async {
+    if (old_item != new_item) {
+      await SQLiteProvider.db.update(TodoItem.table, new_item);
+      await getItems(new_item.category);
+      log('Task edited ${old_item.title}');
     }
-    notifyListeners();
-  }
-
-  void addTodo(Task task) {
-    _tasks.add(task);
-    db.add(task);
-    log('Task add ${task.title}');
-    notifyListeners();
-  }
-
-  void toggleTodo(Task task) {
-    var index = _tasks.indexOf(task); 
-    _tasks[index].toggle();
-    db.edit(index, _tasks[index]);
-    log('Task toggle ${task.title}');
-    notifyListeners();
-  }
-
-  void deleteTodo(Task task) {
-    var index = _tasks.indexOf(task);    
-    _tasks.remove(task);
-    db.delete(index);
-    log('Task delete ${task.title}');
-    notifyListeners();
-  }
-
-  void editTodo(Task old_task,Task new_task) {
-    var index = _tasks.indexOf(old_task);
-    _tasks[_tasks.indexOf(old_task)] = new_task;
-    db.edit(index, new_task);
-    log('Task edited ${old_task.title}');
-    notifyListeners();
   }
 }
