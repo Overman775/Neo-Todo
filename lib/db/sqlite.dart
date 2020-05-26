@@ -7,7 +7,7 @@ import 'package:todolist/models/todo_models.dart';
 
 import 'db.dart';
 
-class SQLiteProvider implements DbInterface{
+class SQLiteProvider implements DbInterface {
   //Singleton
   SQLiteProvider._();
   static final SQLiteProvider db = SQLiteProvider._();
@@ -57,9 +57,25 @@ class SQLiteProvider implements DbInterface{
   //CRUD operations
   @override
   Future<List<Map<String, dynamic>>> select(String table,
-          {List arguments}) async =>
-      await database
-          .then((db) => db.rawQuery('SELECT * FROM $table', arguments));
+          {bool distinct,
+          List<String> columns,
+          String where,
+          List<dynamic> whereArgs,
+          String groupBy,
+          String having,
+          String orderBy,
+          int limit,
+          int offset}) async =>
+      await database.then((db) => db.query(table,
+          distinct: distinct,
+          columns: columns,
+          where: where,
+          whereArgs: whereArgs,
+          groupBy: groupBy,
+          having: having,
+          orderBy: orderBy,
+          limit: limit,
+          offset: offset));
 
   @override
   Future<int> insert(String table, TodoModel model) async =>
