@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-
-import 'models/pages_arguments.dart';
-import 'pages/add_task.dart';
-import 'pages/main.dart';
-import 'pages/todo.dart';
-import 'style.dart';
+import 'package:todolist/pages/add_item.dart';
+import 'package:todolist/models/pages_arguments.dart';
+import 'package:todolist/pages/main.dart';
+import 'package:todolist/pages/todo.dart';
+import 'package:todolist/style.dart';
 
 Route geneateRoute(RouteSettings settings) {
-  var routes = <String, Widget>{
-    '/': MainPage(),
-    '/list': TodoPage(),
-    '/task': AddTask(settings.arguments),
-  };
 
-  if (settings.name == '/list') {
-    return CardRoute(widget: TodoPage(), arguments: settings.arguments);
+  //check named route and return page
+  switch (settings.name) {
+    case '/':
+      return MaterialPageRoute(builder: (context) => MainPage());    
+    case '/item':    
+      return MaterialPageRoute(builder: (context) => AddItem(settings.arguments));
+    case '/category':
+      //return router with card animation
+      return CardRoute(widget: TodoPage(settings.arguments), arguments: settings.arguments);  
+    default:
+      return MaterialPageRoute(builder: (context) => MainPage());
   }
 
-  return MaterialPageRoute(builder: (context) => routes[settings.name]);
+  //TODO: add 404 page
+
 }
 
 class CardRoute extends PageRouteBuilder {
@@ -85,6 +89,8 @@ class CardTransition extends AnimatedWidget {
           duration: Duration(),
           boxShape: NeumorphicBoxShape.roundRect(borderAnim),
           margin: EdgeInsets.fromLTRB(0, paddingAnim, paddingAnim, paddingAnim),
+          ///https://flutter.dev/docs/perf/rendering/best-practices#pitfalls
+          ///TODO: optimization opacity
           child: Opacity(
             opacity: animValue,
             child: child,
