@@ -78,6 +78,7 @@ class TodoItem extends TodoModel{
     var map = <String, dynamic>{
       'category': category,
       'title': title,
+      'description': description,
       'completed': completed ? '1' : '0'
     };
 
@@ -91,9 +92,10 @@ class TodoItem extends TodoModel{
       id: map['id'],
       category: map['category'],
       title: map['title'],
+      description: map['description'],
       completed: map['completed'] == 1);
 
   //override bool operator ==
   @override
-  List<Object> get props => [id, category, title, completed];
+  List<Object> get props => [id, category, title, description, completed];
 }

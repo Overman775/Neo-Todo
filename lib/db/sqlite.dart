@@ -48,7 +48,7 @@ class SQLiteProvider implements DbInterface{
         'id INTEGER PRIMARY KEY AUTOINCREMENT,'
         'category INTEGER NOT NULL,'
         'title TEXT NOT NULL,'
-        'deskription TEXT,'
+        'description TEXT,'
         //sqllite don't have bool type, save like integer and check, deafault 0
         'completed INTEGER DEFAULT 0 CHECK (completed IN (0,1))'
         ')');
