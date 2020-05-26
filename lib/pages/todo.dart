@@ -1,19 +1,33 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../bloc/todo.dart';
-import '../widgets/empty.dart';
-import '../widgets/task_item.dart';
+import 'package:todolist/bloc/todo.dart';
+import 'package:todolist/models/pages_arguments.dart';
+import 'package:todolist/widgets/empty.dart';
+import 'package:todolist/widgets/task_item.dart';
 
-import '../style.dart';
+import 'package:todolist/style.dart';
 
 class TodoPage extends StatefulWidget {
-  TodoPage({Key key}) : super(key: key);
+  final MainPageArguments args;
+
+  TodoPage(this.args, {Key key}) : super(key: key);
 
   @override
-  _TodoPageState createState() => _TodoPageState();
+  _TodoPageState createState() => _TodoPageState(args);
 }
 
 class _TodoPageState extends State<TodoPage> {
+  final MainPageArguments args;
+
+  _TodoPageState(this.args);
+
+  @override
+  void initState() {
+    context.read<Todo>().getItems(args.category.id);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,16 +50,20 @@ class _TodoPageState extends State<TodoPage> {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/task');
+            Navigator.pushNamed(context, '/item',
+                arguments: ItemPageArguments(category: widget.args.category));
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Container(
           child: Consumer<Todo>(builder: (context, todo, child) {
             List<Widget> getTasks() {
-              return todo.tasks.map((task) => TaskItem(task)).toList();
+              return todo.items
+                  .map((item) => TodoItemWidget(item, widget.args.category))
+                  .toList();
             }
-            if (todo.tasks.isNotEmpty) {
+
+            if (todo.items.isNotEmpty) {
               return ListView(
                 padding: EdgeInsets.only(bottom: 80),
                 children: getTasks(),
@@ -54,8 +72,6 @@ class _TodoPageState extends State<TodoPage> {
               return EmpltyTodo();
             }
           }),
-        )
-        
-        );
+        ));
   }
 }

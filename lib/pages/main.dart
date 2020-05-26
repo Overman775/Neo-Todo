@@ -4,7 +4,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:todolist/widgets/appbar.dart';
 import 'package:todolist/widgets/carousel.dart';
 
-import '../style.dart';
+import 'package:todolist/style.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key key}) : super(key: key);
@@ -14,12 +14,12 @@ class MainPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: NeumorphicTheme.baseColor(context),
       appBar: CustomAppBar(
-        child:           NeumorphicButton(
-            boxShape: NeumorphicBoxShape.circle(),
-            padding: EdgeInsets.all(Style.halfPadding),
-            margin: EdgeInsets.all(Style.halfPadding),
-            child: Icon(Icons.more_vert, color: Style.textColor),
-          ),
+        child: NeumorphicButton(
+          boxShape: NeumorphicBoxShape.circle(),
+          padding: EdgeInsets.all(Style.halfPadding),
+          margin: EdgeInsets.all(Style.halfPadding),
+          child: Icon(Icons.more_vert, color: Style.textColor),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

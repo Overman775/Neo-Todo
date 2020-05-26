@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-import '../style.dart';
+import 'package:todolist/style.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Widget child;

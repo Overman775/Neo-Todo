@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:provider/provider.dart';
+import 'package:todolist/bloc/todo.dart';
 import 'package:todolist/models/pages_arguments.dart';
+import 'package:todolist/models/todo_models.dart';
 
-import '../style.dart';
+import 'package:todolist/style.dart';
 
 class Carousel extends StatelessWidget {
   const Carousel({Key key}) : super(key: key);
@@ -11,17 +14,26 @@ class Carousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: 1,
-      child: PageView.builder(
-          scrollDirection: Axis.horizontal,
-          controller: PageController(initialPage: 0, viewportFraction: 0.8),
-          itemBuilder: (context, index) => TaskCard()),
-    );
+        flex: 1,
+        child: Selector<Todo, List<TodoCategory>>(
+          selector: (_, todo) => todo.categoryes,
+          builder: (context, categoryes, _) {
+            return PageView(
+                scrollDirection: Axis.horizontal,
+                controller:
+                    PageController(initialPage: 0, viewportFraction: 0.8),
+                children: <Widget>[
+                  ...categoryes.map((category) => CategoryCard(category)),
+                  CategoryAddCard()
+                ]);
+          },
+        ));
   }
 }
 
-class TaskCard extends StatelessWidget {
-  const TaskCard({Key key}) : super(key: key);
+class CategoryCard extends StatelessWidget {
+  final TodoCategory category;
+  const CategoryCard(this.category, {Key key}) : super(key: key);
 
   CardPosition _getPosition(BuildContext context) {
     //search widget
@@ -51,10 +63,37 @@ class TaskCard extends StatelessWidget {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
-          Navigator.pushNamed(context, '/list',
+          Navigator.pushNamed(context, '/category',
               arguments: MainPageArguments(
-                  category: 'category', cardPosition: _getPosition(context)));
+                  category: category, cardPosition: _getPosition(context)));
         },
+      ),
+    );
+  }
+}
+
+class CategoryAddCard extends StatelessWidget {
+  const CategoryAddCard({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Neumorphic(
+      boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
+      padding: EdgeInsets.all(18.0),
+      margin: EdgeInsets.fromLTRB(
+          0, Style.doublePadding, Style.doublePadding, Style.doublePadding),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          context.read<Todo>().addCategory();
+        },
+        child: Center(
+          child: Icon(
+            Icons.add,
+            color: Style.textColor,
+            size: 100,
+          ),
+        ),
       ),
     );
   }

@@ -1,10 +1,19 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import '../models/task.dart';
+import 'package:todolist/models/todo_models.dart';
 
-class PageArguments {
-  final Task task;
-  PageArguments({this.task});
+class ItemPageArguments{
+  final TodoItem item;
+  final TodoCategory category;
+
+  ItemPageArguments({this.item, @required this.category});
+}
+
+class MainPageArguments{
+  final TodoCategory category;
+  final CardPosition cardPosition;
+
+  MainPageArguments({@required this.category, @required this.cardPosition});
 }
 
 class CardPosition {
@@ -14,11 +23,4 @@ class CardPosition {
   final double bottom;
 
   CardPosition({this.left = 0, this.top = 0, this.right = 0, this.bottom = 0});
-}
-
-class MainPageArguments {
-  final String category;
-  final CardPosition cardPosition;
-
-  MainPageArguments({@required this.category, @required this.cardPosition});
 }

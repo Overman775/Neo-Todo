@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../style.dart';
+import 'package:todolist/style.dart';
 
 class EmpltyTodo extends StatelessWidget {
   const EmpltyTodo({Key key}) : super(key: key);

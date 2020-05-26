@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-import '../models/pages_arguments.dart';
-import '../models/task.dart';
-import '../bloc/todo.dart';
+import 'package:todolist/models/pages_arguments.dart';
+import 'package:todolist/bloc/todo.dart';
+import 'package:todolist/models/todo_models.dart';
 
-import '../style.dart';
+import 'package:todolist/style.dart';
 
-class TaskItem extends StatelessWidget {
-  final Task task;
+class TodoItemWidget extends StatelessWidget {
+  final TodoItem item;
+  final TodoCategory category;
 
-  TaskItem(this.task);
+  TodoItemWidget(this.item, this.category);
 
   @override
   Widget build(BuildContext context) {
@@ -28,15 +29,14 @@ class TaskItem extends StatelessWidget {
             key: UniqueKey(),
             child: ListTile(
               leading: Checkbox(
-                value: task.completed,
+                value: item.completed,
                 onChanged: (bool checked) {
-                  Provider.of<Todo>(context, listen: false)
-                      .toggleTodo(task);
+                  context.read<Todo>().toggleItem(item);
                 },
               ),
-              title: Text(task.title),
+              title: Text(item.title),
               subtitle:
-                  task.description != null ? Text(task.description) : null,
+                  item.description != null ? Text(item.description) : null,
             ),
             secondaryBackground: Container(
               alignment: Alignment.centerRight,
@@ -59,8 +59,8 @@ class TaskItem extends StatelessWidget {
             confirmDismiss: (direction) async {
               if (direction == DismissDirection.startToEnd) {
                 /// edit
-                unawaited(Navigator.pushNamed(context, '/task',
-                    arguments: PageArguments(task: task)));
+                unawaited(Navigator.pushNamed(context, '/item',
+                    arguments: ItemPageArguments(item: item, category: category)));
                 return false;
               } else {
                 /// delete
@@ -69,7 +69,7 @@ class TaskItem extends StatelessWidget {
             },
             onDismissed: (direction) {
               if (direction == DismissDirection.endToStart) {
-                Provider.of<Todo>(context, listen: false).deleteTodo(task);
+                context.read<Todo>().deleteItem(item);
               } else {}
             },
           ),

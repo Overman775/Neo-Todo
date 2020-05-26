@@ -2,55 +2,58 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../bloc/todo.dart';
-import '../models/task.dart';
-import '../style.dart';
+import 'package:todolist/bloc/todo.dart';
+import 'package:todolist/models/pages_arguments.dart';
+import 'package:todolist/models/todo_models.dart';
+import 'package:todolist/style.dart';
 
-class AddTask extends StatefulWidget {
-  final args;
-  AddTask(this.args, {Key key}) : super(key: key);
+class AddItem extends StatefulWidget {
+  final ItemPageArguments args;
+  AddItem(this.args, {Key key}) : super(key: key);
 
   @override
-  _AddTaskState createState() => _AddTaskState(args);
+  _AddItemState createState() => _AddItemState(args);
 }
 
-class _AddTaskState extends State<AddTask> {
-  final args;
+class _AddItemState extends State<AddItem> {
+  final ItemPageArguments args;
 
-  _AddTaskState(this.args);
+  _AddItemState(this.args);
 
   final _formKey = GlobalKey<FormState>();
   final _titleFormController = TextEditingController();
   final _descriptionFormController = TextEditingController();
 
-  Todo todo;
-
   @override
   void initState() {
     super.initState();
-    todo = Provider.of<Todo>(context, listen: false);
     _initForm();
   }
 
   void _initForm() {
-    if (_argsHaveTask) {
-      _titleFormController.text = args.task.title;
-      _descriptionFormController.text = args.task.description;
+    if (_argsHaveitem) {
+      _titleFormController.text = args.item.title;
+      _descriptionFormController.text = args.item.description;
     }
   }
 
-  bool get _argsHaveTask => args?.task != null;
+  bool get _argsHaveitem => args?.item != null;
 
-  void _saveForm() {
+  //TODO: refactoring form + update style
+  void _saveForm() async {
     if (_formKey.currentState.validate()) {
-      if (_argsHaveTask) {
-        todo.editTodo(
-            args.task,
-            Task(
+      if (_argsHaveitem) {
+        await context.read<Todo>().editItem(
+            args.item,
+            TodoItem(
+                id: args.item.id,
+                category: args.category.id,
                 title: _titleFormController.text,
-                description: _descriptionFormController.text));
+                description: _descriptionFormController.text,
+                completed: args.item.completed));
       } else {
-        todo.addTodo(Task(
+        await context.read<Todo>().addItem(TodoItem(
+            category: args.category.id,
             title: _titleFormController.text,
             description: _descriptionFormController.text));
       }
@@ -69,10 +72,10 @@ class _AddTaskState extends State<AddTask> {
 
   @override
   Widget build(BuildContext context) {
-    log('Open task ${args?.task?.title}');
+    log('Open item ${args?.item?.title}');
     return Scaffold(
       appBar: AppBar(
-        title: _argsHaveTask ? Text(args.task.title) : Text('Новая задача'),
+        title: _argsHaveitem ? Text(args.item.title) : Text('Новая задача'),
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(16, 10, 16, 16),
@@ -123,26 +126,25 @@ class _AddTaskState extends State<AddTask> {
               ),
               Center(
                 child: ClipRRect(
-                    borderRadius: Style.mainBorderRadius,
-                    child: FlatButton(
+                  borderRadius: Style.mainBorderRadius,
+                  child: FlatButton(
                     color: Style.primaryColor,
                     onPressed: _saveForm,
                     padding: const EdgeInsets.all(0.0),
                     child: Container(
-                        padding: EdgeInsets.symmetric(vertical: Style.mainPadding, horizontal:  Style.doublePadding),
+                        padding: EdgeInsets.symmetric(
+                            vertical: Style.mainPadding,
+                            horizontal: Style.doublePadding),
                         decoration: BoxDecoration(
-                          gradient: Style.addButtonGradient,
-                          borderRadius: Style.mainBorderRadius,
-                          border: Border.all(
-                            color: Style.primaryColor,
-                            width: 3
-                          ),
-                          boxShadow: Style.buttonGlow
-                        ),
+                            gradient: Style.addButtonGradient,
+                            borderRadius: Style.mainBorderRadius,
+                            border:
+                                Border.all(color: Style.primaryColor, width: 3),
+                            boxShadow: Style.buttonGlow),
                         child: Text(
                           'Сохранить',
                           style: Style.buttonTextStyle,
-                          )),
+                        )),
                   ),
                 ),
               ),
