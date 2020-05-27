@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:todolist/pages/add_category.dart';
 import 'package:todolist/pages/add_item.dart';
 import 'package:todolist/models/pages_arguments.dart';
 import 'package:todolist/pages/main.dart';
@@ -17,7 +18,9 @@ Route geneateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => AddItem(settings.arguments));
     case '/category':
       //return router with card animation
-      return CardRoute(widget: TodoPage(settings.arguments), arguments: settings.arguments);  
+      return CardRoute(widget: TodoPage(settings.arguments), arguments: settings.arguments);   
+    case '/category/add':
+      return CardRoute(widget: AddCategory(settings.arguments), arguments: settings.arguments);  
     default:
       return MaterialPageRoute(builder: (context) => MainPage());
   }
