@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import '../utils/icons.dart';
 
 abstract class TodoModel extends Equatable{
   final int id;
@@ -26,22 +27,19 @@ class TodoCategory extends TodoModel{
 
   static final String table = 'Categories';
 
-  const TodoCategory({this.id, this.title = '', this.icon = Icons.event});
+  const TodoCategory({this.id, this.title = '', this.icon});
 
   factory TodoCategory.fromMap(Map<String, dynamic> map) => TodoCategory(
         id: map['id'],
-        title: map['title'],
-        //TODO: add conver string to IconData
-        //icon: map['icon'],
+        title: map['title'],        
+        icon: map['icon'].toString().getFontAwesomeIcon
       );
 
   @override
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       'title': title,
-      //TODO: convert IconData to string
-      //'icon': icon
-      'icon': 'event'
+      'icon': icon.getFontAwesomeString
     };
 
     if (id != null) {
