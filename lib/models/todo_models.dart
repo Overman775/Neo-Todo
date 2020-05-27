@@ -50,7 +50,7 @@ class TodoCategory extends TodoModel{
 
   //override bool operator ==
   @override
-  List<Object> get props => [id, title, icon];
+  List<Object> get props => [id, title, icon.codePoint];
 
 }
 

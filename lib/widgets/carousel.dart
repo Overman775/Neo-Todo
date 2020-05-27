@@ -35,24 +35,6 @@ class CategoryCard extends StatelessWidget {
   final TodoCategory category;
   const CategoryCard(this.category, {Key key}) : super(key: key);
 
-  CardPosition _getPosition(BuildContext context) {
-    //search widget
-    final RenderBox renderBox = context.findRenderObject();
-    //get position widget
-    final position = renderBox.localToGlobal(Offset.zero);
-    //get size widget
-    final size = renderBox.size;
-    //get screen size
-    var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
-
-    return CardPosition(
-        left: position.dx,
-        top: position.dy,
-        right: screenWidth - size.width - position.dx,
-        bottom: screenHeight - size.height - position.dy);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Neumorphic(
@@ -65,7 +47,8 @@ class CategoryCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(context, '/category',
               arguments: MainPageArguments(
-                  category: category, cardPosition: _getPosition(context)));
+                  category: category,
+                  cardPosition: CardPosition.getPosition(context)));
         },
       ),
     );
@@ -85,7 +68,9 @@ class CategoryAddCard extends StatelessWidget {
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
-          context.read<Todo>().addCategory();
+          Navigator.pushNamed(context, '/category/add',
+              arguments: MainPageArguments(
+                  cardPosition: CardPosition.getPosition(context)));
         },
         child: Center(
           child: Icon(
