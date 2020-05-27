@@ -24,11 +24,19 @@ class Todo extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future addCategory() async {
-    await SQLiteProvider.db
-        .insert(TodoCategory.table, TodoCategory(title: 'test'));
+  Future addCategory(TodoCategory category) async {
+    await SQLiteProvider.db.insert(TodoCategory.table, category);
     log('Category added');
     await getCategoryes();
+  }
+
+  Future editCategory(
+      TodoCategory old_category, TodoCategory new_category) async {
+    if (old_category != new_category) {
+      await SQLiteProvider.db.update(TodoCategory.table, new_category);
+      log('Category edited');
+      await getCategoryes();
+    }
   }
 
   Future getItems(int categoryId) async {
