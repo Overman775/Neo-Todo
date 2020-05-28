@@ -24,22 +24,28 @@ class TodoCategory extends TodoModel{
   final int id;
   final String title;
   final IconData icon;
+  final int completed;
+  final int unCompleted;
 
   static final String table = 'Categories';
 
-  const TodoCategory({this.id, this.title = '', this.icon});
+  const TodoCategory({this.id, this.title = '', this.icon, this.completed = 0, this.unCompleted = 0});
 
   factory TodoCategory.fromMap(Map<String, dynamic> map) => TodoCategory(
         id: map['id'],
         title: map['title'],        
-        icon: map['icon'].toString().getFontAwesomeIcon
+        icon: map['icon'].toString().getFontAwesomeIcon,
+        completed: map['completed'],
+        unCompleted: map['unCompleted'],
       );
 
   @override
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
       'title': title,
-      'icon': icon.getFontAwesomeString
+      'icon': icon.getFontAwesomeString,
+      'completed': completed,
+      'unCompleted': unCompleted,
     };
 
     if (id != null) {
@@ -50,7 +56,7 @@ class TodoCategory extends TodoModel{
 
   //override bool operator ==
   @override
-  List<Object> get props => [id, title, icon.codePoint];
+  List<Object> get props => [id, title, icon.codePoint, completed, unCompleted];
 
 }
 
