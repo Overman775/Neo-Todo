@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-import '../style.dart';
-
 class NeumorphicTextField extends StatefulWidget {
   final String label;
   final String hint;
 
   final ValueChanged<String> onChanged;
 
-  NeumorphicTextField({@required this.label, @required this.hint, this.onChanged});
+  NeumorphicTextField(
+      {@required this.label, @required this.hint, this.onChanged});
 
   @override
   _TextFieldState createState() => _TextFieldState();
@@ -35,17 +34,7 @@ class _TextFieldState extends State<NeumorphicTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
-          child: Text(
-            widget.label,
-            style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 18,
-              color: NeumorphicTheme.defaultTextColor(context),
-            ),
-          ),
-        ),
+        TextFieldLabel(widget.label),
         Neumorphic(
           margin: EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 4),
           boxShape: NeumorphicBoxShape.stadium(),
@@ -58,6 +47,30 @@ class _TextFieldState extends State<NeumorphicTextField> {
           ),
         )
       ],
+    );
+  }
+}
+
+class TextFieldLabel extends StatelessWidget {
+  final String label;
+
+  const TextFieldLabel(
+    this.label, {
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontWeight: FontWeight.w700,
+          fontSize: 18,
+          color: NeumorphicTheme.defaultTextColor(context),
+        ),
+      ),
     );
   }
 }

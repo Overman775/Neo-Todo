@@ -30,6 +30,14 @@ class _AddCategoryState extends State<AddCategory> {
 
   bool get _argsHaveCategory => args?.category != null;
 
+  bool get _canSave {
+    if (title != null && icon != null) {
+      return title.isNotEmpty;
+    } else {
+      return false;
+    }
+  }
+
   void categoryTitleChanget(String title) {
     setState(() {
       this.title = title;
@@ -38,7 +46,9 @@ class _AddCategoryState extends State<AddCategory> {
 
   void iconChanget(IconData icon) {
     setState(() {
-      this.icon = icon;
+      if (icon != null) {
+        this.icon = icon;
+      }
     });
   }
 
@@ -72,30 +82,40 @@ class _AddCategoryState extends State<AddCategory> {
             padding: EdgeInsets.fromLTRB(16, 10, 16, 16),
             child: Wrap(
                 direction: Axis.horizontal,
+                alignment: WrapAlignment.start,
                 runSpacing: Style.doublePadding,
                 children: <Widget>[
                   NeumorphicTextField(
                       hint: null,
                       label: 'Название',
                       onChanged: categoryTitleChanget),
-                  Wrap(
-                    alignment: WrapAlignment.start,
-                    runSpacing: 16,
-                    
-                    spacing: 16,
-                    children: icons_list.entries
-                        .map((item) => NeumorphicRadio(
-                              groupValue: icon,
-                              padding: EdgeInsets.all(16),
-                              boxShape: NeumorphicBoxShape.circle(),
-                              value: item.value,
-                              child: FaIcon(item.value),
-                              onChanged: iconChanget,
-                            ))
-                        .toList(),
+                  TextFieldLabel('Иконка'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Wrap(
+                      alignment: WrapAlignment.spaceAround,
+                      runSpacing: 16,
+                      spacing: 16,
+                      children: icons_list.entries
+                          .map((item) => NeumorphicRadio(
+                                groupValue: icon,
+                                padding: EdgeInsets.all(16),
+                                boxShape: NeumorphicBoxShape.circle(),
+                                value: item.value,
+                                child: FaIcon(item.value,
+                                    size: 18,
+                                    color: item.value == icon
+                                        ? NeumorphicTheme.accentColor(context)
+                                        : NeumorphicTheme.defaultTextColor(
+                                            context)),
+                                onChanged: iconChanget,
+                              ))
+                          .toList(),
+                    ),
                   ),
                   Center(
                     child: NeumorphicButton(
+                      isEnabled: _canSave,
                       child: Text('Сохранить'),
                       onPressed: saveCategory,
                     ),

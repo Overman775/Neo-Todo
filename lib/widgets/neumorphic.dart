@@ -12,10 +12,12 @@ class NeumorphicWidget extends StatelessWidget {
     return NeumorphicTheme(
         usedTheme: UsedTheme.LIGHT,
         theme: NeumorphicThemeData(
+          defaultTextColor: Style.textColor,
           baseColor: Style.bgColor,
-          intensity: 1,
+          accentColor: Style.secondColor,
+          intensity: 0.8,
           lightSource: LightSource.topRight,
-          depth: 10,
+          depth: 6,
         ),
         darkTheme: NeumorphicThemeData(
           //TODO Add black theme
