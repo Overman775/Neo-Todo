@@ -7,6 +7,7 @@ import 'package:todolist/bloc/todo.dart';
 import 'package:todolist/models/pages_arguments.dart';
 import 'package:todolist/models/todo_models.dart';
 import 'package:todolist/utils/icons.dart';
+import 'package:todolist/widgets/save_button.dart';
 import 'package:todolist/widgets/text_field.dart';
 
 import '../style.dart';
@@ -88,37 +89,42 @@ class _AddCategoryState extends State<AddCategory> {
                   NeumorphicTextField(
                       hint: null,
                       label: 'Название',
-                      onChanged: categoryTitleChanget),
-                  TextFieldLabel('Иконка'),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: Wrap(
-                      alignment: WrapAlignment.spaceAround,
-                      runSpacing: 16,
-                      spacing: 16,
-                      children: icons_list.entries
-                          .map((item) => NeumorphicRadio(
-                                groupValue: icon,
-                                padding: EdgeInsets.all(16),
-                                boxShape: NeumorphicBoxShape.circle(),
-                                value: item.value,
-                                child: FaIcon(item.value,
-                                    size: 18,
-                                    color: item.value == icon
-                                        ? NeumorphicTheme.accentColor(context)
-                                        : NeumorphicTheme.defaultTextColor(
-                                            context)),
-                                onChanged: iconChanget,
-                              ))
-                          .toList(),
-                    ),
+                      onChanged: categoryTitleChanget),                  
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      TextFieldLabel('Иконка'),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Wrap(
+                          alignment: WrapAlignment.spaceAround,
+                          runSpacing: 16,
+                          spacing: 16,
+                          children: icons_list.entries
+                              .map((item) => NeumorphicRadio(
+                                    groupValue: icon,
+                                    padding: EdgeInsets.all(16),
+                                    boxShape: NeumorphicBoxShape.circle(),
+                                    value: item.value,
+                                    child: FaIcon(item.value,
+                                        size: 18,
+                                        color: item.value == icon
+                                            ? NeumorphicTheme.accentColor(context)
+                                            : NeumorphicTheme.defaultTextColor(
+                                                context)),
+                                    onChanged: iconChanget,
+                                  ))
+                              .toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: Style.halfPadding,
                   ),
                   Center(
-                    child: NeumorphicButton(
-                      isEnabled: _canSave,
-                      child: Text('Сохранить'),
-                      onPressed: saveCategory,
-                    ),
+                    child: NeumorphicSaveButton(
+                        canSave: _canSave, onPressed: saveCategory),
                   )
                 ])));
   }
