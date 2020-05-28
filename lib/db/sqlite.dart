@@ -76,6 +76,9 @@ class SQLiteProvider implements DbInterface {
           orderBy: orderBy,
           limit: limit,
           offset: offset));
+  
+  Future<List<Map<String, dynamic>>> customSelect(String query)async =>
+      await database.then((db) => db.rawQuery(query));
 
   @override
   Future<int> insert(String table, TodoModel model) async =>

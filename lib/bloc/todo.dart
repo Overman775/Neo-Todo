@@ -17,7 +17,10 @@ class Todo extends ChangeNotifier {
   }
 
   Future getCategoryes() async {
-    var _results = await SQLiteProvider.db.select(TodoCategory.table);
+    var _results = await SQLiteProvider.db.customSelect('SELECT t.* ,'
+        '(SELECT COUNT(*) FROM ${TodoItem.table} i WHERE i.category=t.id AND i.completed=1 ) as completed, '
+        '(SELECT COUNT(*) FROM ${TodoItem.table} i WHERE i.category=t.id AND i.completed=0 ) as unCompleted '
+        'FROM ${TodoCategory.table} t');
     categoryes = _results
         .map<TodoCategory>((item) => TodoCategory.fromMap(item))
         .toList();

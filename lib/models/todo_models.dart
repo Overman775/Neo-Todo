@@ -44,8 +44,6 @@ class TodoCategory extends TodoModel{
     var map = <String, dynamic>{
       'title': title,
       'icon': icon.getFontAwesomeString,
-      'completed': completed,
-      'unCompleted': unCompleted,
     };
 
     if (id != null) {
