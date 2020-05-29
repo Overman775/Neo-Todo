@@ -2,15 +2,15 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import '../utils/icons.dart';
 
-abstract class TodoModel extends Equatable{
+abstract class TodoModel extends Equatable {
   final int id;
 
   const TodoModel({this.id});
 
-  factory TodoModel.fromMap(){
+  factory TodoModel.fromMap() {
     return null;
   }
-  Map toMap(){
+  Map toMap() {
     return null;
   }
 
@@ -19,25 +19,38 @@ abstract class TodoModel extends Equatable{
   bool get stringify => true;
 }
 
-class TodoCategory extends TodoModel{
+class TodoCategory extends TodoModel {
   @override
   final int id;
   final String title;
   final IconData icon;
   final int completed;
-  final int unCompleted;
+  final int totalItems;
 
   static final String table = 'Categories';
 
-  const TodoCategory({this.id, this.title = '', this.icon, this.completed = 0, this.unCompleted = 0});
+  const TodoCategory(
+      {this.id,
+      this.title = '',
+      this.icon,
+      this.completed = 0,
+      this.totalItems = 0});
 
   factory TodoCategory.fromMap(Map<String, dynamic> map) => TodoCategory(
         id: map['id'],
-        title: map['title'],        
+        title: map['title'],
         icon: map['icon'].toString().getFontAwesomeIcon,
         completed: map['completed'],
-        unCompleted: map['unCompleted'],
+        totalItems: map['totalItems'],
       );
+
+  double get percent {
+    if (totalItems == 0) {
+      return 0.0;
+    } else {
+      return (completed / totalItems).toDouble();
+    }
+  }
 
   @override
   Map<String, dynamic> toMap() {
@@ -54,11 +67,10 @@ class TodoCategory extends TodoModel{
 
   //override bool operator ==
   @override
-  List<Object> get props => [id, title, icon.codePoint, completed, unCompleted];
-
+  List<Object> get props => [id, title, icon.codePoint, completed, totalItems];
 }
 
-class TodoItem extends TodoModel{
+class TodoItem extends TodoModel {
   @override
   final id;
   final int category;
