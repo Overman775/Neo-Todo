@@ -35,17 +35,22 @@ abstract class Style {
   static const double doublePadding = 32.00;
   static const double halfPadding = 8.00;
   static double mainBorderRadiusValue = 16.0;
-  static BorderRadius mainBorderRadius = BorderRadius.circular(mainBorderRadiusValue);
+  static BorderRadius mainBorderRadius =
+      BorderRadius.circular(mainBorderRadiusValue);
 
   static const TextStyle headerTextStyle =
       TextStyle(color: Style.textColor, fontSize: 24.00);
 
-    static const TextStyle buttonTextStyle =
+  static const TextStyle buttonTextStyle =
       TextStyle(color: Colors.white, fontSize: 16.00);
 
   static const TextStyle mainDateTextStyle =
       TextStyle(color: Style.textColor, fontSize: 32.00);
 
+  static const TextStyle cardTitleTextStyle =
+      TextStyle(color: Style.textColor, fontSize: 32.00);
+
+  //TODO: delete opacity
   static TextStyle mainDateSubTextStyle =
       TextStyle(color: Style.textColor.withOpacity(0.5), fontSize: 32.00);
 

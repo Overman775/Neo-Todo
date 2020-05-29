@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/bloc/todo.dart';
 import 'package:todolist/models/pages_arguments.dart';
@@ -50,6 +52,43 @@ class CategoryCard extends StatelessWidget {
                   category: category,
                   cardPosition: CardPosition.getPosition(context)));
         },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                FaIcon(
+                  category.icon,
+                  color: Style.textColor,
+                  size: 32,
+                ),
+                SizedBox(width: Style.mainPadding),
+                Expanded(
+                  child: AutoSizeText(
+                    category.title,
+                    style: Style.cardTitleTextStyle,
+                    minFontSize: 22,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                )
+              ],
+            ),
+            Expanded(child: SizedBox.shrink()),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: Style.halfPadding),
+              child: Text(
+                'Выполнено ${category.completed} из ${category.totalItems}',
+                style: Style.mainTasksTextStyle,
+              ),
+            ),
+            NeumorphicProgress(
+              percent: category.percent,
+              height: 16,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -73,8 +112,8 @@ class CategoryAddCard extends StatelessWidget {
                   cardPosition: CardPosition.getPosition(context)));
         },
         child: Center(
-          child: Icon(
-            Icons.add,
+          child: FaIcon(
+            FontAwesomeIcons.plus,
             color: Style.textColor,
             size: 100,
           ),
