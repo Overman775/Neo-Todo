@@ -15,7 +15,6 @@ dependencies:
   flutter_svg: ^0.17.4
   pedantic: ^1.9.0
   flutter_neumorphic: ^2.2.2
-  equatable: ^1.1.1
   font_awesome_flutter: '>=8.8.1'
   auto_size_text: ^2.1.0
 

@@ -1,8 +1,8 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+
 import '../utils/icons.dart';
 
-abstract class TodoModel extends Equatable {
+abstract class TodoModel{
   final int id;
 
   const TodoModel({this.id});
@@ -13,10 +13,6 @@ abstract class TodoModel extends Equatable {
   Map toMap() {
     return null;
   }
-
-  ////override toString
-  @override
-  bool get stringify => true;
 }
 
 class TodoCategory extends TodoModel {
@@ -66,13 +62,37 @@ class TodoCategory extends TodoModel {
   }
 
   //override bool operator ==
+
   @override
-  List<Object> get props => [id, title, icon.codePoint, completed, totalItems];
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+  
+    return o is TodoCategory &&
+      o.id == id &&
+      o.title == title &&
+      o.icon == icon &&
+      o.completed == completed &&
+      o.totalItems == totalItems;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+      title.hashCode ^
+      icon.hashCode ^
+      completed.hashCode ^
+      totalItems.hashCode;
+  }
+
+  @override
+  String toString() {
+    return 'TodoCategory(id: $id, title: $title, icon: $icon, completed: $completed, totalItems: $totalItems)';
+  }
 }
 
 class TodoItem extends TodoModel {
   @override
-  final id;
+  final int id;
   final int category;
   final String title;
   final String description;
@@ -109,7 +129,30 @@ class TodoItem extends TodoModel {
       description: map['description'],
       completed: map['completed'] == 1);
 
-  //override bool operator ==
+  
   @override
-  List<Object> get props => [id, category, title, description, completed];
+  String toString() {
+    return 'TodoItem(id: $id, category: $category, title: $title, description: $description, completed: $completed)';
+  }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+  
+    return o is TodoItem &&
+      o.id == id &&
+      o.category == category &&
+      o.title == title &&
+      o.description == description &&
+      o.completed == completed;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+      category.hashCode ^
+      title.hashCode ^
+      description.hashCode ^
+      completed.hashCode;
+  }
 }
