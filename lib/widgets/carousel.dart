@@ -65,17 +65,17 @@ class CategoryCard extends StatelessWidget {
                 ),
                 SizedBox(width: Style.mainPadding),
                 Expanded(
-                  child: AutoSizeText(
-                    category.title,
-                    style: Style.cardTitleTextStyle,
-                    minFontSize: 22,
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                    child: Text(
+                      category.title,
+                      style: Style.cardTitleTextStyle,
+                      softWrap: false,
+                      overflow: TextOverflow.ellipsis,
+                      ),
+                  
                 )
               ],
             ),
-            Expanded(child: SizedBox.shrink()),
+            Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: Style.halfPadding),
               child: Text(

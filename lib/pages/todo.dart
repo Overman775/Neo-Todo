@@ -32,7 +32,7 @@ class _TodoPageState extends State<TodoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Todo List'),
+          title: Text(args.category.title),
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Style.primaryColor,
