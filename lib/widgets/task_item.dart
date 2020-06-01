@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/models/pages_arguments.dart';
-import 'package:todolist/bloc/todo.dart';
-import 'package:todolist/models/todo_models.dart';
+import '../models/pages_arguments.dart';
+import '../bloc/todo.dart';
+import '../models/todo_models.dart';
 
-import 'package:todolist/style.dart';
+import '../style.dart';
 
 class TodoItemWidget extends StatelessWidget {
   final TodoItem item;

@@ -1,5 +1,5 @@
 //DB interface
-import 'package:todolist/models/todo_models.dart';
+import '../models/todo_models.dart';
 
 class DbInterface {
   Future initDB() {

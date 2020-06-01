@@ -5,11 +5,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/bloc/todo.dart';
-import 'package:todolist/models/pages_arguments.dart';
-import 'package:todolist/models/todo_models.dart';
+import '../bloc/todo.dart';
+import '../models/pages_arguments.dart';
+import '../models/todo_models.dart';
 
-import 'package:todolist/style.dart';
+import '../style.dart';
 
 class Carousel extends StatefulWidget {
   const Carousel({Key key}) : super(key: key);

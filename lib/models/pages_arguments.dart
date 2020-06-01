@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:todolist/models/todo_models.dart';
+import '../models/todo_models.dart';
 
 class ItemPageArguments {
   final TodoItem item;

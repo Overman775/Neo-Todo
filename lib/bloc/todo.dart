@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:todolist/db/sqlite.dart';
-import 'package:todolist/models/todo_models.dart';
+import '../db/sqlite.dart';
+import '../models/todo_models.dart';
 
 class Todo extends ChangeNotifier {
   Todo() {

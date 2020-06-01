@@ -2,10 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/bloc/todo.dart';
-import 'package:todolist/models/pages_arguments.dart';
-import 'package:todolist/models/todo_models.dart';
-import 'package:todolist/style.dart';
+import '../bloc/todo.dart';
+import '../models/pages_arguments.dart';
+import '../models/todo_models.dart';
+import '../style.dart';
 
 class AddItem extends StatefulWidget {
   final ItemPageArguments args;

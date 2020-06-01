@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-import 'package:todolist/style.dart';
+import '../style.dart';
 
 class NeumorphicWidget extends StatelessWidget {
   final Widget child;

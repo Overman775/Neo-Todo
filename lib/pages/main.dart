@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:todolist/widgets/appbar.dart';
-import 'package:todolist/widgets/carousel.dart';
+import '../widgets/appbar.dart';
+import '../widgets/carousel.dart';
 
-import 'package:todolist/style.dart';
+import '../style.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key key}) : super(key: key);
