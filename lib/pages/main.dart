@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import '../widgets/timer.dart';
 import '../widgets/appbar.dart';
 import '../widgets/carousel.dart';
 
@@ -26,13 +27,7 @@ class MainPage extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(left: Style.doublePadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Thusday', style: Style.mainDateTextStyle),
-                Text('5 may', style: Style.mainDateSubTextStyle)
-              ],
-            ),
+            child: MainTimer(),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(
