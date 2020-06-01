@@ -92,8 +92,9 @@ class _AddCategoryState extends State<AddCategory> {
               ? Text(args.category.title)
               : Text('Новая категория'),
         ),
-        body: Container(
-            padding: EdgeInsets.fromLTRB(16, 10, 16, 16),
+        body: Padding(
+            padding: EdgeInsets.fromLTRB(Style.mainPadding, Style.halfPadding,
+                Style.mainPadding, Style.mainPadding),
             child: AnimatedOpacity(
               ///run Opacity animation when page transistion end
               opacity: _transistionPageEnd ? 1 : 0,
