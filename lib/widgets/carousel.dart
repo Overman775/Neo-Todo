@@ -10,6 +10,7 @@ import '../models/pages_arguments.dart';
 import '../models/todo_models.dart';
 
 import '../style.dart';
+import 'detail_card.dart';
 
 class Carousel extends StatefulWidget {
   const Carousel({Key key}) : super(key: key);
@@ -102,66 +103,23 @@ class CategoryCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              FaIcon(
-                category.icon,
-                color: Style.secondColor,
-                size: 32,
+              Hero(
+                tag: 'icon_${category.id}',
+                child: FaIcon(
+                  category.icon,
+                  color: Style.secondColor,
+                  size: 32,
+                ),
               ),
               Spacer(),
-              DetailCard(category: category),
+              Hero(
+                  tag: 'detail_${category.id}',
+                  flightShuttleBuilder: flightShuttleBuilderFix,
+                  child: DetailCard(category: category)),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class DetailCard extends StatelessWidget {
-  const DetailCard({
-    Key key,
-    @required this.category,
-  }) : super(key: key);
-
-  final TodoCategory category;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          '${category.totalItems} задач',
-          style: Style.mainTasksTextStyle,
-        ),
-        Text(
-          category.title,
-          style: Style.cardTitleTextStyle,
-          softWrap: false,
-          overflow: TextOverflow.ellipsis,
-        ),
-        SizedBox(
-          height: Style.mainPadding,
-        ),
-        Row(
-          children: <Widget>[
-            Flexible(
-              flex: 1,
-              child: NeumorphicProgress(
-                percent: category.percent,
-                height: 8,
-              ),
-            ),
-            SizedBox(
-              width: Style.mainPadding,
-            ),
-            Text(
-              category.percentString,
-              style: Style.mainTasksTextStyle,
-            )
-          ],
-        )
-      ],
     );
   }
 }

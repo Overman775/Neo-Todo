@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import '../widgets/detail_card.dart';
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
 import '../widgets/empty.dart';
@@ -65,32 +67,62 @@ class _TodoPageState extends State<TodoPage> {
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: AnimatedOpacity(
-          opacity: _transistionPageEnd ? 1 : 0,
-          duration: Duration(milliseconds: 300),
-          child: Builder(builder: (context) {
-            if (!_transistionPageEnd) {
-              return SizedBox.shrink();
-            }
-            return Container(
-              child: Consumer<Todo>(builder: (context, todo, child) {
-                List<Widget> getTasks() {
-                  return todo.items
-                      .map((item) => TodoItemWidget(item, widget.args.category))
-                      .toList();
-                }
+        body: Padding(
+          padding: EdgeInsets.fromLTRB(Style.doublePadding, Style.halfPadding,
+              Style.doublePadding, Style.mainPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Hero(
+                tag: 'icon_${args.category.id}',
+                child: FaIcon(
+                  args.category.icon,
+                  color: Style.secondColor,
+                  size: 32,
+                ),
+              ),
+              SizedBox(
+                height: Style.mainPadding,
+              ),
+              Hero(
+                  tag: 'detail_${args.category.id}',
+                  flightShuttleBuilder: flightShuttleBuilderFix,
+                  child: DetailCard(category: args.category)),
+              SizedBox(
+                height: Style.mainPadding,
+              ),
+              Expanded(
+                child: AnimatedOpacity(
+                  opacity: _transistionPageEnd ? 1 : 0,
+                  duration: Duration(milliseconds: 300),
+                  child: Builder(builder: (context) {
+                    if (!_transistionPageEnd) {
+                      return SizedBox.shrink();
+                    }
+                    return Container(
+                      child: Consumer<Todo>(builder: (context, todo, child) {
+                        List<Widget> getTasks() {
+                          return todo.items
+                              .map((item) =>
+                                  TodoItemWidget(item, widget.args.category))
+                              .toList();
+                        }
 
-                if (todo.items.isNotEmpty) {
-                  return ListView(
-                    padding: EdgeInsets.only(bottom: 80),
-                    children: getTasks(),
-                  );
-                } else {
-                  return EmpltyTodo();
-                }
-              }),
-            );
-          }),
+                        if (todo.items.isNotEmpty) {
+                          return ListView(
+                            padding: EdgeInsets.only(bottom: 80),
+                            children: getTasks(),
+                          );
+                        } else {
+                          return EmpltyTodo();
+                        }
+                      }),
+                    );
+                  }),
+                ),
+              ),
+            ],
+          ),
         ));
   }
 }
