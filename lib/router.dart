@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:todolist/pages/add_category.dart';
-import 'package:todolist/pages/add_item.dart';
-import 'package:todolist/models/pages_arguments.dart';
-import 'package:todolist/pages/main.dart';
-import 'package:todolist/pages/todo.dart';
-import 'package:todolist/style.dart';
+import 'pages/add_category.dart';
+import 'pages/add_item.dart';
+import 'models/pages_arguments.dart';
+import 'pages/main.dart';
+import 'pages/todo.dart';
+import 'style.dart';
 
 Route geneateRoute(RouteSettings settings) {
 
@@ -38,11 +38,13 @@ class CardRoute extends PageRouteBuilder {
           pageBuilder: (BuildContext context, Animation<double> animation,
               Animation<double> secondaryAnimation) {
             return widget;
+            //return AnimationPageInjection(child: widget, animationPage: animation);
           },
           transitionsBuilder: (BuildContext context,
               Animation<double> animation,
               Animation<double> secondaryAnimation,
               Widget child) {
+                
             var curvedAnimation = CurvedAnimation(
               parent: animation,
               curve: Curves.easeOut,
@@ -53,7 +55,7 @@ class CardRoute extends PageRouteBuilder {
                 animation: curvedAnimation,
                 cardPosition: arguments.cardPosition);
           },
-          transitionDuration: Duration(milliseconds: 300),
+          transitionDuration: Style.pageDuration,
         );
 }
 
@@ -94,12 +96,34 @@ class CardTransition extends AnimatedWidget {
           margin: EdgeInsets.fromLTRB(0, paddingAnim, paddingAnim, paddingAnim),
           ///https://flutter.dev/docs/perf/rendering/best-practices#pitfalls
           ///TODO: optimization opacity
-          child: Opacity(
+          child: AnimatedOpacity (
             opacity: animValue,
-            child: child,
+            duration: Duration(),
+            child: AnimationPageInjection(child: child, animationPage: animation),
           ),
         ),
       ),
     ]);
   }
+}
+
+//animation page injector
+class AnimationPageInjection extends InheritedWidget {
+  final Animation<double> animationPage;
+
+  const AnimationPageInjection({
+    Key key,
+    @required this.animationPage,
+    @required Widget child,
+  })  :
+        assert(child != null),
+        assert(animationPage != null),
+        super(key: key, child: child);
+
+  static AnimationPageInjection of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<AnimationPageInjection>();
+  }
+
+  @override
+  bool updateShouldNotify(AnimationPageInjection oldWidget) => animationPage != oldWidget.animationPage;
 }
