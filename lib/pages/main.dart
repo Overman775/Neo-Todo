@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:provider/provider.dart';
+import 'package:todolist/bloc/todo.dart';
 import '../widgets/timer.dart';
 import '../widgets/appbar.dart';
 import '../widgets/carousel.dart';
@@ -32,7 +34,12 @@ class MainPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(
                 Style.doublePadding, Style.mainPadding, Style.mainPadding, 0.0),
-            child: Text('You have 5 tasks', style: Style.mainTasksTextStyle),
+            child: Selector<Todo, int>(
+              selector: (_, todo) => todo.total_items,
+              builder: (_, total_items, __) {
+                return Text('You have $total_items tasks', style: Style.mainTasksTextStyle);
+              }
+            ),
           ),
           Carousel(),
           SizedBox(

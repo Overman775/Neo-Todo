@@ -12,6 +12,16 @@ class Todo extends ChangeNotifier {
   List<TodoItem> items = [];
   List<TodoCategory> categoryes = [];
 
+  int get total_items {
+    var count = 0;
+    
+    for (var i = 0; i < categoryes.length; i++) {
+      count += categoryes[i].totalItems - categoryes[i].completed;
+    }
+
+    return count;
+  }
+
   void _init() async {
     await getCategoryes();
   }
