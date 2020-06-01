@@ -110,6 +110,7 @@ class _TodoPageState extends State<TodoPage> {
 
                         if (todo.items.isNotEmpty) {
                           return ListView(
+                            physics: BouncingScrollPhysics(),
                             padding: EdgeInsets.only(bottom: 80),
                             children: getTasks(),
                           );
