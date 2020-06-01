@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/bloc/todo.dart';
-import 'package:todolist/models/pages_arguments.dart';
-import 'package:todolist/widgets/empty.dart';
-import 'package:todolist/widgets/task_item.dart';
-
-import 'package:todolist/style.dart';
+import '../bloc/todo.dart';
+import '../models/pages_arguments.dart';
+import '../widgets/empty.dart';
+import '../widgets/task_item.dart';
+import '../style.dart';
+import '../router.dart';
 
 class TodoPage extends StatefulWidget {
   final MainPageArguments args;
@@ -19,13 +19,25 @@ class TodoPage extends StatefulWidget {
 
 class _TodoPageState extends State<TodoPage> {
   final MainPageArguments args;
+  AnimationPageInjection animationPageInjection;
 
   _TodoPageState(this.args);
+
+  ///check page transistion end
+  bool get _transistionPageEnd =>
+      animationPageInjection.animationPage.value == 1;
 
   @override
   void initState() {
     context.read<Todo>().getItems(args.category.id);
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    //update animation injection
+    animationPageInjection = AnimationPageInjection.of(context);
+    super.didChangeDependencies();
   }
 
   @override
@@ -47,28 +59,37 @@ class _TodoPageState extends State<TodoPage> {
               color: Colors.white,
             ),
           ),
-          
           onPressed: () {
             Navigator.pushNamed(context, '/item',
                 arguments: ItemPageArguments(category: widget.args.category));
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: Container(
-          child: Consumer<Todo>(builder: (context, todo, child) {
-            List<Widget> getTasks() {
-              return todo.items
-                  .map((item) => TodoItemWidget(item, widget.args.category))
-                  .toList();
+        body: AnimatedOpacity(
+          opacity: _transistionPageEnd ? 1 : 0,
+          duration: Duration(milliseconds: 300),
+          child: Builder(builder: (context) {
+            if (!_transistionPageEnd) {
+              return SizedBox.shrink();
             }
-            if (todo.items.isNotEmpty) {
-              return ListView(
-                padding: EdgeInsets.only(bottom: 80),
-                children: getTasks(),
-              );
-            } else {
-              return EmpltyTodo();
-            }
+            return Container(
+              child: Consumer<Todo>(builder: (context, todo, child) {
+                List<Widget> getTasks() {
+                  return todo.items
+                      .map((item) => TodoItemWidget(item, widget.args.category))
+                      .toList();
+                }
+
+                if (todo.items.isNotEmpty) {
+                  return ListView(
+                    padding: EdgeInsets.only(bottom: 80),
+                    children: getTasks(),
+                  );
+                } else {
+                  return EmpltyTodo();
+                }
+              }),
+            );
           }),
         ));
   }
