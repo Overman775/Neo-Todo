@@ -77,4 +77,6 @@ abstract class Style {
         blurRadius: 12.0,
         spreadRadius: 6.0)
   ];
+
+  static const Duration pageDuration = Duration(milliseconds: 300);
 }
