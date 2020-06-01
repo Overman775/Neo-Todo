@@ -16,8 +16,7 @@ class TodoItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(
-          Style.mainPadding, Style.mainPadding, Style.mainPadding, 0.0),
+      padding: EdgeInsets.symmetric(vertical: Style.halfPadding),
       child: Container(
         decoration: BoxDecoration(
             borderRadius: Style.mainBorderRadius,
