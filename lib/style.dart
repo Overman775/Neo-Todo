@@ -48,7 +48,7 @@ abstract class Style {
       TextStyle(color: Style.textColor, fontSize: 32.00);
 
   static const TextStyle cardTitleTextStyle =
-      TextStyle(color: Style.textColor, fontSize: 32.00);
+      TextStyle(color: Style.textColor, fontSize: 40.00);
 
   //TODO: delete opacity
   static TextStyle mainDateSubTextStyle =

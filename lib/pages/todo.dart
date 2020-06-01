@@ -31,9 +31,7 @@ class _TodoPageState extends State<TodoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(args.category.title),
-        ),
+        appBar: AppBar(),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Style.primaryColor,
           elevation: 0,
@@ -49,6 +47,7 @@ class _TodoPageState extends State<TodoPage> {
               color: Colors.white,
             ),
           ),
+          
           onPressed: () {
             Navigator.pushNamed(context, '/item',
                 arguments: ItemPageArguments(category: widget.args.category));
@@ -62,7 +61,6 @@ class _TodoPageState extends State<TodoPage> {
                   .map((item) => TodoItemWidget(item, widget.args.category))
                   .toList();
             }
-
             if (todo.items.isNotEmpty) {
               return ListView(
                 padding: EdgeInsets.only(bottom: 80),

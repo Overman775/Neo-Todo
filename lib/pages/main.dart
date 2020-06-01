@@ -39,7 +39,10 @@ class MainPage extends StatelessWidget {
                 Style.doublePadding, Style.mainPadding, Style.mainPadding, 0.0),
             child: Text('You have 5 tasks', style: Style.mainTasksTextStyle),
           ),
-          Carousel()
+          Carousel(),
+          SizedBox(
+            height: Style.doublePadding
+          )          
         ],
       ),
     );

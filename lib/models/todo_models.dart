@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../utils/icons.dart';
 
@@ -47,6 +48,8 @@ class TodoCategory extends TodoModel {
       return (completed / totalItems).toDouble();
     }
   }
+
+  String get percentString => NumberFormat.percentPattern().format(percent);  
 
   @override
   Map<String, dynamic> toMap() {
