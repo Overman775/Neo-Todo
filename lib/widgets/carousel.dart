@@ -141,7 +141,7 @@ class CategoryAddCard extends StatelessWidget {
         margin: EdgeInsets.fromLTRB(
             0, Style.doublePadding, Style.doublePadding, Style.doublePadding),
         style:
-            NeumorphicStyle(depth: NeumorphicTheme.depth(context) * scaleDepth),
+            NeumorphicStyle(depth: NeumorphicTheme.depth(context)*2 * scaleDepth),
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
