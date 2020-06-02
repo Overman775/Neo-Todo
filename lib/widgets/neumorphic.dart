@@ -18,14 +18,14 @@ class NeumorphicWidget extends StatelessWidget {
           variantColor: Style.primaryColor,
           intensity: 0.6,
           lightSource: LightSource.topRight,
-          depth: 6,
+          depth: 3,
         ),
         darkTheme: NeumorphicThemeData(
           //TODO Add black theme
           baseColor: Color(0xFF3E3E3E),
-          intensity: 0.5,
+          intensity: 0.6,
           lightSource: LightSource.topRight,
-          depth: 6,
+          depth: 3,
         ),
         child: child);
   }
