@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 
 import '../utils/icons.dart';
 
-abstract class TodoModel{
+abstract class TodoModel {
   final int id;
 
   const TodoModel({this.id});
@@ -49,7 +49,7 @@ class TodoCategory extends TodoModel {
     }
   }
 
-  String get percentString => NumberFormat.percentPattern().format(percent);  
+  String get percentString => NumberFormat.percentPattern().format(percent);
 
   @override
   Map<String, dynamic> toMap() {
@@ -69,27 +69,43 @@ class TodoCategory extends TodoModel {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is TodoCategory &&
-      o.id == id &&
-      o.title == title &&
-      o.icon == icon &&
-      o.completed == completed &&
-      o.totalItems == totalItems;
+        o.id == id &&
+        o.title == title &&
+        o.icon == icon &&
+        o.completed == completed &&
+        o.totalItems == totalItems;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      title.hashCode ^
-      icon.hashCode ^
-      completed.hashCode ^
-      totalItems.hashCode;
+        title.hashCode ^
+        icon.hashCode ^
+        completed.hashCode ^
+        totalItems.hashCode;
   }
 
   @override
   String toString() {
     return 'TodoCategory(id: $id, title: $title, icon: $icon, completed: $completed, totalItems: $totalItems)';
+  }
+
+  TodoCategory copyWith({
+    int id,
+    String title,
+    IconData icon,
+    int completed,
+    int totalItems,
+  }) {
+    return TodoCategory(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      icon: icon ?? this.icon,
+      completed: completed ?? this.completed,
+      totalItems: totalItems ?? this.totalItems,
+    );
   }
 }
 
@@ -132,7 +148,6 @@ class TodoItem extends TodoModel {
       description: map['description'],
       completed: map['completed'] == 1);
 
-  
   @override
   String toString() {
     return 'TodoItem(id: $id, category: $category, title: $title, description: $description, completed: $completed)';
@@ -141,21 +156,37 @@ class TodoItem extends TodoModel {
   @override
   bool operator ==(Object o) {
     if (identical(this, o)) return true;
-  
+
     return o is TodoItem &&
-      o.id == id &&
-      o.category == category &&
-      o.title == title &&
-      o.description == description &&
-      o.completed == completed;
+        o.id == id &&
+        o.category == category &&
+        o.title == title &&
+        o.description == description &&
+        o.completed == completed;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      category.hashCode ^
-      title.hashCode ^
-      description.hashCode ^
-      completed.hashCode;
+        category.hashCode ^
+        title.hashCode ^
+        description.hashCode ^
+        completed.hashCode;
+  }
+
+  TodoItem copyWith({
+    int id,
+    int category,
+    String title,
+    String description,
+    bool completed,
+  }) {
+    return TodoItem(
+      id: id ?? this.id,
+      category: category ?? this.category,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      completed: completed ?? this.completed,
+    );
   }
 }
