@@ -53,16 +53,18 @@ class _TextFieldState extends State<NeumorphicTextField> {
 
 class TextFieldLabel extends StatelessWidget {
   final String label;
+  final EdgeInsetsGeometry padding;
 
   const TextFieldLabel(
     this.label, {
     Key key,
+    this.padding = const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8),
+      padding: padding,
       child: Text(
         label,
         style: TextStyle(
