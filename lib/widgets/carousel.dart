@@ -11,6 +11,7 @@ import '../models/todo_models.dart';
 
 import '../style.dart';
 import 'detail_card.dart';
+import 'glow.dart';
 
 class Carousel extends StatefulWidget {
   const Carousel({Key key}) : super(key: key);
@@ -105,10 +106,15 @@ class CategoryCard extends StatelessWidget {
             children: <Widget>[
               Hero(
                 tag: 'icon_${category.id}',
-                child: FaIcon(
-                  category.icon,
+                child: Glow(
                   color: Style.primaryColor,
-                  size: 32,
+                  intensity: 0.25,
+                  spread: 5.0,
+                  child: FaIcon(
+                    category.icon,
+                    color: Style.primaryColor,
+                    size: 32,
+                  ),
                 ),
               ),
               Spacer(),

@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import '../widgets/glow.dart';
 import '../widgets/detail_card.dart';
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
@@ -75,10 +76,15 @@ class _TodoPageState extends State<TodoPage> {
             children: <Widget>[
               Hero(
                 tag: 'icon_${args.category.id}',
-                child: FaIcon(
-                  args.category.icon,
+                child: Glow(
                   color: Style.primaryColor,
-                  size: 32,
+                  intensity: 0.25,
+                  spread: 5.0,
+                  child: FaIcon(
+                    args.category.icon,
+                    color: Style.primaryColor,
+                    size: 32,
+                  ),
                 ),
               ),
               SizedBox(
