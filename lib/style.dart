@@ -2,24 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 abstract class Style {
-  static const Color primaryColor = Color(0xffea4c89);
+  static const Color primaryColor = Color(0xffea4c86);
   static const MaterialColor primaryColorMaterial = MaterialColor(
-    0xffea4c89,
+    0xffea4c86,
     <int, Color>{
-      50: Color(0xffea4c89),
-      100: Color(0xffea4c89),
-      200: Color(0xffea4c89),
-      300: Color(0xffea4c89),
-      400: Color(0xffea4c89),
-      500: Color(0xffea4c89),
-      600: Color(0xffea4c89),
-      700: Color(0xffea4c89),
-      800: Color(0xffea4c89),
-      900: Color(0xffea4c89),
+      50: Color(0xffea4c86),
+      100: Color(0xffea4c86),
+      200: Color(0xffea4c86),
+      300: Color(0xffea4c86),
+      400: Color(0xffea4c86),
+      500: Color(0xffea4c86),
+      600: Color(0xffea4c86),
+      700: Color(0xffea4c86),
+      800: Color(0xffea4c86),
+      900: Color(0xffea4c86),
     },
   );
 
-  static const Color secondColor = Color(0xffcd3b73);
   static const Color textColor = Color(0xff444444);
   static const Color subTextColor = Color(0xff9e9e9e);
   static const Color bgColor = Color(0xffe7e7e7);
@@ -27,7 +26,7 @@ abstract class Style {
   static const Color deleteColor = Color(0xffea4c54);
 
   static const LinearGradient addButtonGradient = LinearGradient(
-      colors: <Color>[Style.primaryColor, Style.secondColor],
+      colors: <Color>[Style.primaryColor, Style.primaryColor],
       begin: Alignment.bottomLeft,
       end: Alignment.topRight);
 

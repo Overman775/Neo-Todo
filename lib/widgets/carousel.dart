@@ -107,7 +107,7 @@ class CategoryCard extends StatelessWidget {
                 tag: 'icon_${category.id}',
                 child: FaIcon(
                   category.icon,
-                  color: Style.secondColor,
+                  color: Style.primaryColor,
                   size: 32,
                 ),
               ),

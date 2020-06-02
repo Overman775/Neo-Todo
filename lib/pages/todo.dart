@@ -77,7 +77,7 @@ class _TodoPageState extends State<TodoPage> {
                 tag: 'icon_${args.category.id}',
                 child: FaIcon(
                   args.category.icon,
-                  color: Style.secondColor,
+                  color: Style.primaryColor,
                   size: 32,
                 ),
               ),

@@ -17,8 +17,8 @@ class MyApp extends StatelessWidget {
       providers: [ChangeNotifierProvider(create: (_) => Todo(), lazy: false)],
       child: NeumorphicWidget(
         child: MaterialApp(
-          showPerformanceOverlay: true,
-          debugShowCheckedModeBanner: false,
+          //showPerformanceOverlay: true,
+          //debugShowCheckedModeBanner: false,
           title: 'Todo List',
           theme: ThemeData(
               primarySwatch: Style.primaryColorMaterial,

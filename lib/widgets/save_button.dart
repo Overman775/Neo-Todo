@@ -16,15 +16,15 @@ class NeumorphicSaveButton extends StatelessWidget {
       boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
       style: NeumorphicStyle(
           border: NeumorphicBorder(
-              width: 3, color: canSave ? Style.secondColor : Style.subTextColor),
+              width: 3, color: canSave ? Style.primaryColor : Style.subTextColor),
           surfaceIntensity: canSave ? 0.5 : 0,
           shape: NeumorphicShape.concave,
-          color: canSave ? Style.secondColor : Style.subTextColor,
+          color: canSave ? Style.primaryColor : Style.subTextColor,
           intensity: 0.7,
           lightSource: LightSource.topRight,
           depth: 6,
-          shadowDarkColor: Style.secondColor,
-          shadowLightColor: Style.secondColor,
+          shadowDarkColor: Style.primaryColor,
+          shadowLightColor: Style.primaryColor,
           ),
       isEnabled: canSave,
       child: Text(
