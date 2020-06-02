@@ -85,7 +85,6 @@ class _AddCategoryState extends State<AddCategory> {
 
   @override
   Widget build(BuildContext context) {
-    print(_transistionPageEnd);
     return Scaffold(
         appBar: AppBar(
           title: _argsHaveCategory
