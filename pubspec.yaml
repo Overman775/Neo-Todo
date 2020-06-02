@@ -17,6 +17,7 @@ dependencies:
   flutter_neumorphic: ^2.2.2
   font_awesome_flutter: '>=8.8.1'
   intl: ^0.16.1
+  expandable: ^4.1.4
 
 dev_dependencies:
   flutter_test:
