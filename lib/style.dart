@@ -21,7 +21,7 @@ abstract class Style {
 
   static const Color textColor = Color(0xff444444);
   static const Color subTextColor = Color(0xff9e9e9e);
-  static const Color bgColor = Color(0xffe7e7e7);
+  static const Color bgColor = Color(0xffdddddd);
   static const Color editColor = Color(0xff4ceaad);
   static const Color deleteColor = Color(0xffea4c54);
 

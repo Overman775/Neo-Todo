@@ -16,7 +16,7 @@ class NeumorphicWidget extends StatelessWidget {
           baseColor: Style.bgColor,
           accentColor: Style.primaryColor,
           variantColor: Style.primaryColor,
-          intensity: 0.8,
+          intensity: 0.6,
           lightSource: LightSource.topRight,
           depth: 6,
         ),
