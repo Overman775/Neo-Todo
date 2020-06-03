@@ -38,6 +38,9 @@ class DetailCard extends StatelessWidget {
                 percent: category.percent,
                 height: 8,
                 duration: Duration(milliseconds: 300),
+                style: ProgressStyle(
+                  depth: NeumorphicTheme.depth(context)// TODO: fix depth and others
+                )
               ),
             ),
             SizedBox(

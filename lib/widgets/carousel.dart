@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -46,6 +47,7 @@ class _CarouselState extends State<Carousel> {
         flex: 1,
         child: Selector<Todo, List<TodoCategory>>(
           selector: (_, todo) => todo.categoryes,
+          shouldRebuild: (old_categoryes, new_categoryes) => listEquals(old_categoryes, new_categoryes),
           builder: (context, categoryes, _) {
             return NotificationListener<ScrollNotification>(
                 onNotification:
