@@ -4,7 +4,6 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/bloc/todo.dart';
 import '../widgets/timer.dart';
-import '../widgets/appbar.dart';
 import '../widgets/carousel.dart';
 
 import '../style.dart';
@@ -16,16 +15,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: NeumorphicTheme.baseColor(context),
-      appBar: CustomAppBar(
-        child: NeumorphicButton(
-          style: NeumorphicStyle(
-            boxShape: NeumorphicBoxShape.circle(),
-          ),
-          padding: EdgeInsets.all(Style.halfPadding),
-          margin: EdgeInsets.all(Style.halfPadding),
-          child: Icon(Icons.more_vert, color: Style.textColor),
-        ),
-      ),
+      appBar: NeumorphicAppBar(),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

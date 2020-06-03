@@ -19,6 +19,14 @@ class NeumorphicWidget extends StatelessWidget {
           intensity: 0.6,
           lightSource: LightSource.topRight,
           depth: 3,
+          appBarTheme: NeumorphicAppBarThemeData(
+            buttonPadding: EdgeInsets.all(14.0), //TODO: fix padding
+            buttonStyle: NeumorphicStyle(
+              boxShape: NeumorphicBoxShape.circle()
+            ),
+            
+            iconTheme: IconThemeData()
+          )
         ),
         darkTheme: NeumorphicThemeData(
           //TODO Add black theme

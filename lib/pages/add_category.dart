@@ -86,7 +86,7 @@ class _AddCategoryState extends State<AddCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+        appBar: NeumorphicAppBar(
           title: _argsHaveCategory
               ? Text(args.category.title)
               : Text('Новая категория'),
