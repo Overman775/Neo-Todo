@@ -12,28 +12,31 @@ class NeumorphicSaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return NeumorphicButton(
-      
+    return Neumorphic(
+      drawSurfaceAboveChild: false,
       style: NeumorphicStyle(
-        boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
-          border: NeumorphicBorder(
-              width: 3, color: canSave ? Style.primaryColor : Style.subTextColor),
-          surfaceIntensity: canSave ? 0.5 : 0,
-          shape: NeumorphicShape.concave,
           color: canSave ? Style.primaryColor : Style.subTextColor,
-          intensity: 0.7,
-          lightSource: LightSource.topRight,
           depth: 6,
+          boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
+          intensity: 0.7,
+          shape: canSave ? NeumorphicShape.concave : NeumorphicShape.flat,
           shadowDarkColor: Style.primaryColor,
           shadowLightColor: Style.primaryColor,
+          disableDepth: !canSave),
+      child: NeumorphicButton(
+          onPressed: onPressed,
+          margin: EdgeInsets.all(3),
+          padding: EdgeInsets.all(14.0),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
+            color: canSave ? Style.primaryColor : Style.subTextColor,
+            depth: 0,
+            shape: canSave ? NeumorphicShape.convex : NeumorphicShape.flat,
           ),
-      //TODO: migrate isEnabled
-      //isEnabled: canSave,
-      child: Text(
-        'Сохранить',
-        style: TextStyle(color: Colors.white, fontSize: 16),
-      ),
-      onPressed: onPressed,
+          child: Text(
+            'Сохранить',
+            style: TextStyle(color: Colors.white, fontSize: 16),
+          )),
     );
   }
 }
