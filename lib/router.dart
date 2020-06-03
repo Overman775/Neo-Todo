@@ -9,24 +9,26 @@ import 'pages/todo.dart';
 import 'style.dart';
 
 Route geneateRoute(RouteSettings settings) {
-
   //check named route and return page
   switch (settings.name) {
     case '/':
-      return MaterialPageRoute(builder: (context) => MainPage());    
-    case '/item':    
-      return MaterialPageRoute(builder: (context) => AddItem(settings.arguments));
+      return MaterialPageRoute(builder: (context) => MainPage());
+    case '/item':
+      return MaterialPageRoute(
+          builder: (context) => AddItem(settings.arguments));
     case '/category':
       //return router with card animation
-      return CardRoute(widget: TodoPage(settings.arguments), arguments: settings.arguments);   
+      return CardRoute(
+          widget: TodoPage(settings.arguments), arguments: settings.arguments);
     case '/category/add':
-      return CardRoute(widget: AddCategory(settings.arguments), arguments: settings.arguments);  
+      return CardRoute(
+          widget: AddCategory(settings.arguments),
+          arguments: settings.arguments);
     default:
       return MaterialPageRoute(builder: (context) => MainPage());
   }
 
   //TODO: add 404 page
-
 }
 
 class CardRoute extends PageRouteBuilder {
@@ -44,7 +46,6 @@ class CardRoute extends PageRouteBuilder {
               Animation<double> animation,
               Animation<double> secondaryAnimation,
               Widget child) {
-                
             var curvedAnimation = CurvedAnimation(
               parent: animation,
               curve: Curves.easeOut,
@@ -92,14 +93,19 @@ class CardTransition extends AnimatedWidget {
         bottom: animBottom,
         child: Neumorphic(
           duration: Duration(),
-          boxShape: NeumorphicBoxShape.roundRect(borderAnim),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(borderAnim),
+          ),
+
           margin: EdgeInsets.fromLTRB(0, paddingAnim, paddingAnim, paddingAnim),
+
           ///https://flutter.dev/docs/perf/rendering/best-practices#pitfalls
           ///TODO: optimization opacity
-          child: AnimatedOpacity (
+          child: AnimatedOpacity(
             opacity: animValue,
             duration: Duration(),
-            child: AnimationPageInjection(child: child, animationPage: animation),
+            child:
+                AnimationPageInjection(child: child, animationPage: animation),
           ),
         ),
       ),
@@ -115,8 +121,7 @@ class AnimationPageInjection extends InheritedWidget {
     Key key,
     @required this.animationPage,
     @required Widget child,
-  })  :
-        assert(child != null),
+  })  : assert(child != null),
         assert(animationPage != null),
         super(key: key, child: child);
 
@@ -125,5 +130,6 @@ class AnimationPageInjection extends InheritedWidget {
   }
 
   @override
-  bool updateShouldNotify(AnimationPageInjection oldWidget) => animationPage != oldWidget.animationPage;
+  bool updateShouldNotify(AnimationPageInjection oldWidget) =>
+      animationPage != oldWidget.animationPage;
 }

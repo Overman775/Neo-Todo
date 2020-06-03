@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
+import 'package:pedantic/pedantic.dart';
 import '../db/sqlite.dart';
 import '../models/todo_models.dart';
 
@@ -30,6 +31,8 @@ class Todo extends ChangeNotifier {
   void _init() async {
     await getCategoryes();
   }
+
+//TODO: optimization sql reqwesr, decrease, rewrite in memory
 
   Future getCategoryes() async {
     var _results = await SQLiteProvider.db.customSelect('SELECT t.* ,'
@@ -70,16 +73,39 @@ class Todo extends ChangeNotifier {
     await getItems(item.category);
   }
 
-  Future toggleItem(TodoItem item) async {
-    var new_item = TodoItem(
-        id: item.id,
-        category: item.category,
-        title: item.title,
-        description: item.description,
-        completed: !item.completed);
-    await SQLiteProvider.db.update(TodoItem.table, new_item);
-    await getItems(item.category);
+  void toggleItem(TodoItem item) {
+    final new_item = item.copyWith(completed: !item.completed);
+    unawaited(SQLiteProvider.db.update(TodoItem.table, new_item));
+    //overwrrite TodoItem
+    updateItem(new_item);
+
+    final category_index =
+        categoryes.indexWhere((old_item) => old_item.id == item.category);
+    final old_category = categoryes[category_index];
+    final new_category = categoryes[category_index].copyWith(
+      completed: new_item.completed
+          ? old_category.completed + 1
+          : old_category.completed - 1,
+    );
+
+    updateCategory(new_category, index: category_index);
+
+    notifyListeners();
     log('Item toggle ${item.title}');
+  }
+
+  void updateItem(TodoItem item, {index}) {
+    //search item if index not set
+    index ??= items.indexWhere((old_item) => old_item.id == item.id);
+    //overvrite
+    items[index] = item;
+  }
+
+  void updateCategory(TodoCategory item, {index}) {
+    //search item if index not set
+    index ??= categoryes.indexWhere((old_item) => old_item.id == item.id);
+    //overvrite
+    categoryes[index] = item;
   }
 
   Future deleteItem(TodoItem item) async {

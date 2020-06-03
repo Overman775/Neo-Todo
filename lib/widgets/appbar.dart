@@ -21,7 +21,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           children: <Widget>[
             if (canPop)
               NeumorphicButton(
-                boxShape: NeumorphicBoxShape.circle(),
+                style: NeumorphicStyle(
+                  boxShape: NeumorphicBoxShape.circle(),
+                ),
                 padding: EdgeInsets.all(Style.halfPadding),
                 margin: EdgeInsets.all(Style.halfPadding),
                 child: Icon(Icons.arrow_back, color: Style.textColor),

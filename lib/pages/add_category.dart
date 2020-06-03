@@ -126,7 +126,9 @@ class _AddCategoryState extends State<AddCategory> {
                                   .map((item) => NeumorphicRadio(
                                         groupValue: icon,
                                         padding: EdgeInsets.all(16),
-                                        boxShape: NeumorphicBoxShape.circle(),
+                                        style: NeumorphicRadioStyle(
+                                          boxShape: NeumorphicBoxShape.circle(),
+                                        ),
                                         value: item.value,
                                         child: FaIcon(item.value,
                                             size: 18,

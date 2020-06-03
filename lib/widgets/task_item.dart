@@ -18,9 +18,12 @@ class TodoItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Neumorphic(
-      boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
       margin: EdgeInsets.symmetric(vertical: Style.halfPadding),
-      style: NeumorphicStyle(depth: 3, intensity: 0.5),
+      style: NeumorphicStyle(
+        depth: 3,
+        intensity: 0.5,
+        boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
+      ),
       child: Dismissible(
         key: Key('item_${item.id}'),
         child: ListTile(
@@ -40,13 +43,13 @@ class TodoItemWidget extends StatelessWidget {
           padding: const EdgeInsets.all(2.0),
           child: Neumorphic(
             drawSurfaceAboveChild: false,
-            boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
             padding: EdgeInsets.only(left: Style.mainPadding),
             style: NeumorphicStyle(
               depth: -6,
               color: Style.editColor,
               lightSource: LightSource.topLeft,
               intensity: 1,
+              boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
             ),
             child: Align(
               alignment: Alignment.centerLeft,
@@ -61,13 +64,13 @@ class TodoItemWidget extends StatelessWidget {
           padding: const EdgeInsets.all(2.0),
           child: Neumorphic(
             drawSurfaceAboveChild: false,
-            boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
             padding: EdgeInsets.only(right: Style.mainPadding),
             style: NeumorphicStyle(
               depth: -6,
               color: Style.deleteColor,
               lightSource: LightSource.topRight,
               intensity: 1,
+              boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
             ),
             child: Align(
               alignment: Alignment.centerRight,
@@ -81,7 +84,7 @@ class TodoItemWidget extends StatelessWidget {
         onDismissed: (direction) {
           if (direction == DismissDirection.endToStart) {
             context.read<Todo>().deleteItem(item);
-          } else if(direction == DismissDirection.startToEnd){
+          } else if (direction == DismissDirection.startToEnd) {
             context.read<Todo>().toggleItem(item);
           }
         },

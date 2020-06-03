@@ -37,8 +37,10 @@ class _TextFieldState extends State<NeumorphicTextField> {
         TextFieldLabel(widget.label),
         Neumorphic(
           margin: EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 4),
-          boxShape: NeumorphicBoxShape.stadium(),
-          style: NeumorphicStyle(depth: NeumorphicTheme.embossDepth(context)),
+          style: NeumorphicStyle(
+            depth: NeumorphicTheme.embossDepth(context),
+            boxShape: NeumorphicBoxShape.stadium(),
+          ),
           padding: EdgeInsets.symmetric(vertical: 0, horizontal: 14),
           child: TextField(
             onChanged: widget.onChanged,

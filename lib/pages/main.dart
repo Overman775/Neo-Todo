@@ -18,7 +18,9 @@ class MainPage extends StatelessWidget {
       backgroundColor: NeumorphicTheme.baseColor(context),
       appBar: CustomAppBar(
         child: NeumorphicButton(
-          boxShape: NeumorphicBoxShape.circle(),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.circle(),
+          ),
           padding: EdgeInsets.all(Style.halfPadding),
           margin: EdgeInsets.all(Style.halfPadding),
           child: Icon(Icons.more_vert, color: Style.textColor),
@@ -35,16 +37,14 @@ class MainPage extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(
                 Style.doublePadding, Style.mainPadding, Style.mainPadding, 0.0),
             child: Selector<Todo, int>(
-              selector: (_, todo) => todo.total_items,
-              builder: (_, total_items, __) {
-                return Text('You have $total_items tasks', style: Style.mainTasksTextStyle);
-              }
-            ),
+                selector: (_, todo) => todo.total_items,
+                builder: (_, total_items, __) {
+                  return Text('You have $total_items tasks',
+                      style: Style.mainTasksTextStyle);
+                }),
           ),
           Carousel(),
-          SizedBox(
-            height: Style.doublePadding
-          )          
+          SizedBox(height: Style.doublePadding)
         ],
       ),
     );

@@ -10,7 +10,7 @@ class NeumorphicWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NeumorphicTheme(
-        usedTheme: UsedTheme.LIGHT,
+        themeMode: ThemeMode.light,
         theme: NeumorphicThemeData(
           defaultTextColor: Style.textColor,
           baseColor: Style.bgColor,

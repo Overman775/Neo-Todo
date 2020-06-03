@@ -87,12 +87,12 @@ class CategoryCard extends StatelessWidget {
       scale: scale,
       alignment: Alignment.centerLeft,
       child: Neumorphic(
-        boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
         padding: EdgeInsets.all(18.0),
         margin: EdgeInsets.fromLTRB(
             0, Style.doublePadding, Style.doublePadding, Style.doublePadding),
-        style:
-            NeumorphicStyle(depth: NeumorphicTheme.depth(context)*2 * scaleDepth),
+        style: NeumorphicStyle(
+            depth: NeumorphicTheme.depth(context) * 2 * scaleDepth,
+            boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius)),
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
@@ -142,12 +142,13 @@ class CategoryAddCard extends StatelessWidget {
       scale: scale,
       alignment: Alignment.centerLeft,
       child: Neumorphic(
-        boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
         padding: EdgeInsets.all(18.0),
         margin: EdgeInsets.fromLTRB(
             0, Style.doublePadding, Style.doublePadding, Style.doublePadding),
-        style:
-            NeumorphicStyle(depth: NeumorphicTheme.depth(context)*2 * scaleDepth),
+        style: NeumorphicStyle(
+          depth: NeumorphicTheme.depth(context) * 2 * scaleDepth,
+          boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
+        ),
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {

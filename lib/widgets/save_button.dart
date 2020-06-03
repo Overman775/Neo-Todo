@@ -13,8 +13,9 @@ class NeumorphicSaveButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return NeumorphicButton(
-      boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
+      
       style: NeumorphicStyle(
+        boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
           border: NeumorphicBorder(
               width: 3, color: canSave ? Style.primaryColor : Style.subTextColor),
           surfaceIntensity: canSave ? 0.5 : 0,
@@ -26,7 +27,8 @@ class NeumorphicSaveButton extends StatelessWidget {
           shadowDarkColor: Style.primaryColor,
           shadowLightColor: Style.primaryColor,
           ),
-      isEnabled: canSave,
+      //TODO: migrate isEnabled
+      //isEnabled: canSave,
       child: Text(
         'Сохранить',
         style: TextStyle(color: Colors.white, fontSize: 16),
