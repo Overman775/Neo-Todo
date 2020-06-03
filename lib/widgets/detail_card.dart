@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import '../models/todo_models.dart';
 import '../style.dart';
+import 'animated_percent.dart';
 
 class DetailCard extends StatelessWidget {
   const DetailCard({
@@ -41,9 +42,13 @@ class DetailCard extends StatelessWidget {
             SizedBox(
               width: Style.mainPadding,
             ),
-            Text(
-              category.percentString,
-              style: Style.mainTasksTextStyle,
+            Container(
+              width: 40,
+              alignment: Alignment.centerRight,
+              child: AnimatedPercent(
+                category.percent,
+                style: Style.mainTasksTextStyle,
+              ),
             )
           ],
         )
