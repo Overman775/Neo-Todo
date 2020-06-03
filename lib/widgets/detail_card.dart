@@ -37,6 +37,7 @@ class DetailCard extends StatelessWidget {
               child: NeumorphicProgress(
                 percent: category.percent,
                 height: 8,
+                duration: Duration(milliseconds: 300),
               ),
             ),
             SizedBox(
@@ -48,6 +49,7 @@ class DetailCard extends StatelessWidget {
               child: AnimatedPercent(
                 category.percent,
                 style: Style.mainTasksTextStyle,
+                duration: Duration(milliseconds: 300),
               ),
             )
           ],
