@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:todolist/models/todo_models.dart';
 import '../widgets/text_field.dart';
 import '../widgets/glow.dart';
 import '../widgets/detail_card.dart';
@@ -76,31 +77,39 @@ class _TodoPageState extends State<TodoPage> {
             Padding(
               padding: EdgeInsets.fromLTRB(Style.doublePadding,
                   Style.halfPadding, Style.doublePadding, 0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Hero(
-                    tag: 'icon_${args.category.id}',
-                    child: Glow(
-                      color: Style.primaryColor,
-                      intensity: 0.25,
-                      spread: 5.0,
-                      child: FaIcon(
-                        args.category.icon,
-                        color: Style.primaryColor,
-                        size: 32,
+              child: Selector<Todo, TodoCategory>(
+                selector: (BuildContext context, Todo todo) => todo.categoryes
+                    .firstWhere((element) => element.id == args.category.id),
+                shouldRebuild: (old_category, new_category) =>
+                    old_category != new_category,
+                builder: (context, category, _) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Hero(
+                        tag: 'icon_${category.id}',
+                        child: Glow(
+                          color: Style.primaryColor,
+                          intensity: 0.25,
+                          spread: 5.0,
+                          child: FaIcon(
+                            args.category.icon,
+                            color: Style.primaryColor,
+                            size: 32,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: Style.mainPadding,
-                  ),
-                  Hero(
-                      tag: 'detail_${args.category.id}',
-                      flightShuttleBuilder: flightShuttleBuilderFix,
-                      child: DetailCard(category: args.category)),
-                  SizedBox(height: Style.mainPadding)
-                ],
+                      SizedBox(
+                        height: Style.mainPadding,
+                      ),
+                      Hero(
+                          tag: 'detail_${category.id}',
+                          flightShuttleBuilder: flightShuttleBuilderFix,
+                          child: DetailCard(category: category)),
+                      SizedBox(height: Style.mainPadding)
+                    ],
+                  );
+                },
               ),
             ),
             ListBody(transistionPageEnd: _transistionPageEnd, widget: widget)
