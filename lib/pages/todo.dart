@@ -143,42 +143,16 @@ class ListBody extends StatelessWidget {
           if (!_transistionPageEnd) {
             return SizedBox.shrink();
           }
-          return Consumer<Todo>(builder: (context, todo, child) {
-            if (todo.items.isNotEmpty) {
-              return ListView(
-                physics: BouncingScrollPhysics(),
-                padding: EdgeInsets.only(bottom: 80),
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        Style.doublePadding,
-                        Style.halfPadding,
-                        Style.doublePadding,
-                        Style.mainPadding),
-                    child: Column(
-                      children: <Widget>[
-                        ...todo.items_unCompleted.map((item) =>
-                            TodoItemWidget(item, widget.args.category)),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: Style.halfPadding,
-                  ),
-                  ExpandablePanel(
-                      header: TextFieldLabel(
-                        'Выполнено',
-                        padding: EdgeInsets.only(left: Style.doublePadding),
-                      ),
-                      theme: ExpandableThemeData(
-                          headerAlignment:
-                              ExpandablePanelHeaderAlignment.center,
-                          iconPadding:
-                              EdgeInsets.only(right: Style.doublePadding),
-                          expandIcon: FontAwesomeIcons.angleDown,
-                          collapseIcon: FontAwesomeIcons.angleDown,
-                          useInkWell: false),
-                      expanded: Padding(
+          //Stack for cover begin and end ListView
+          return Stack(
+            children: <Widget>[
+              Consumer<Todo>(builder: (context, todo, child) {
+                if (todo.items.isNotEmpty) {
+                  return ListView(
+                    physics: BouncingScrollPhysics(),
+                    padding: EdgeInsets.only(bottom: 80),
+                    children: <Widget>[
+                      Padding(
                         padding: EdgeInsets.fromLTRB(
                             Style.doublePadding,
                             Style.halfPadding,
@@ -186,17 +160,75 @@ class ListBody extends StatelessWidget {
                             Style.mainPadding),
                         child: Column(
                           children: <Widget>[
-                            ...todo.items_completed.map((item) =>
+                            ...todo.items_unCompleted.map((item) =>
                                 TodoItemWidget(item, widget.args.category)),
                           ],
                         ),
-                      ))
-                ],
-              );
-            } else {
-              return EmpltyTodo();
-            }
-          });
+                      ),
+                      SizedBox(
+                        height: Style.halfPadding,
+                      ),
+                      ExpandablePanel(
+                          header: TextFieldLabel(
+                            'Выполнено',
+                            padding: EdgeInsets.only(left: Style.doublePadding),
+                          ),
+                          theme: ExpandableThemeData(
+                              headerAlignment:
+                                  ExpandablePanelHeaderAlignment.center,
+                              iconPadding:
+                                  EdgeInsets.only(right: Style.doublePadding),
+                              expandIcon: FontAwesomeIcons.angleDown,
+                              collapseIcon: FontAwesomeIcons.angleDown,
+                              useInkWell: false),
+                          expanded: Padding(
+                            padding: EdgeInsets.fromLTRB(
+                                Style.doublePadding,
+                                Style.halfPadding,
+                                Style.doublePadding,
+                                Style.mainPadding),
+                            child: Column(
+                              children: <Widget>[
+                                ...todo.items_completed.map((item) =>
+                                    TodoItemWidget(item, widget.args.category)),
+                              ],
+                            ),
+                          ))
+                    ],
+                  );
+                } else {
+                  return EmpltyTodo();
+                }
+              }),
+              //top cover gradient
+              Container(
+                  height: Style.mainPadding,
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      NeumorphicTheme.baseColor(context),
+                      NeumorphicTheme.baseColor(context).withOpacity(0)
+                    ],
+                  ))),
+              //bottom cover gradient
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                    height: Style.mainPadding,
+                    decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                      begin: Alignment.bottomCenter,
+                      end: Alignment.topCenter,
+                      colors: [
+                        NeumorphicTheme.baseColor(context),
+                        NeumorphicTheme.baseColor(context).withOpacity(0)
+                      ],
+                    ))),
+              ),
+            ],
+          );
         }),
       ),
     );

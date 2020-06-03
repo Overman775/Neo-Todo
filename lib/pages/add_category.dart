@@ -59,6 +59,7 @@ class _AddCategoryState extends State<AddCategory> {
   }
 
   void saveCategory() {
+    //TODO: fix bug save
     if (_argsHaveCategory) {
       context
           .read<Todo>()
