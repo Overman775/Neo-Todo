@@ -81,10 +81,10 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "81942e8655e2a9cedab38bad4136be226a7f1d50"
+      resolved-ref: "8ebe4f06f8240f372c769ec3916c7e9b93031e95"
       url: "git://github.com/Idean/Flutter-Neumorphic.git"
     source: git
-    version: "3.0.0"
+    version: "3.0.1"
   flutter_svg:
     dependency: "direct main"
     description:
