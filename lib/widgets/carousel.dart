@@ -47,7 +47,7 @@ class _CarouselState extends State<Carousel> {
         flex: 1,
         child: Selector<Todo, List<TodoCategory>>(
           selector: (_, todo) => todo.categoryes,
-          shouldRebuild: (old_categoryes, new_categoryes) => listEquals(old_categoryes, new_categoryes),
+          shouldRebuild: (old_categoryes, new_categoryes) => !listEquals(old_categoryes, new_categoryes),
           builder: (context, categoryes, _) {
             return NotificationListener<ScrollNotification>(
                 onNotification:
