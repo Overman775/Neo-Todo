@@ -6,15 +6,18 @@ class NeumorphicTextField extends StatefulWidget {
   final String hint;
   final String text;
   final bool autofocus;
+  final bool multilines;
 
   final ValueChanged<String> onChanged;
 
-  NeumorphicTextField(
-      {this.label,
-      this.hint,
-      this.text,
-      this.onChanged,
-      this.autofocus = false});
+  NeumorphicTextField({
+    this.label,
+    this.hint,
+    this.text,
+    this.onChanged,
+    this.autofocus = false,
+    this.multilines = false,
+  });
 
   @override
   _TextFieldState createState() => _TextFieldState();
@@ -52,6 +55,10 @@ class _TextFieldState extends State<NeumorphicTextField> {
             onChanged: widget.onChanged,
             controller: _controller,
             autofocus: widget.autofocus,
+            keyboardType: widget.multilines
+                ? TextInputType.multiline
+                : TextInputType.text,
+            maxLines: widget.multilines ? null : 1,
             decoration: InputDecoration.collapsed(hintText: widget.hint),
           ),
         )
