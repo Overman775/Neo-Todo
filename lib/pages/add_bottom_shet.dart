@@ -37,6 +37,7 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
   void chaneEnableDescription() {
     setState(() {
       enableDescription = !enableDescription;
+      description = '';
     });
   }
 
@@ -79,13 +80,15 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               NeumorphicTextField(
-                  //hint: 'Новая задача', //TODO: delete on next stable version, bug https://github.com/flutter/flutter/issues/57570
+                  hint: 'Новая задача',
                   onChanged: itemTitleChanget,
                   autofocus: true),
               SizedBox(height: Style.mainPadding),
               if (enableDescription)
                 NeumorphicTextField(
-                    onChanged: itemDescriptionChanget, autofocus: true),
+                    hint: 'Описание',
+                    onChanged: itemDescriptionChanget,
+                    ),
               SizedBox(height: Style.mainPadding),
               Row(
                 children: <Widget>[

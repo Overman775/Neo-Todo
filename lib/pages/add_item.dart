@@ -1,7 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
+import 'package:todolist/widgets/text_field.dart';
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
 import '../models/todo_models.dart';
@@ -12,51 +12,38 @@ class AddItem extends StatefulWidget {
   AddItem(this.args, {Key key}) : super(key: key);
 
   @override
-  _AddItemState createState() => _AddItemState(args);
+  _AddItemState createState() => _AddItemState();
 }
 
 class _AddItemState extends State<AddItem> {
-  final ItemPageArguments args;
+  String title = '';
+  String description = '';
 
-  _AddItemState(this.args);
-
-  final _formKey = GlobalKey<FormState>();
-  final _titleFormController = TextEditingController();
-  final _descriptionFormController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-    _initForm();
+  void itemTitleChanget(String title) {
+    setState(() {
+      this.title = title;
+    });
   }
 
-  void _initForm() {
-    if (_argsHaveitem) {
-      _titleFormController.text = args.item.title;
-      _descriptionFormController.text = args.item.description;
+  void itemDescriptionChanget(String description) {
+    setState(() {
+      this.description = description;
+    });
+  }
+
+  bool get _saveEnable {
+    if (title.isEmpty && description.isEmpty) {
+      return false;
     }
+    return true;
   }
 
-  bool get _argsHaveitem => args?.item != null;
-
-  //TODO: refactoring form + update style
-  void _saveForm() async {
-    if (_formKey.currentState.validate()) {
-      if (_argsHaveitem) {
-        await context.read<Todo>().editItem(
-            args.item,
-            TodoItem(
-                id: args.item.id,
-                category: args.category.id,
-                title: _titleFormController.text,
-                description: _descriptionFormController.text,
-                completed: args.item.completed));
-      } else {
-        await context.read<Todo>().addItem(TodoItem(
-            category: args.category.id,
-            title: _titleFormController.text,
-            description: _descriptionFormController.text));
-      }
+  void saveItem() async {
+    if (_saveEnable) {
+      await context.read<Todo>().addItem(TodoItem(
+          category: widget.args.category.id,
+          title: title,
+          description: description));
 
       //go back
       Navigator.of(context).pop();
@@ -64,90 +51,39 @@ class _AddItemState extends State<AddItem> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    _titleFormController.dispose();
-    _descriptionFormController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    log('Open item ${args?.item?.title}');
     return Scaffold(
-      appBar: AppBar(
-        title: _argsHaveitem ? Text(args.item.title) : Text('Новая задача'),
-      ),
-      body: Container(
-        padding: EdgeInsets.fromLTRB(16, 10, 16, 16),
-        child: Form(
-          key: _formKey,
-          child: Wrap(
-            direction: Axis.horizontal,
-            runSpacing: Style.doublePadding,
+      appBar: NeumorphicAppBar(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(Style.mainPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: Style.mainBorderRadius,
-                    color: Style.bgColor,
-                    boxShadow: Style.boxShadows),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'Заголовок',
-                      contentPadding: EdgeInsets.all(Style.mainPadding),
-                      border: OutlineInputBorder(
-                        borderRadius: Style.mainBorderRadius,
-                      )),
-                  controller: _titleFormController,
-                  autofocus: true,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Введите текст';
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
+              NeumorphicTextField(
+                label: 'Название',
+                text: widget.args.item.title,
+                onChanged: itemTitleChanget,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    borderRadius: Style.mainBorderRadius,
-                    color: Style.bgColor,
-                    boxShadow: Style.boxShadows),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelText: 'Описание',
-                      contentPadding: EdgeInsets.all(Style.mainPadding),
-                      border: OutlineInputBorder(
-                          borderRadius: Style.mainBorderRadius)),
-                  keyboardType: TextInputType.multiline,
-                  maxLines: 3,
-                  controller: _descriptionFormController,
-                ),
-              ),
+              SizedBox(height: Style.mainPadding),
+              NeumorphicTextField(
+                  label: 'Описание',
+                  text: widget.args.item.description,
+                  onChanged: itemDescriptionChanget),
+              SizedBox(height: Style.mainPadding),
               Center(
-                child: ClipRRect(
-                  borderRadius: Style.mainBorderRadius,
-                  child: FlatButton(
-                    color: Style.primaryColor,
-                    onPressed: _saveForm,
-                    padding: const EdgeInsets.all(0.0),
-                    child: Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: Style.mainPadding,
-                            horizontal: Style.doublePadding),
-                        decoration: BoxDecoration(
-                            gradient: Style.addButtonGradient,
-                            borderRadius: Style.mainBorderRadius,
-                            border:
-                                Border.all(color: Style.primaryColor, width: 3),
-                            boxShadow: Style.buttonGlow),
-                        child: Text(
-                          'Сохранить',
-                          style: Style.buttonTextStyle,
-                        )),
-                  ),
-                ),
-              ),
+                  child: NeumorphicButton(
+                padding: EdgeInsets.all(16),
+                style: NeumorphicStyle(
+                    boxShape:
+                        NeumorphicBoxShape.roundRect(Style.mainBorderRadius)),
+                child: Text('Сохранить',
+                    style: TextStyle(
+                        color: _saveEnable
+                            ? NeumorphicTheme.accentColor(context)
+                            : NeumorphicTheme.defaultTextColor(context))),
+                onPressed: saveItem,
+              ))
             ],
           ),
         ),
