@@ -43,36 +43,35 @@ class _CarouselState extends State<Carousel> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        flex: 1,
         child: Selector<Todo, List<TodoCategory>>(
-          selector: (_, todo) => todo.categoryes,
-          shouldRebuild: (old_categoryes, new_categoryes) =>
-              !listEquals(old_categoryes, new_categoryes),
-          builder: (context, categoryes, _) {
-            return NotificationListener<ScrollNotification>(
-                onNotification:
-                    _handlePageNotification, //listen scroll and update page
-                child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  itemCount:
-                      categoryes.length + 1, // +1 need for add CategoryAddCard
-                  controller: _pageController,
-                  itemBuilder: (context, index) {
-                    final scale =
-                        max(scaleFraction, (fullScale - (index - page).abs()));
-                    final depth =
-                        max(scaleDepth, (fullScale - (index - page).abs()));
+      selector: (_, todo) => todo.categoryes,
+      shouldRebuild: (old_categoryes, new_categoryes) =>
+          old_categoryes == new_categoryes,
+      builder: (context, categoryes, _) {
+        return NotificationListener<ScrollNotification>(
+            onNotification:
+                _handlePageNotification, //listen scroll and update page
+            child: PageView.builder(
+              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              itemCount:
+                  categoryes.length + 1, // +1 need for add CategoryAddCard
+              controller: _pageController,
+              itemBuilder: (context, index) {
+                final scale =
+                    max(scaleFraction, (fullScale - (index - page).abs()));
+                final depth =
+                    max(scaleDepth, (fullScale - (index - page).abs()));
 
-                    if (index < categoryes.length) {
-                      return CategoryCard(categoryes[index], scale, depth);
-                    } else {
-                      return CategoryAddCard(scale, depth);
-                    }
-                  },
-                ));
-          },
-        ));
+                if (index < categoryes.length) {
+                  return CategoryCard(categoryes[index], scale, depth);
+                } else {
+                  return CategoryAddCard(scale, depth);
+                }
+              },
+            ));
+      },
+    ));
   }
 }
 
@@ -111,7 +110,7 @@ class CategoryCard extends StatelessWidget {
               //detail
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[        
+                children: <Widget>[
                   HeroTitle(category: category),
                   SizedBox(
                     height: Style.mainPadding,

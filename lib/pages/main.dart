@@ -28,6 +28,7 @@ class MainPage extends StatelessWidget {
                 Style.doublePadding, Style.mainPadding, Style.mainPadding, 0.0),
             child: Selector<Todo, int>(
                 selector: (_, todo) => todo.total_items,
+                shouldRebuild: (old_total, new_total) => old_total != new_total,
                 builder: (_, total_items, __) {
                   return Text('You have $total_items tasks',
                       style: Style.mainTasksTextStyle);
