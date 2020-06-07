@@ -40,12 +40,27 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
     });
   }
 
-  void saveItem() async {
-    await context.read<Todo>().addItem(TodoItem(
-        category: widget.category.id, title: title, description: description));
+  bool get _saveEnable {
+    if (title.isEmpty) {
+      return false;
+    }
+    if (enableDescription && description.isEmpty) {
+      return false;
+    }
 
-    //go back
-    Navigator.of(context).pop();
+    return true;
+  }
+
+  void saveItem() async {
+    if (_saveEnable) {
+      await context.read<Todo>().addItem(TodoItem(
+          category: widget.category.id,
+          title: title,
+          description: description));
+
+      //go back
+      Navigator.of(context).pop();
+    }
   }
 
   @override
@@ -92,7 +107,9 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
                             Style.mainBorderRadius)),
                     child: Text('Сохранить',
                         style: TextStyle(
-                            color: NeumorphicTheme.accentColor(context))),
+                            color: _saveEnable
+                                ? NeumorphicTheme.accentColor(context)
+                                : NeumorphicTheme.defaultTextColor(context))),
                     onPressed: saveItem,
                   ),
                 ],
