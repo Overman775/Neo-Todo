@@ -12,7 +12,6 @@ import '../models/todo_models.dart';
 
 import '../style.dart';
 import 'detail_card.dart';
-import 'glow.dart';
 
 class Carousel extends StatefulWidget {
   const Carousel({Key key}) : super(key: key);
@@ -47,7 +46,8 @@ class _CarouselState extends State<Carousel> {
         flex: 1,
         child: Selector<Todo, List<TodoCategory>>(
           selector: (_, todo) => todo.categoryes,
-          shouldRebuild: (old_categoryes, new_categoryes) => !listEquals(old_categoryes, new_categoryes),
+          shouldRebuild: (old_categoryes, new_categoryes) =>
+              !listEquals(old_categoryes, new_categoryes),
           builder: (context, categoryes, _) {
             return NotificationListener<ScrollNotification>(
                 onNotification:
@@ -106,24 +106,25 @@ class CategoryCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Hero(
-                tag: 'icon_${category.id}',
-                child: Glow(
-                  color: Style.primaryColor,
-                  intensity: 0.25,
-                  spread: 5.0,
-                  child: FaIcon(
-                    category.icon,
-                    color: Style.primaryColor,
-                    size: 32,
-                  ),
-                ),
-              ),
+              HeroIcon(category: category),
               Spacer(),
-              Hero(
+
+              //detail
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[        
+                  HeroTitle(category: category),
+                  SizedBox(
+                    height: Style.mainPadding,
+                  ),
+                  HeroProgress(category: category)
+                ],
+              )
+
+              /*Hero(
                   tag: 'detail_${category.id}',
                   flightShuttleBuilder: flightShuttleBuilderFix,
-                  child: DetailCard(category: category)),
+                  child: DetailCard(category: category)),*/
             ],
           ),
         ),

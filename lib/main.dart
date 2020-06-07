@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
                   textTheme: TextTheme(headline6: Style.headerTextStyle),
                   iconTheme: IconThemeData(color: Style.primaryColor)),
               scaffoldBackgroundColor: Style.bgColor),
+              
           initialRoute: '/',
           onGenerateRoute: geneateRoute,
         ),
