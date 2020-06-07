@@ -108,7 +108,6 @@ class CategoryCard extends StatelessWidget {
             children: <Widget>[
               HeroIcon(category: category),
               Spacer(),
-
               //detail
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,11 +119,6 @@ class CategoryCard extends StatelessWidget {
                   HeroProgress(category: category)
                 ],
               )
-
-              /*Hero(
-                  tag: 'detail_${category.id}',
-                  flightShuttleBuilder: flightShuttleBuilderFix,
-                  child: DetailCard(category: category)),*/
             ],
           ),
         ),

@@ -13,6 +13,7 @@ import '../widgets/empty.dart';
 import '../widgets/task_item.dart';
 import '../style.dart';
 import '../router.dart';
+import 'add_bottom_shet.dart';
 
 class TodoPage extends StatefulWidget {
   final MainPageArguments args;
@@ -46,11 +47,21 @@ class _TodoPageState extends State<TodoPage> {
     super.didChangeDependencies();
   }
 
+  void _modalBottomSheet(BuildContext context, TodoCategory category) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (_) {
+          return AddItemBottomShet(category: category);
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: NeumorphicAppBar(
-          //TODO: fix update title
+            //TODO: fix update title
             title: HeroTitle(category: args.category)),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Style.primaryColor,
@@ -68,8 +79,7 @@ class _TodoPageState extends State<TodoPage> {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/item',
-                arguments: ItemPageArguments(category: widget.args.category));
+            _modalBottomSheet(context, args.category);
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -77,8 +87,8 @@ class _TodoPageState extends State<TodoPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.fromLTRB(Style.mainPadding,
-                  Style.halfPadding, Style.mainPadding, Style.mainPadding),
+              padding: EdgeInsets.fromLTRB(Style.mainPadding, Style.halfPadding,
+                  Style.mainPadding, Style.mainPadding),
               child: Selector<Todo, TodoCategory>(
                 selector: (BuildContext context, Todo todo) => todo.categoryes
                     .firstWhere((element) => element.id == args.category.id),

@@ -4,11 +4,15 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 class NeumorphicTextField extends StatefulWidget {
   final String label;
   final String hint;
+  final bool autofocus;
 
   final ValueChanged<String> onChanged;
 
   NeumorphicTextField(
-      {@required this.label, @required this.hint, this.onChanged});
+      {this.label,
+      this.hint,
+      this.onChanged,
+      this.autofocus = false});
 
   @override
   _TextFieldState createState() => _TextFieldState();
@@ -34,7 +38,7 @@ class _TextFieldState extends State<NeumorphicTextField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        TextFieldLabel(widget.label),
+        if (widget.label != null) TextFieldLabel(widget.label),
         Neumorphic(
           margin: EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 4),
           style: NeumorphicStyle(
@@ -45,6 +49,7 @@ class _TextFieldState extends State<NeumorphicTextField> {
           child: TextField(
             onChanged: widget.onChanged,
             controller: _controller,
+            autofocus: widget.autofocus,
             decoration: InputDecoration.collapsed(hintText: widget.hint),
           ),
         )
