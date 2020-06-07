@@ -12,7 +12,6 @@ dependencies:
   provider: ^4.1.3
   sqflite: ^1.3.0+1
   path_provider: ^1.6.10
-  flutter_svg: ^0.17.4
   pedantic: ^1.9.0
   flutter_neumorphic: 
     git:
@@ -20,6 +19,7 @@ dependencies:
   font_awesome_flutter: '>=8.8.1'
   intl: ^0.16.1
   expandable: ^4.1.4
+  flare_flutter: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -30,3 +30,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/animation/

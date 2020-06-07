@@ -46,7 +46,7 @@ class _CarouselState extends State<Carousel> {
         child: Selector<Todo, List<TodoCategory>>(
       selector: (_, todo) => todo.categoryes,
       shouldRebuild: (old_categoryes, new_categoryes) =>
-          old_categoryes == new_categoryes,
+          old_categoryes != new_categoryes,
       builder: (context, categoryes, _) {
         return NotificationListener<ScrollNotification>(
             onNotification:
