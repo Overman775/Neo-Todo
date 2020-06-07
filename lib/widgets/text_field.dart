@@ -4,6 +4,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 class NeumorphicTextField extends StatefulWidget {
   final String label;
   final String hint;
+  final String text;
   final bool autofocus;
 
   final ValueChanged<String> onChanged;
@@ -11,6 +12,7 @@ class NeumorphicTextField extends StatefulWidget {
   NeumorphicTextField(
       {this.label,
       this.hint,
+      this.text,
       this.onChanged,
       this.autofocus = false});
 
@@ -23,7 +25,7 @@ class _TextFieldState extends State<NeumorphicTextField> {
 
   @override
   void initState() {
-    _controller = TextEditingController(text: widget.hint);
+    _controller = TextEditingController(text: widget.text);
     super.initState();
   }
 
