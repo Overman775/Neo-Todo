@@ -50,11 +50,8 @@ class _TodoPageState extends State<TodoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: NeumorphicAppBar(
-            title: Row(children: <Widget>[
-          //HeroIcon(category: args.category),
-          SizedBox(width: Style.mainPadding),
-          HeroTitle(category: args.category),
-        ])),
+          //TODO: fix update title
+            title: HeroTitle(category: args.category)),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Style.primaryColor,
           elevation: 0,
@@ -80,8 +77,8 @@ class _TodoPageState extends State<TodoPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.fromLTRB(Style.doublePadding,
-                  Style.halfPadding, Style.doublePadding, 0),
+              padding: EdgeInsets.fromLTRB(Style.mainPadding,
+                  Style.halfPadding, Style.mainPadding, Style.mainPadding),
               child: Selector<Todo, TodoCategory>(
                 selector: (BuildContext context, Todo todo) => todo.categoryes
                     .firstWhere((element) => element.id == args.category.id),
@@ -99,7 +96,6 @@ class _TodoPageState extends State<TodoPage> {
                 },
               ),
             ),
-            SizedBox(height: Style.mainPadding),
             ListBody(transistionPageEnd: _transistionPageEnd, widget: widget)
           ],
         ));
@@ -141,9 +137,9 @@ class ListBody extends StatelessWidget {
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.fromLTRB(
-                            Style.doublePadding,
+                            Style.mainPadding,
                             Style.halfPadding,
-                            Style.doublePadding,
+                            Style.mainPadding,
                             Style.mainPadding),
                         child: Column(
                           children: <Widget>[
@@ -170,9 +166,9 @@ class ListBody extends StatelessWidget {
                               useInkWell: false),
                           expanded: Padding(
                             padding: EdgeInsets.fromLTRB(
-                                Style.doublePadding,
+                                Style.mainPadding,
                                 Style.halfPadding,
-                                Style.doublePadding,
+                                Style.mainPadding,
                                 Style.mainPadding),
                             child: Column(
                               children: <Widget>[
