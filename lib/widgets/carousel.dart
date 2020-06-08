@@ -35,18 +35,10 @@ class _CarouselState extends State<Carousel> {
   bool _handlePageNotification(ScrollNotification notification) {
     if (notification.depth == 0 && notification is ScrollUpdateNotification) {
       setState(() {
+        //TODO: need optimiation??
         page = _pageController.page;
       });
     }
-    return false;
-  }
-
-  bool shouldRebuildCategory(
-      List<TodoCategory> old_categoryes, List<TodoCategory> new_categoryes) {
-    if (old_categoryes.length != new_categoryes.length) {
-      return true;
-    }
-
     return false;
   }
 
@@ -55,8 +47,14 @@ class _CarouselState extends State<Carousel> {
     return Expanded(
         child: Selector<Todo, List<TodoCategory>>(
       selector: (_, todo) => todo.categoryes,
-      shouldRebuild: (old_categoryes, new_categoryes) =>
-          DeepCollectionEquality().equals(old_categoryes, new_categoryes),
+      shouldRebuild: (old_categoryes, new_categoryes) {
+        if (old_categoryes.length != new_categoryes.length) {
+          return true;
+        } else {
+          return DeepCollectionEquality()
+              .equals(old_categoryes, new_categoryes);
+        }
+      },
       builder: (context, categoryes, _) {
         return NotificationListener<ScrollNotification>(
             onNotification:
