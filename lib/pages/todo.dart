@@ -47,45 +47,11 @@ class _TodoPageState extends State<TodoPage> {
     super.didChangeDependencies();
   }
 
-  void _modalBottomSheet(BuildContext context, TodoCategory category) {
-    showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (_) {
-          return AnimatedPadding(
-              padding: MediaQuery.of(context).viewInsets,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.decelerate,
-              child: AddItemBottomShet(category: category));
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: NeumorphicAppBar(
-            //TODO: fix update title
-            title: HeroTitle(category: args.category)),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Style.primaryColor,
-          elevation: 0,
-          child: Container(
-            height: 50,
-            width: 50,
-            decoration: BoxDecoration(
-                gradient: Style.addButtonGradient,
-                shape: BoxShape.circle,
-                boxShadow: Style.buttonGlow),
-            child: const Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-          ),
-          onPressed: () {
-            _modalBottomSheet(context, args.category);
-          },
-        ),
+        appBar: CategoryAppBar(args: args),
+        floatingActionButton: CategoryFAB(args: args),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,6 +80,57 @@ class _TodoPageState extends State<TodoPage> {
           ],
         ));
   }
+}
+
+class CategoryFAB extends StatelessWidget {
+  const CategoryFAB({
+    Key key,
+    @required this.args,
+  }) : super(key: key);
+
+  final MainPageArguments args;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      backgroundColor: Style.primaryColor,
+      elevation: 0,
+      child: Container(
+        height: 50,
+        width: 50,
+        decoration: BoxDecoration(
+            gradient: Style.addButtonGradient,
+            shape: BoxShape.circle,
+            boxShadow: Style.buttonGlow),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
+      onPressed: () {
+        modalBottomSheet(context, args.category);
+      },
+    );
+  }
+}
+
+class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget{
+  const CategoryAppBar({
+    Key key,
+    @required this.args,
+  }) : super(key: key);
+
+  final MainPageArguments args;
+
+  @override
+  Widget build(BuildContext context) {
+    return NeumorphicAppBar(
+        //TODO: fix update title
+        title: HeroTitle(category: args.category));
+  }
+
+  @override
+  Size get preferredSize => Size.fromHeight(kToolbarHeight + 16 * 2);
 }
 
 class ListBody extends StatelessWidget {

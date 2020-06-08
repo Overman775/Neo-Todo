@@ -121,3 +121,17 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
     );
   }
 }
+
+  void modalBottomSheet(BuildContext context, TodoCategory category) {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (_) {
+          return AnimatedPadding(
+              padding: MediaQuery.of(context).viewInsets,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.decelerate,
+              child: AddItemBottomShet(category: category));
+        });
+  }
