@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:collection/collection.dart';
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
 import '../models/todo_models.dart';
@@ -40,13 +41,22 @@ class _CarouselState extends State<Carousel> {
     return false;
   }
 
+  bool shouldRebuildCategory(
+      List<TodoCategory> old_categoryes, List<TodoCategory> new_categoryes) {
+    if (old_categoryes.length != new_categoryes.length) {
+      return true;
+    }
+
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Expanded(
         child: Selector<Todo, List<TodoCategory>>(
       selector: (_, todo) => todo.categoryes,
       shouldRebuild: (old_categoryes, new_categoryes) =>
-          old_categoryes != new_categoryes,
+          DeepCollectionEquality().equals(old_categoryes, new_categoryes),
       builder: (context, categoryes, _) {
         return NotificationListener<ScrollNotification>(
             onNotification:
