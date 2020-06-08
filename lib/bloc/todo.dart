@@ -60,6 +60,15 @@ class Todo extends ChangeNotifier {
     }
   }
 
+  Future deleteCategory(TodoCategory category) async {
+    await SQLiteProvider.db.delete(TodoCategory.table, category);
+    await SQLiteProvider.db
+        .delete(TodoItem.table, category, where: 'category = ?');
+
+    //await getCategoryes();
+    log('Category deleted ${category.title}');
+  }
+
   Future getItems(int categoryId) async {
     var _results = await SQLiteProvider.db.select(TodoItem.table,
         where: '"category" = ?', whereArgs: [categoryId]);

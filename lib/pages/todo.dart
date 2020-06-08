@@ -5,6 +5,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/models/todo_models.dart';
+import 'package:todolist/widgets/neo_pop_up.dart';
 import '../widgets/text_field.dart';
 import '../widgets/detail_card.dart';
 import '../bloc/todo.dart';
@@ -61,10 +62,15 @@ class _TodoPageState extends State<TodoPage> {
                   Style.mainPadding, Style.mainPadding),
               child: Selector<Todo, TodoCategory>(
                 selector: (BuildContext context, Todo todo) => todo.categoryes
-                    .firstWhere((element) => element.id == args.category.id),
+                    .firstWhere((element) => element.id == args.category.id,
+                        orElse: () => null),
                 shouldRebuild: (old_category, new_category) =>
                     old_category != new_category,
                 builder: (context, category, _) {
+                  if (category == null) {
+                    //return empty container when category deletet
+                    return SizedBox.shrink();
+                  }
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
@@ -114,7 +120,7 @@ class CategoryFAB extends StatelessWidget {
   }
 }
 
-class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget{
+class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CategoryAppBar({
     Key key,
     @required this.args,
@@ -122,11 +128,54 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   final MainPageArguments args;
 
+  void onSelected(String selected, BuildContext context) async {
+    final block = context.read<Todo>();
+    switch (selected) {
+      case 'edit':
+        break;
+      case 'delete':
+        await block.deleteCategory(args.category);
+        await Navigator.of(context).pop();
+        await block.getCategoryes();
+        break;
+      default:
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return NeumorphicAppBar(
-        //TODO: fix update title
-        title: HeroTitle(category: args.category));
+      //TODO: fix update title
+      title: HeroTitle(category: args.category),
+      actions: <Widget>[
+        NeumorphicPopupMenuButton(
+          icon: Icon(FontAwesomeIcons.ellipsisV),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          onSelected: (String selected) => onSelected(selected, context),
+          itemBuilder: (_) => <PopupMenuItem<String>>[
+            PopupMenuItem<String>(
+                child: Row(
+                  children: <Widget>[
+                    FaIcon(FontAwesomeIcons.edit),
+                    SizedBox(width: Style.halfPadding),
+                    const Text('Edit'),
+                  ],
+                ),
+                value: 'edit'),
+            PopupMenuItem<String>(
+                child: Row(
+                  children: <Widget>[
+                    FaIcon(FontAwesomeIcons.trashAlt),
+                    SizedBox(width: Style.halfPadding),
+                    const Text('Delete'),
+                  ],
+                ),
+                value: 'delete'),
+          ],
+        ),
+      ],
+    );
   }
 
   @override
