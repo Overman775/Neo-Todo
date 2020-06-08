@@ -76,8 +76,8 @@ class SQLiteProvider implements DbInterface {
           orderBy: orderBy,
           limit: limit,
           offset: offset));
-  
-  Future<List<Map<String, dynamic>>> customSelect(String query)async =>
+
+  Future<List<Map<String, dynamic>>> customSelect(String query) async =>
       await database.then((db) => db.rawQuery(query));
 
   @override
@@ -85,11 +85,14 @@ class SQLiteProvider implements DbInterface {
       await database.then((db) => db.insert(table, model.toMap()));
 
   @override
-  Future<int> update(String table, TodoModel model) async =>
-      await database.then((db) => db.update(table, model.toMap(),
-          where: 'id = ?', whereArgs: [model.id]));
+  Future<int> update(String table, TodoModel model,
+          {String where = 'id = ?'}) async =>
+      await database.then((db) =>
+          db.update(table, model.toMap(), where: where, whereArgs: [model.id]));
 
   @override
-  Future<int> delete(String table, TodoModel model) async => await database
-      .then((db) => db.delete(table, where: 'id = ?', whereArgs: [model.id]));
+  Future<int> delete(String table, TodoModel model,
+          {String where = 'id = ?'}) async =>
+      await database
+          .then((db) => db.delete(table, where: where, whereArgs: [model.id]));
 }
