@@ -67,9 +67,7 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: enableDescription ? 484 : 430,
-      padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      height: enableDescription ? 244 : 190,
       child: Neumorphic(
           padding: EdgeInsets.all(Style.mainPadding),
           style: NeumorphicStyle(
@@ -82,7 +80,8 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
               NeumorphicTextField(
                   hint: 'Новая задача',
                   onChanged: itemTitleChanget,
-                  autofocus: true),
+                  autofocus: true
+                  ),
               SizedBox(height: Style.mainPadding),
               if (enableDescription)
                 NeumorphicTextField(

@@ -53,7 +53,11 @@ class _TodoPageState extends State<TodoPage> {
         backgroundColor: Colors.transparent,
         context: context,
         builder: (_) {
-          return AddItemBottomShet(category: category);
+          return AnimatedPadding(
+              padding: MediaQuery.of(context).viewInsets,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.decelerate,
+              child: AddItemBottomShet(category: category));
         });
   }
 
