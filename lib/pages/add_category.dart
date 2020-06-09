@@ -91,8 +91,8 @@ class _AddCategoryState extends State<AddCategory> {
         resizeToAvoidBottomPadding: false,
         appBar: NeumorphicAppBar(
           title: _argsHaveCategory
-              ? Text('Новая категория')
-              : Text('Редактирование'),
+              ? Text('Редактирование')
+              : Text('Новая категория'),
         ),
         body: Padding(
             padding: EdgeInsets.fromLTRB(Style.mainPadding, Style.halfPadding,
