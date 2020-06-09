@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
@@ -40,6 +41,12 @@ class _MainTimerState extends State<MainTimer> {
 
   @override
   Widget build(BuildContext context) {
+    
+  //only week name
+  final dayWeekFormat = DateFormat.EEEE(context.locale.toString());
+  //day and month
+  final dayMonth = DateFormat('d MMMM', context.locale.toString());
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
