@@ -14,6 +14,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: NeumorphicTheme.baseColor(context),
       appBar: NeumorphicAppBar(),
       body: Container(

@@ -55,12 +55,14 @@ class _AddCategoryState extends State<AddCategory> {
     });
   }
 
-  void saveCategory() {
+  void saveCategory() async {
     if (_argsHaveCategory) {
-      context.read<Todo>().editCategory(widget.args.category,
+      await context.read<Todo>().editCategory(widget.args.category,
           TodoCategory(id: widget.args.category.id, title: title, icon: icon));
     } else {
-      context.read<Todo>().addCategory(TodoCategory(title: title, icon: icon));
+      await context
+          .read<Todo>()
+          .addCategory(TodoCategory(title: title, icon: icon));
     }
     //go back
     Navigator.of(context).pop();
@@ -86,6 +88,7 @@ class _AddCategoryState extends State<AddCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomPadding: false,
         appBar: NeumorphicAppBar(
           title: _argsHaveCategory
               ? Text('Новая категория')
