@@ -20,6 +20,7 @@ dependencies:
   intl: ^0.16.1
   expandable: ^4.1.4
   flare_flutter: ^2.0.3
+  easy_localization: ^2.3.2
 
 dev_dependencies:
   flutter_test:
@@ -31,3 +32,4 @@ flutter:
   assets:
     - assets/images/
     - assets/animation/
+    - assets/locales/

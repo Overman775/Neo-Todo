@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../models/todo_models.dart';
 import '../style.dart';
 import 'animated_percent.dart';
@@ -22,9 +23,9 @@ class HeroProgress extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            '${category.totalItems} задач',
+            'task_card',
             style: Style.mainTasksTextStyle,
-          ),
+          ).plural(category.totalItems),
           SizedBox(
             height: Style.halfPadding,
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
 import 'package:todolist/widgets/text_field.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
 import '../models/todo_models.dart';
@@ -61,13 +62,13 @@ class _AddItemState extends State<AddItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               NeumorphicTextField(
-                label: 'Название',
+                label: 'add_task.title'.tr(),
                 text: widget.args.item.title,
                 onChanged: itemTitleChanget,
               ),
               SizedBox(height: Style.mainPadding),
               NeumorphicTextField(
-                  label: 'Описание',
+                  label: 'add_task.description'.tr(),
                   text: widget.args.item.description,
                   onChanged: itemDescriptionChanget),
               SizedBox(height: Style.mainPadding),
@@ -77,11 +78,11 @@ class _AddItemState extends State<AddItem> {
                 style: NeumorphicStyle(
                     boxShape:
                         NeumorphicBoxShape.roundRect(Style.mainBorderRadius)),
-                child: Text('Сохранить',
+                child: Text('save',
                     style: TextStyle(
                         color: _saveEnable
                             ? NeumorphicTheme.accentColor(context)
-                            : NeumorphicTheme.defaultTextColor(context))),
+                            : NeumorphicTheme.defaultTextColor(context))).tr(),
                 onPressed: saveItem,
               ))
             ],

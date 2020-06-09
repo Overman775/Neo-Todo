@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:todolist/bloc/todo.dart';
 import '../widgets/timer.dart';
 import '../widgets/carousel.dart';
@@ -32,8 +33,8 @@ class MainPage extends StatelessWidget {
                   selector: (_, todo) => todo.total_items,
                   shouldRebuild: (old_total, new_total) => old_total != new_total,
                   builder: (_, total_items, __) {
-                    return Text('You have $total_items tasks',
-                        style: Style.mainTasksTextStyle);
+                    return Text('task_count',
+                        style: Style.mainTasksTextStyle).plural(total_items);
                   }),
             ),
             Carousel(),

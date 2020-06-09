@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
 import '../models/todo_models.dart';
@@ -91,8 +92,8 @@ class _AddCategoryState extends State<AddCategory> {
         resizeToAvoidBottomPadding: false,
         appBar: NeumorphicAppBar(
           title: _argsHaveCategory
-              ? Text('Редактирование')
-              : Text('Новая категория'),
+              ? Text('add_category.title_edit').tr()
+              : Text('add_category.title_add').tr(),
         ),
         body: Padding(
             padding: EdgeInsets.fromLTRB(Style.mainPadding, Style.halfPadding,
@@ -113,13 +114,13 @@ class _AddCategoryState extends State<AddCategory> {
                     children: <Widget>[
                       NeumorphicTextField(
                           hint: null,
-                          label: 'Название',
+                          label: 'add_category.name'.tr(),
                           text: title,
                           onChanged: categoryTitleChanget),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          TextFieldLabel('Иконка'),
+                          TextFieldLabel('add_category.icon'.tr()),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: Wrap(

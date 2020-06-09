@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:todolist/bloc/todo.dart';
 import 'package:todolist/models/todo_models.dart';
 import 'package:todolist/widgets/text_field.dart';
@@ -78,16 +79,15 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               NeumorphicTextField(
-                  hint: 'Новая задача',
+                  hint: 'add_task.title_hint'.tr(),
                   onChanged: itemTitleChanget,
-                  autofocus: true
-                  ),
+                  autofocus: true),
               SizedBox(height: Style.mainPadding),
               if (enableDescription)
                 NeumorphicTextField(
-                    hint: 'Описание',
-                    onChanged: itemDescriptionChanget,
-                    ),
+                  hint: 'add_task.description_hint'.tr(),
+                  onChanged: itemDescriptionChanget,
+                ),
               SizedBox(height: Style.mainPadding),
               Row(
                 children: <Widget>[
@@ -107,11 +107,13 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
                     style: NeumorphicStyle(
                         boxShape: NeumorphicBoxShape.roundRect(
                             Style.mainBorderRadius)),
-                    child: Text('Сохранить',
-                        style: TextStyle(
-                            color: _saveEnable
-                                ? NeumorphicTheme.accentColor(context)
-                                : NeumorphicTheme.defaultTextColor(context))),
+                    child: Text('save',
+                            style: TextStyle(
+                                color: _saveEnable
+                                    ? NeumorphicTheme.accentColor(context)
+                                    : NeumorphicTheme.defaultTextColor(
+                                        context)))
+                        .tr(),
                     onPressed: saveItem,
                   ),
                 ],
@@ -122,16 +124,16 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
   }
 }
 
-  void modalBottomSheet(BuildContext context, TodoCategory category) {
-    showModalBottomSheet(
-        isScrollControlled: true,
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (_) {
-          return AnimatedPadding(
-              padding: MediaQuery.of(context).viewInsets,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.decelerate,
-              child: AddItemBottomShet(category: category));
-        });
-  }
+void modalBottomSheet(BuildContext context, TodoCategory category) {
+  showModalBottomSheet(
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (_) {
+        return AnimatedPadding(
+            padding: MediaQuery.of(context).viewInsets,
+            duration: const Duration(milliseconds: 300),
+            curve: Curves.decelerate,
+            child: AddItemBottomShet(category: category));
+      });
+}

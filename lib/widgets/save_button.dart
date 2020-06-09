@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../style.dart';
 
@@ -34,9 +35,9 @@ class NeumorphicSaveButton extends StatelessWidget {
             shape: canSave ? NeumorphicShape.convex : NeumorphicShape.flat,
           ),
           child: Text(
-            'Сохранить',
+            'save',
             style: TextStyle(color: Colors.white, fontSize: 16),
-          )),
+          ).tr()),
     );
   }
 }
