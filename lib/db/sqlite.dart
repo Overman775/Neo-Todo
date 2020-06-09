@@ -77,6 +77,8 @@ class SQLiteProvider implements DbInterface {
           limit: limit,
           offset: offset));
 
+  //TODO: add catch errors
+  
   Future<List<Map<String, dynamic>>> customSelect(String query) async =>
       await database.then((db) => db.rawQuery(query));
 

@@ -13,7 +13,7 @@ Route geneateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
       return MaterialPageRoute(builder: (context) => MainPage());
-    case '/item':
+    case '/item/edit':
       return MaterialPageRoute(
           builder: (context) => AddItem(settings.arguments));
     case '/category':
@@ -24,6 +24,9 @@ Route geneateRoute(RouteSettings settings) {
       return CardRoute(
           widget: AddCategory(settings.arguments),
           arguments: settings.arguments);
+    case '/category/edit':
+      return MaterialPageRoute(
+          builder: (context) => AddCategory(settings.arguments));
     default:
       return MaterialPageRoute(builder: (context) => MainPage());
   }

@@ -6,7 +6,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:collection/collection.dart';
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
 import '../models/todo_models.dart';
@@ -50,10 +49,13 @@ class _CarouselState extends State<Carousel> {
       shouldRebuild: (old_categoryes, new_categoryes) {
         if (old_categoryes.length != new_categoryes.length) {
           return true;
-        } else {
-          return DeepCollectionEquality()
-              .equals(old_categoryes, new_categoryes);
         }
+        for (var i = 0; i < old_categoryes.length; i++) {
+          if (old_categoryes[i] != new_categoryes[i]) {
+            return true;
+          }
+        }
+        return false;
       },
       builder: (context, categoryes, _) {
         return NotificationListener<ScrollNotification>(
@@ -116,16 +118,11 @@ class CategoryCard extends StatelessWidget {
               HeroIcon(category: category),
               Spacer(),
               //detail
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  HeroTitle(category: category),
-                  SizedBox(
-                    height: Style.mainPadding,
-                  ),
-                  HeroProgress(category: category)
-                ],
-              )
+              HeroTitle(category: category),
+              SizedBox(
+                height: Style.mainPadding,
+              ),
+              HeroProgress(category: category)
             ],
           ),
         ),

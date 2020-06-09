@@ -26,7 +26,7 @@ class TodoPage extends StatefulWidget {
 }
 
 class _TodoPageState extends State<TodoPage> {
-  final MainPageArguments args;
+  MainPageArguments args;
   AnimationPageInjection animationPageInjection;
 
   _TodoPageState(this.args);
@@ -38,6 +38,17 @@ class _TodoPageState extends State<TodoPage> {
   @override
   void initState() {
     context.read<Todo>().getItems(args.category.id);
+
+    /*
+    context.read<Todo>().addListener(() {
+      setState(() {
+       var _category =  context.read<Todo>().categoryes
+                    .firstWhere((element) => element.id == args.category.id,
+                        orElse: () => null);
+          print(_category);
+      });
+    });
+*/
     super.initState();
   }
 
@@ -132,6 +143,12 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
     final block = context.read<Todo>();
     switch (selected) {
       case 'edit':
+        //fix double editing
+        final category = block.categoryes
+            .firstWhere((element) => element.id == args.category.id);
+        await Navigator.pushNamed(context, '/category/edit',
+            arguments:
+                MainPageArguments(category: category, cardPosition: null));
         break;
       case 'delete':
         await block.deleteCategory(args.category);
@@ -145,8 +162,19 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return NeumorphicAppBar(
-      //TODO: fix update title
-      title: HeroTitle(category: args.category),
+      title: Selector<Todo, TodoCategory>(
+          selector: (BuildContext context, Todo todo) => todo.categoryes
+              .firstWhere((element) => element.id == args.category.id,
+                  orElse: () => null),
+          shouldRebuild: (old_category, new_category) =>
+              old_category != new_category,
+          builder: (context, category, _) {
+            if (category == null) {
+              //return empty container when category deletet
+              return SizedBox.shrink();
+            }
+            return HeroTitle(category: category);
+          }),
       actions: <Widget>[
         NeumorphicPopupMenuButton(
           icon: Icon(FontAwesomeIcons.ellipsisV),

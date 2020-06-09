@@ -34,7 +34,7 @@ class Todo extends ChangeNotifier {
 
 //TODO: optimization sql reqwesr, decrease, rewrite in memory
 
-  Future getCategoryes() async {
+  Future getCategoryes({bool notify = true}) async {
     var _results = await SQLiteProvider.db.customSelect('SELECT t.* ,'
         '(SELECT COUNT(*) FROM ${TodoItem.table} i WHERE i.category=t.id AND i.completed=1 ) as completed, '
         '(SELECT COUNT(*) FROM ${TodoItem.table} i WHERE i.category=t.id ) as totalItems '
@@ -42,7 +42,9 @@ class Todo extends ChangeNotifier {
     categoryes = _results
         .map<TodoCategory>((item) => TodoCategory.fromMap(item))
         .toList();
-    notifyListeners();
+    if (notify) {
+      notifyListeners();
+    }
   }
 
   Future addCategory(TodoCategory category) async {
@@ -69,11 +71,13 @@ class Todo extends ChangeNotifier {
     log('Category deleted ${category.title}');
   }
 
-  Future getItems(int categoryId) async {
+  Future getItems(int categoryId, {bool notify = true}) async {
     var _results = await SQLiteProvider.db.select(TodoItem.table,
         where: '"category" = ?', whereArgs: [categoryId]);
     items = _results.map<TodoItem>((item) => TodoItem.fromMap(item)).toList();
-    notifyListeners();
+    if (notify) {
+      notifyListeners();
+    }
   }
 
   Future addItem(TodoItem item) async {
@@ -82,8 +86,13 @@ class Todo extends ChangeNotifier {
     await getItems(item.category);
   }
 
-  void toggleItem(TodoItem item) {
+  void toggleItem(TodoItem item) async {
     final new_item = item.copyWith(completed: !item.completed);
+    await SQLiteProvider.db.update(TodoItem.table, new_item);
+    await getCategoryes(notify: false);
+    await getItems(new_item.category, notify: false);
+    
+    /*
     unawaited(SQLiteProvider.db.update(TodoItem.table, new_item));
     //overwrrite TodoItem
     updateItem(new_item);
@@ -96,8 +105,8 @@ class Todo extends ChangeNotifier {
           ? old_category.completed + 1
           : old_category.completed - 1,
     );
-
     updateCategory(new_category, index: category_index);
+    */
 
     notifyListeners();
     log('Item toggle ${item.title}');

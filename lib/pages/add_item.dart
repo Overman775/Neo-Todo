@@ -32,7 +32,7 @@ class _AddItemState extends State<AddItem> {
   }
 
   bool get _saveEnable {
-    if (title.isEmpty && description.isEmpty) {
+    if (title.isEmpty) {
       return false;
     }
     return true;

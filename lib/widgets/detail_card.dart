@@ -30,8 +30,7 @@ class HeroProgress extends StatelessWidget {
           ),
           Row(
             children: <Widget>[
-              Flexible(
-                flex: 1,
+              Expanded(
                 child: NeumorphicProgress(
                     percent: category.percent,
                     height: 8,
@@ -99,9 +98,7 @@ class HeroIcon extends StatelessWidget {
       tag: 'icon_${category.id}',
       child: Neumorphic(
         padding: EdgeInsets.all(16),
-        style: NeumorphicStyle(
-          boxShape: NeumorphicBoxShape.circle()
-        ),
+        style: NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
         child: FaIcon(
           category.icon,
           color: Style.primaryColor,

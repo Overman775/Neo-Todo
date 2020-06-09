@@ -18,23 +18,20 @@ class AddCategory extends StatefulWidget {
   AddCategory(this.args, {Key key}) : super(key: key);
 
   @override
-  _AddCategoryState createState() => _AddCategoryState(args);
+  _AddCategoryState createState() => _AddCategoryState();
 }
 
 class _AddCategoryState extends State<AddCategory> {
-  final MainPageArguments args;
-
-  _AddCategoryState(this.args);
-
-  String title;
+  String title = '';
   IconData icon = icons_list.entries.first.value;
   AnimationPageInjection animationPageInjection;
 
-  bool get _argsHaveCategory => args?.category != null;
+  bool get _argsHaveCategory => widget.args?.category != null;
 
   ///check page transistion end
+  ///if editing then return true
   bool get _transistionPageEnd =>
-      animationPageInjection.animationPage.value == 1;
+      animationPageInjection?.animationPage?.value == 1 || _argsHaveCategory;
 
   bool get _canSave {
     if (title != null && icon != null) {
@@ -59,11 +56,9 @@ class _AddCategoryState extends State<AddCategory> {
   }
 
   void saveCategory() {
-    //TODO: fix bug save
     if (_argsHaveCategory) {
-      context
-          .read<Todo>()
-          .editCategory(args.category, TodoCategory(title: title, icon: icon));
+      context.read<Todo>().editCategory(widget.args.category,
+          TodoCategory(id: widget.args.category.id, title: title, icon: icon));
     } else {
       context.read<Todo>().addCategory(TodoCategory(title: title, icon: icon));
     }
@@ -73,7 +68,10 @@ class _AddCategoryState extends State<AddCategory> {
 
   @override
   void initState() {
-    title = args?.category?.title;
+    if (_argsHaveCategory) {
+      title = widget.args.category.title;
+      icon = widget.args.category.icon;
+    }
     super.initState();
   }
 
@@ -81,6 +79,7 @@ class _AddCategoryState extends State<AddCategory> {
   void didChangeDependencies() {
     //update animation injection
     animationPageInjection = AnimationPageInjection.of(context);
+
     super.didChangeDependencies();
   }
 
@@ -89,8 +88,8 @@ class _AddCategoryState extends State<AddCategory> {
     return Scaffold(
         appBar: NeumorphicAppBar(
           title: _argsHaveCategory
-              ? Text(args.category.title)
-              : Text('Новая категория'),
+              ? Text('Новая категория')
+              : Text('Редактирование'),
         ),
         body: Padding(
             padding: EdgeInsets.fromLTRB(Style.mainPadding, Style.halfPadding,
@@ -112,6 +111,7 @@ class _AddCategoryState extends State<AddCategory> {
                       NeumorphicTextField(
                           hint: null,
                           label: 'Название',
+                          text: title,
                           onChanged: categoryTitleChanget),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

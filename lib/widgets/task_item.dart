@@ -36,7 +36,7 @@ class TodoItemWidget extends StatelessWidget {
           title: Text(item.title),
           subtitle: item.description != null ? Text(item.description) : null,
           //go to edit page
-          onTap: () => unawaited(Navigator.pushNamed(context, '/item',
+          onTap: () => unawaited(Navigator.pushNamed(context, '/item/edit',
               arguments: ItemPageArguments(item: item, category: category))),
         ),
         background: Padding(
