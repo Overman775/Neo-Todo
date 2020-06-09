@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
-import 'package:pedantic/pedantic.dart';
 import '../db/sqlite.dart';
 import '../models/todo_models.dart';
 

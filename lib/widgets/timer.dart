@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 import '../style.dart';
+import '../utils/string_extensions.dart';
 
 class MainTimer extends StatefulWidget {
   MainTimer({Key key}) : super(key: key);
@@ -42,7 +43,7 @@ class _MainTimerState extends State<MainTimer> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(dayWeekFormat.format(now), style: Style.mainDateTextStyle),
+        Text(dayWeekFormat.format(now).capitalize(), style: Style.mainDateTextStyle),
         Text(dayMonth.format(now), style: Style.mainDateSubTextStyle)
       ],
     );
