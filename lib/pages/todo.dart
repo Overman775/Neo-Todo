@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:todolist/models/todo_models.dart';
+import 'package:todolist/widgets/cover_line.dart';
 import 'package:todolist/widgets/neo_pop_up.dart';
 import '../widgets/text_field.dart';
 import '../widgets/detail_card.dart';
@@ -293,7 +294,9 @@ class ListBody extends StatelessWidget {
                 }
               }),
               //top cover gradient
-              Container(
+              CoverLine(),
+              CoverLine(alignment: Alignment.bottomCenter,),
+              /*Container(
                   height: Style.mainPadding,
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -318,7 +321,7 @@ class ListBody extends StatelessWidget {
                         NeumorphicTheme.baseColor(context).withOpacity(0)
                       ],
                     ))),
-              ),
+              ),*/
             ],
           );
         }),
