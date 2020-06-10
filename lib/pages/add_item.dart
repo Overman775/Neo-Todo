@@ -5,7 +5,6 @@ import 'package:todolist/widgets/text_field.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
-import '../models/todo_models.dart';
 import '../style.dart';
 
 class AddItem extends StatefulWidget {
@@ -17,8 +16,8 @@ class AddItem extends StatefulWidget {
 }
 
 class _AddItemState extends State<AddItem> {
-  String title = '';
-  String description = '';
+  String title;
+  String description;
 
   void itemTitleChanget(String title) {
     setState(() {
@@ -41,14 +40,19 @@ class _AddItemState extends State<AddItem> {
 
   void saveItem() async {
     if (_saveEnable) {
-      await context.read<Todo>().addItem(TodoItem(
-          category: widget.args.category.id,
-          title: title,
-          description: description));
+      await context.read<Todo>().editItem(widget.args.item,
+          widget.args.item.copyWith(title: title, description: description));
 
       //go back
       Navigator.of(context).pop();
     }
+  }
+
+  @override
+  void initState() {
+    title = widget.args.item.title;
+    description = widget.args.item.description;
+    super.initState();
   }
 
   @override
@@ -80,10 +84,11 @@ class _AddItemState extends State<AddItem> {
                     boxShape:
                         NeumorphicBoxShape.roundRect(Style.mainBorderRadius)),
                 child: Text('save',
-                    style: TextStyle(
-                        color: _saveEnable
-                            ? NeumorphicTheme.accentColor(context)
-                            : NeumorphicTheme.defaultTextColor(context))).tr(),
+                        style: TextStyle(
+                            color: _saveEnable
+                                ? NeumorphicTheme.accentColor(context)
+                                : NeumorphicTheme.defaultTextColor(context)))
+                    .tr(),
                 onPressed: saveItem,
               ))
             ],
