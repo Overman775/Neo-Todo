@@ -66,7 +66,7 @@ class _TodoPageState extends State<TodoPage> {
     return Scaffold(
         appBar: CategoryAppBar(args: args),
         floatingActionButton: CategoryFAB(args: args),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,        
         backgroundColor: NeumorphicTheme.baseColor(context),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -114,7 +114,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "8ebe4f06f8240f372c769ec3916c7e9b93031e95"
+      resolved-ref: "0f5f5e7e9cc10c7f84e37af197161c54354e89d3"
       url: "git://github.com/Idean/Flutter-Neumorphic.git"
     source: git
     version: "3.0.1"
