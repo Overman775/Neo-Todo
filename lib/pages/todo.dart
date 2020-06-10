@@ -67,6 +67,7 @@ class _TodoPageState extends State<TodoPage> {
         appBar: CategoryAppBar(args: args),
         floatingActionButton: CategoryFAB(args: args),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        backgroundColor: NeumorphicTheme.baseColor(context),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -271,6 +272,7 @@ class ListBody extends StatelessWidget {
                                   ExpandablePanelHeaderAlignment.center,
                               iconPadding:
                                   EdgeInsets.only(right: Style.doublePadding),
+                              iconColor: NeumorphicTheme.defaultTextColor(context),
                               expandIcon: FontAwesomeIcons.angleDown,
                               collapseIcon: FontAwesomeIcons.angleDown,
                               useInkWell: false),

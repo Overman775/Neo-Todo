@@ -12,7 +12,8 @@ class CoverLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: alignment,
-      child: Container(
+      child: AnimatedContainer(
+          duration: const Duration(milliseconds: 100),
           height: height,
           decoration: BoxDecoration(
               gradient: LinearGradient(

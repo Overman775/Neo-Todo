@@ -1,53 +1,90 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'bloc/settings.dart';
 import 'bloc/todo.dart';
 import 'style.dart';
 
 import 'router.dart';
-import 'widgets/neumorphic.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+
+/*
+  runApp(new SplashScreen());
+  var foo = await init();
+  runApp(new FullApp(foo: foo));
+*/
+
   runApp(
     EasyLocalization(
-      supportedLocales: [Locale('en'), Locale('ru')],
-      path: 'assets/locales',
-      fallbackLocale: Locale('en'),
-      useOnlyLangCode: true,
-      preloaderColor: Style.bgColor,
-      child: MyApp()
-    ),
+        supportedLocales: [Locale('en'), Locale('ru')],
+        path: 'assets/locales',
+        fallbackLocale: Locale('en'),
+        useOnlyLangCode: true,
+        preloaderColor: prefs.getBool('dakMode') == true
+            ? Style.bgColorDark
+            : Style.bgColor,
+        child: MultiProvider(providers: [
+          ChangeNotifierProvider(create: (_) => Todo(), lazy: false),
+          ChangeNotifierProvider(create: (_) => Settings(prefs), lazy: false)
+        ], child: MyApp())),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => Todo(), lazy: false)],
-      child: NeumorphicWidget(
-        child: MaterialApp(
-          //showPerformanceOverlay: true,
-          //debugShowCheckedModeBanner: false,
-          localizationsDelegates: context.localizationDelegates,
-          supportedLocales: context.supportedLocales,
-          locale: context.locale,
-          title: 'title'.tr(),
-          theme: ThemeData(
-              primarySwatch: Style.primaryColorMaterial,
-              primaryColor: Style.primaryColor,
-              appBarTheme: AppBarTheme(
-                  elevation: 0.0,
-                  color: Style.bgColor,
-                  textTheme: TextTheme(headline6: Style.headerTextStyle),
-                  iconTheme: IconThemeData(color: Style.primaryColor)),
-              scaffoldBackgroundColor: Style.bgColor),
-
-          initialRoute: '/',
-          onGenerateRoute: geneateRoute,
-        ),
-      ),
-    );
+    return NeumorphicApp(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        title: 'title'.tr(),
+        initialRoute: '/',
+        onGenerateRoute: geneateRoute,
+        themeMode: context.watch<Settings>().themeMode,
+        theme: NeumorphicThemeData(
+            defaultTextColor: Style.textColor,
+            baseColor: Style.bgColor,
+            accentColor: Style.primaryColor,
+            variantColor: Style.primaryColor,
+            intensity: 0.6,
+            lightSource: LightSource.topRight,
+            depth: 3,
+            appBarTheme: NeumorphicAppBarThemeData(
+                buttonPadding: EdgeInsets.all(14.0), //TODO: fix padding
+                buttonStyle:
+                    NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
+                iconTheme: IconThemeData(
+                  color: Style.textColor,
+                ),
+                icons: NeumorphicAppBarIcons(
+                    backIcon: Icon(FontAwesomeIcons.chevronLeft),
+                    menuIcon: Icon(FontAwesomeIcons.bars)))),
+        darkTheme: NeumorphicThemeData(
+            defaultTextColor: Style.textColorDark,
+            baseColor: Style.bgColorDark,
+            accentColor: Style.primaryColor,
+            variantColor: Style.primaryColor,
+            intensity: 0.6,
+            lightSource: LightSource.topRight,
+            shadowDarkColor: Colors.black,
+            depth: 3,
+            appBarTheme: NeumorphicAppBarThemeData(
+                buttonPadding: EdgeInsets.all(14.0), //TODO: fix padding
+                buttonStyle:
+                    NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
+                iconTheme: IconThemeData(
+                  color: Style.textColorDark,
+                ),
+                icons: NeumorphicAppBarIcons(
+                    backIcon: Icon(FontAwesomeIcons.chevronLeft),
+                    menuIcon: Icon(FontAwesomeIcons.bars)))));
   }
 }

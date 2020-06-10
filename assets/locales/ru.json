@@ -9,6 +9,8 @@
 	"add_task.title_hint": "Новая задача",
 	"completed": "Завершенные",
 	"save": "Сохранить",
+	"settings.dark_mode": "Ночной режим",
+	"settings.locale": "Язык",
 	"task_card.few": "{} задачи",
 	"task_card.many": "{} задач",
 	"task_card.one": "{} задача",

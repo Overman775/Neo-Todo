@@ -24,7 +24,10 @@ class HeroProgress extends StatelessWidget {
         children: <Widget>[
           Text(
             'task_card',
-            style: Style.mainTasksTextStyle,
+            style: TextStyle(
+                color:
+                    NeumorphicTheme.defaultTextColor(context).withOpacity(0.5),
+                fontSize: 16.00),
           ).plural(category.totalItems),
           SizedBox(
             height: Style.halfPadding,
@@ -49,7 +52,10 @@ class HeroProgress extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: AnimatedPercent(
                   category.percent,
-                  style: Style.mainTasksTextStyle,
+                  style: TextStyle(
+                      color: NeumorphicTheme.defaultTextColor(context)
+                          .withOpacity(0.5),
+                      fontSize: 16.00),
                   duration: Duration(milliseconds: 300),
                   curve: Curves.easeOutCubic,
                 ),
@@ -77,7 +83,7 @@ class HeroTitle extends StatelessWidget {
       flightShuttleBuilder: flightShuttleBuilderFix,
       child: Text(
         category.title,
-        style: Style.cardTitleTextStyle,
+        style: TextStyle(color: NeumorphicTheme.defaultTextColor(context), fontSize: 40.00),
         softWrap: false,
         overflow: TextOverflow.ellipsis,
       ),

@@ -9,6 +9,8 @@
 	"add_task.title_hint": "New task",
 	"completed": "Completed",
 	"save": "Save",
+	"settings.dark_mode": "Dark mode",
+	"settings.locale": "Locale",
 	"task_card.few": "{} tasks",
 	"task_card.many": "{} tasks",
 	"task_card.one": "{} task",

@@ -89,6 +89,7 @@ class _AddCategoryState extends State<AddCategory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: NeumorphicTheme.baseColor(context),
         resizeToAvoidBottomPadding: false,
         appBar: NeumorphicAppBar(
           title: _argsHaveCategory

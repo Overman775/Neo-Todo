@@ -8,6 +8,7 @@ import '../widgets/timer.dart';
 import '../widgets/carousel.dart';
 
 import '../style.dart';
+import 'main_drawer.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key key}) : super(key: key);
@@ -16,6 +17,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
+      drawer: MainDrawer(),
       backgroundColor: NeumorphicTheme.baseColor(context),
       appBar: NeumorphicAppBar(),
       body: Container(
@@ -27,14 +29,20 @@ class MainPage extends StatelessWidget {
               child: MainTimer(),
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(
-                  Style.doublePadding, Style.mainPadding, Style.mainPadding, 0.0),
+              padding: const EdgeInsets.fromLTRB(Style.doublePadding,
+                  Style.mainPadding, Style.mainPadding, 0.0),
               child: Selector<Todo, int>(
                   selector: (_, todo) => todo.total_items,
-                  shouldRebuild: (old_total, new_total) => old_total != new_total,
+                  shouldRebuild: (old_total, new_total) =>
+                      old_total != new_total,
                   builder: (_, total_items, __) {
-                    return Text('task_count',
-                        style: Style.mainTasksTextStyle).plural(total_items);
+                    return Text(
+                      'task_count',
+                      style: TextStyle(
+                          color: NeumorphicTheme.defaultTextColor(context)
+                              .withOpacity(0.5),
+                          fontSize: 16.00),
+                    ).plural(total_items);
                   }),
             ),
             Carousel(),

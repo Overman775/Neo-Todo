@@ -21,9 +21,14 @@ abstract class Style {
 
   static const Color textColor = Color(0xff444444);
   static const Color subTextColor = Color(0xff9e9e9e);
-  static const Color bgColor = Color(0xffdddddd);
+  static const Color bgColor = Color(0xffdedede);
   static const Color editColor = Color(0xff4ceaad);
   static const Color deleteColor = Color(0xffea4c54);
+
+  static const Color textColorDark = Color(0xffcccccc);
+  static const Color subTextColorDark = Color(0xff858585);
+  static const Color bgColorDark = Color(0xff1e1e1e);
+  static const Color bgSubColorDark = Color(0xff262526);
 
   static const LinearGradient addButtonGradient = LinearGradient(
       colors: <Color>[Style.primaryColor, Style.primaryColor],
@@ -43,19 +48,7 @@ abstract class Style {
   static const TextStyle buttonTextStyle =
       TextStyle(color: Colors.white, fontSize: 16.00);
 
-  static const TextStyle mainDateTextStyle =
-      TextStyle(color: Style.textColor, fontSize: 32.00);
-
-  static const TextStyle cardTitleTextStyle =
-      TextStyle(color: Style.textColor, fontSize: 40.00, fontWeight: FontWeight.normal);
-
-  //TODO: delete opacity
-  static TextStyle mainDateSubTextStyle =
-      TextStyle(color: Style.textColor.withOpacity(0.5), fontSize: 32.00);
-
-  static TextStyle mainTasksTextStyle =
-      TextStyle(color: Style.textColor.withOpacity(0.5), fontSize: 16.00);
-
+  //TODO: refactoring FAB
   static const List<BoxShadow> boxShadows = [
     BoxShadow(
         color: Color.fromRGBO(0, 0, 0, 0.1),

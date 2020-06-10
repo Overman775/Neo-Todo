@@ -58,7 +58,7 @@ class _TextFieldState extends State<NeumorphicTextField> {
             keyboardType: widget.multilines
                 ? TextInputType.multiline
                 : TextInputType.text,
-            maxLines: widget.multilines ? null : 1,
+            maxLines: widget.multilines ? null : 1,            
             decoration: InputDecoration.collapsed(hintText: widget.hint),
           ),
         )

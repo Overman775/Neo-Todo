@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:intl/intl.dart';
 
-import '../style.dart';
 import '../utils/string_extensions.dart';
 
 class MainTimer extends StatefulWidget {
@@ -41,17 +41,23 @@ class _MainTimerState extends State<MainTimer> {
 
   @override
   Widget build(BuildContext context) {
-    
-  //only week name
-  final dayWeekFormat = DateFormat.EEEE(context.locale.toString());
-  //day and month
-  final dayMonth = DateFormat('d MMMM', context.locale.toString());
+    //only week name
+    final dayWeekFormat = DateFormat.EEEE(context.locale.toString());
+    //day and month
+    final dayMonth = DateFormat('d MMMM', context.locale.toString());
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(dayWeekFormat.format(now).capitalize(), style: Style.mainDateTextStyle),
-        Text(dayMonth.format(now), style: Style.mainDateSubTextStyle)
+        Text(dayWeekFormat.format(now).capitalize(),
+            style: TextStyle(
+                color: NeumorphicTheme.defaultTextColor(context),
+                fontSize: 32.00)),
+        Text(dayMonth.format(now),
+            style: TextStyle(
+                color:
+                    NeumorphicTheme.defaultTextColor(context).withOpacity(0.5),
+                fontSize: 32.00))
       ],
     );
   }

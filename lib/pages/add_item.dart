@@ -54,6 +54,7 @@ class _AddItemState extends State<AddItem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: NeumorphicTheme.baseColor(context),
       appBar: NeumorphicAppBar(),
       body: SingleChildScrollView(
         child: Padding(

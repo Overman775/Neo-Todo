@@ -21,6 +21,8 @@ dependencies:
   expandable: ^4.1.4
   flare_flutter: ^2.0.3
   easy_localization: ^2.3.2
+  shared_preferences: '>=0.5.7+3 <2.0.0'
+  animated_background: ^1.0.5
 
 dev_dependencies:
   flutter_test:
