@@ -292,7 +292,7 @@ class ListBody extends StatelessWidget {
                     ],
                   );
                 } else {
-                  return EmpltyTodo();
+                  return EmptyTodo();
                 }
               }),
               //top cover gradient

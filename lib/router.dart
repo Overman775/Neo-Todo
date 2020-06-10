@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:todolist/pages/404.dart';
 import 'pages/add_category.dart';
 import 'pages/add_item.dart';
 import 'models/pages_arguments.dart';
@@ -28,7 +29,7 @@ Route geneateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (context) => AddCategory(settings.arguments));
     default:
-      return MaterialPageRoute(builder: (context) => MainPage());
+      return MaterialPageRoute(builder: (context) => Page404());
   }
 
   //TODO: add 404 page

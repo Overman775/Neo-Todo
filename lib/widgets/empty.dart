@@ -3,8 +3,8 @@ import 'package:flare_flutter/provider/asset_flare.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class EmpltyTodo extends StatelessWidget {
-  const EmpltyTodo({Key key}) : super(key: key);
+class EmptyTodo extends StatelessWidget {
+  const EmptyTodo({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
