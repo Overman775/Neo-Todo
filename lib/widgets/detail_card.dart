@@ -48,7 +48,7 @@ class HeroProgress extends StatelessWidget {
                 width: Style.mainPadding,
               ),
               Container(
-                width: 40,
+                width: 48,
                 alignment: Alignment.centerRight,
                 child: AnimatedPercent(
                   category.percent,
@@ -83,7 +83,8 @@ class HeroTitle extends StatelessWidget {
       flightShuttleBuilder: flightShuttleBuilderFix,
       child: Text(
         category.title,
-        style: TextStyle(color: NeumorphicTheme.defaultTextColor(context), fontSize: 40.00),
+        style: TextStyle(
+            color: NeumorphicTheme.defaultTextColor(context), fontSize: 40.00),
         softWrap: false,
         overflow: TextOverflow.ellipsis,
       ),

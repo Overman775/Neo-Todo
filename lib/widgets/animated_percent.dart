@@ -28,6 +28,8 @@ class _AnimatedPercentState extends AnimatedWidgetBaseState<AnimatedPercent> {
     return Text(
       percentString,
       style: widget.style,
+      maxLines: 1,
+      softWrap: false,
     );
   }
 
