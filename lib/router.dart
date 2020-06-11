@@ -31,8 +31,6 @@ Route geneateRoute(RouteSettings settings) {
     default:
       return MaterialPageRoute(builder: (context) => Page404());
   }
-
-  //TODO: add 404 page
 }
 
 class CardRoute extends PageRouteBuilder {
