@@ -28,7 +28,15 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.7.5
 
+flutter_icons:
+  image_path: "assets/icon/icon.png"
+  android: true
+  ios: false
+  adaptive_icon_background: "#dedede" # only available for Android 8.0 devices and above
+  adaptive_icon_foreground: "assets/icon/icon_foreground.png" # only available for Android 8.0 devices and above
+#flutter pub run flutter_launcher_icons:main
 
 flutter:
   uses-material-design: true
@@ -36,3 +44,4 @@ flutter:
     - assets/images/
     - assets/animation/
     - assets/locales/
+    - assets/icon/

@@ -70,7 +70,10 @@ class MainDrawer extends StatelessWidget {
                   onTap: () => showAboutDialog(
                     context: context,
                     applicationVersion: snapshot.data.version,
-                    //applicationIcon: MyAppIcon(),
+                    applicationIcon: Image.asset(
+                      'assets/icon/icon.png',
+                      height: 50,
+                    ),
                     applicationLegalese: 'about.audience'.tr(),
                     children: [
                       Padding(
