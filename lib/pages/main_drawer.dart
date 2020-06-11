@@ -9,6 +9,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:todolist/bloc/settings.dart';
 
 import 'package:todolist/widgets/cover_line.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../style.dart';
 
@@ -74,11 +75,57 @@ class MainDrawer extends StatelessWidget {
                       'assets/icon/icon.png',
                       height: 50,
                     ),
-                    applicationLegalese: 'about.audience'.tr(),
                     children: [
+                      Text('settings.about_text'.tr()),
                       Padding(
-                        padding: const EdgeInsets.only(top: 16),
-                        child: Text('settings.about_text'.tr()),
+                        padding: const EdgeInsets.only(top: Style.mainPadding),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                IconButton(
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.github,
+                                      color:
+                                          NeumorphicTheme.accentColor(context),
+                                    ),
+                                    onPressed: () => launch(
+                                        'https://github.com/Overman775')),
+                                Text('Github')
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                IconButton(
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.twitter,
+                                      color:
+                                          NeumorphicTheme.accentColor(context),
+                                    ),
+                                    onPressed: () =>
+                                        launch('https://twitter.com/AlexeyZd')),
+                                Text('Twitter')
+                              ],
+                            ),
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                IconButton(
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.linkedin,
+                                      color:
+                                          NeumorphicTheme.accentColor(context),
+                                    ),
+                                    onPressed: () => launch(
+                                        'https://www.linkedin.com/in/overman775/')),
+                                Text('Linkedin')
+                              ],
+                            )
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -151,22 +198,14 @@ class ItemDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      title: Row(
-        children: <Widget>[
-          if (icon != null)
-            FaIcon(icon, color: NeumorphicTheme.defaultTextColor(context)),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: Style.mainPadding),
-            child: Text(
-              text,
-              style:
-                  TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
-            ),
-          ),
-          Spacer(),
-          if (child != null) child
-        ],
+      leading: icon != null
+          ? FaIcon(icon, color: NeumorphicTheme.defaultTextColor(context))
+          : null,
+      title: Text(
+        text,
+        style: TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
       ),
+      trailing: child,
       onTap: onTap,
     );
   }

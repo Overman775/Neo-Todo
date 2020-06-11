@@ -1,5 +1,4 @@
 {
-	"about.audience": "Это приложение было одобрено для всех аудиторий.",
 	"add_category.icon": "Значок",
 	"add_category.name": "Название",
 	"add_category.title_add": "Новая категория",
@@ -11,7 +10,7 @@
 	"completed": "Завершенные",
 	"save": "Сохранить",
 	"settings.about": "О приложении",
-	"settings.about_text": "Разработано Алексеем Здоровых\n\nhttps://github.com/Overman775/Neo-Todo",
+	"settings.about_text": "Разработано Алексеем Здоровых",
 	"settings.dark_mode": "Ночной режим",
 	"settings.locale": "Язык",
 	"settings.version": "Версия {}",
