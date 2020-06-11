@@ -1,4 +1,5 @@
 {
+	"about.audience": "This application has been approved for all audiences.",
 	"add_category.icon": "Icon",
 	"add_category.name": "Title",
 	"add_category.title_add": "New category",
@@ -9,8 +10,11 @@
 	"add_task.title_hint": "New task",
 	"completed": "Completed",
 	"save": "Save",
+	"settings.about": "About application",
+	"settings.about_text": "Developed by Aleksey Zdorovykh\n\nhttps://github.com/Overman775/Neo-List",
 	"settings.dark_mode": "Dark mode",
 	"settings.locale": "Locale",
+	"settings.version": "Version {}",
 	"task_card.few": "{} tasks",
 	"task_card.many": "{} tasks",
 	"task_card.one": "{} task",

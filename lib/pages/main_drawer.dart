@@ -1,5 +1,6 @@
 import 'package:animated_background/animated_background.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -13,8 +14,6 @@ import '../style.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key key}) : super(key: key);
-
-  // get _isDarkMode = NeumorphicTheme.currentTheme(context) == ThemeMode.dark
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +48,7 @@ class MainDrawer extends StatelessWidget {
             icon: FontAwesomeIcons.moon,
             text: 'settings.dark_mode'.tr(),
             child: NeumorphicSwitch(
-              value:  context.watch<Settings>().isDarkMode,
+              value: context.watch<Settings>().isDarkMode,
               onChanged: (dark) {
                 if (dark) {
                   context.read<Settings>().themeMode = ThemeMode.dark;
@@ -60,6 +59,32 @@ class MainDrawer extends StatelessWidget {
             ),
           ),
           Spacer(),
+          //wait version info
+          FutureBuilder(
+            future: PackageInfo.fromPlatform(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && !snapshot.hasError) {
+                return ItemDrawer(
+                  text: 'settings.version'.tr(args: [snapshot.data.version]),
+                  child: Text('settings.about'.tr()),
+                  onTap: () => showAboutDialog(
+                    context: context,
+                    applicationVersion: snapshot.data.version,
+                    //applicationIcon: MyAppIcon(),
+                    applicationLegalese: 'about.audience'.tr(),
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16),
+                        child: Text('settings.about_text'.tr()),
+                      ),
+                    ],
+                  ),
+                );
+              } else {
+                return SizedBox.shrink();
+              }
+            },
+          ),
         ]),
       ),
     );
@@ -117,11 +142,7 @@ class ItemDrawer extends StatelessWidget {
   final Widget child;
 
   const ItemDrawer(
-      {@required this.icon,
-      @required this.text,
-      this.onTap,
-      this.child,
-      Key key})
+      {this.icon, @required this.text, this.onTap, this.child, Key key})
       : super(key: key);
 
   @override
@@ -129,7 +150,8 @@ class ItemDrawer extends StatelessWidget {
     return ListTile(
       title: Row(
         children: <Widget>[
-          FaIcon(icon, color: NeumorphicTheme.defaultTextColor(context)),
+          if (icon != null)
+            FaIcon(icon, color: NeumorphicTheme.defaultTextColor(context)),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: Style.mainPadding),
             child: Text(
@@ -146,14 +168,3 @@ class ItemDrawer extends StatelessWidget {
     );
   }
 }
-
-/*
-new DropdownButton<String>(
-  items: <String>['A', 'B', 'C', 'D'].map((String value) {
-    return new DropdownMenuItem<String>(
-      value: value,
-      child: new Text(value),
-    );
-  }).toList(),
-  onChanged: (_) {},
-)*/

@@ -1,4 +1,5 @@
 {
+	"about.audience": "Это приложение было одобрено для всех аудиторий.",
 	"add_category.icon": "Значок",
 	"add_category.name": "Название",
 	"add_category.title_add": "Новая категория",
@@ -9,8 +10,11 @@
 	"add_task.title_hint": "Новая задача",
 	"completed": "Завершенные",
 	"save": "Сохранить",
+	"settings.about": "О приложении",
+	"settings.about_text": "Разработано Алексеем Здоровых\n\nhttps://github.com/Overman775/Neo-List",
 	"settings.dark_mode": "Ночной режим",
 	"settings.locale": "Язык",
+	"settings.version": "Версия {}",
 	"task_card.few": "{} задачи",
 	"task_card.many": "{} задач",
 	"task_card.one": "{} задача",

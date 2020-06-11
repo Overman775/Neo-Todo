@@ -1,4 +1,4 @@
-<babeledit_project be_version="2.7.0" version="1.2">
+<babeledit_project version="1.2" be_version="2.7.0">
     <!--
 
     BabelEdit project file
@@ -15,6 +15,28 @@
     <folder_node>
         <name></name>
         <children>
+            <folder_node>
+                <name>about</name>
+                <children>
+                    <concept_node>
+                        <name>audience</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                </children>
+            </folder_node>
             <folder_node>
                 <name>add_category</name>
                 <children>
@@ -199,6 +221,40 @@
                 <name>settings</name>
                 <children>
                     <concept_node>
+                        <name>about</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>about_text</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
                         <name>dark_mode</name>
                         <definition_loaded>false</definition_loaded>
                         <description></description>
@@ -225,6 +281,23 @@
                             <translation>
                                 <language>en-US</language>
                                 <approved>false</approved>
+                            </translation>
+                            <translation>
+                                <language>ru-RU</language>
+                                <approved>false</approved>
+                            </translation>
+                        </translations>
+                    </concept_node>
+                    <concept_node>
+                        <name>version</name>
+                        <definition_loaded>false</definition_loaded>
+                        <description></description>
+                        <comment></comment>
+                        <default_text></default_text>
+                        <translations>
+                            <translation>
+                                <language>en-US</language>
+                                <approved>true</approved>
                             </translation>
                             <translation>
                                 <language>ru-RU</language>
