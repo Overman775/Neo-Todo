@@ -67,59 +67,66 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: enableDescription ? 244 : 190,
-      child: Neumorphic(
-          padding: EdgeInsets.all(Style.mainPadding),
-          style: NeumorphicStyle(
-              boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
-                  topLeft: Radius.circular(16), topRight: Radius.circular(16))),
-              oppositeShadowLightSource: true),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              NeumorphicTextField(
-                  hint: 'add_task.title_hint'.tr(),
-                  onChanged: itemTitleChanget,
-                  autofocus: true),
-              SizedBox(height: Style.mainPadding),
-              if (enableDescription)
+    return AnimatedPadding(
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.decelerate,
+      child: Container(
+        height: enableDescription ? 244 : 190,
+        child: Neumorphic(
+            padding: EdgeInsets.all(Style.mainPadding),
+            style: NeumorphicStyle(
+                boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
+                    topLeft: Radius.circular(16),
+                    topRight: Radius.circular(16))),
+                oppositeShadowLightSource: true),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
                 NeumorphicTextField(
-                  hint: 'add_task.description_hint'.tr(),
-                  onChanged: itemDescriptionChanget,
-                ),
-              SizedBox(height: Style.mainPadding),
-              Row(
-                children: <Widget>[
-                  NeumorphicButton(
-                    padding: EdgeInsets.all(16),
-                    style: NeumorphicStyle(
-                      boxShape: NeumorphicBoxShape.circle(),
+                    hint: 'add_task.title_hint'.tr(),
+                    onChanged: itemTitleChanget,
+                    autofocus: true),
+                SizedBox(height: Style.mainPadding),
+                if (enableDescription)
+                  NeumorphicTextField(
+                    hint: 'add_task.description_hint'.tr(),
+                    onChanged: itemDescriptionChanget,
+                  ),
+                SizedBox(height: Style.mainPadding),
+                Row(
+                  children: <Widget>[
+                    NeumorphicButton(
+                      padding: EdgeInsets.all(16),
+                      style: NeumorphicStyle(
+                        boxShape: NeumorphicBoxShape.circle(),
+                      ),
+                      child: FaIcon(FontAwesomeIcons.bars,
+                          size: 18,
+                          color: NeumorphicTheme.defaultTextColor(context)),
+                      onPressed: chaneEnableDescription,
                     ),
-                    child: FaIcon(FontAwesomeIcons.bars,
-                        size: 18,
-                        color: NeumorphicTheme.defaultTextColor(context)),
-                    onPressed: chaneEnableDescription,
-                  ),
-                  Spacer(),
-                  NeumorphicButton(
-                    padding: EdgeInsets.all(16),
-                    style: NeumorphicStyle(
-                        boxShape: NeumorphicBoxShape.roundRect(
-                            Style.mainBorderRadius)),
-                    child: Text('save',
-                            style: TextStyle(
-                                color: _saveEnable
-                                    ? NeumorphicTheme.accentColor(context)
-                                    : NeumorphicTheme.defaultTextColor(
-                                        context)))
-                        .tr(),
-                    onPressed: saveItem,
-                  ),
-                ],
-              )
-            ],
-          )),
+                    Spacer(),
+                    NeumorphicButton(
+                      padding: EdgeInsets.all(16),
+                      style: NeumorphicStyle(
+                          boxShape: NeumorphicBoxShape.roundRect(
+                              Style.mainBorderRadius)),
+                      child: Text('save',
+                              style: TextStyle(
+                                  color: _saveEnable
+                                      ? NeumorphicTheme.accentColor(context)
+                                      : NeumorphicTheme.defaultTextColor(
+                                          context)))
+                          .tr(),
+                      onPressed: saveItem,
+                    ),
+                  ],
+                )
+              ],
+            )),
+      ),
     );
   }
 }
@@ -130,10 +137,6 @@ void modalBottomSheet(BuildContext context, TodoCategory category) {
       backgroundColor: Colors.transparent,
       context: context,
       builder: (_) {
-        return AnimatedPadding(
-            padding: MediaQuery.of(context).viewInsets,
-            duration: const Duration(milliseconds: 300),
-            curve: Curves.decelerate,
-            child: AddItemBottomShet(category: category));
+        return AddItemBottomShet(category: category);
       });
 }

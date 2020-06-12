@@ -66,8 +66,9 @@ class _TodoPageState extends State<TodoPage> {
     return Scaffold(
         appBar: CategoryAppBar(args: args),
         floatingActionButton: CategoryFAB(args: args),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,        
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         backgroundColor: NeumorphicTheme.baseColor(context),
+        resizeToAvoidBottomPadding: false,
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -272,7 +273,8 @@ class ListBody extends StatelessWidget {
                                   ExpandablePanelHeaderAlignment.center,
                               iconPadding:
                                   EdgeInsets.only(right: Style.doublePadding),
-                              iconColor: NeumorphicTheme.defaultTextColor(context),
+                              iconColor:
+                                  NeumorphicTheme.defaultTextColor(context),
                               expandIcon: FontAwesomeIcons.angleDown,
                               collapseIcon: FontAwesomeIcons.angleDown,
                               useInkWell: false),
@@ -297,7 +299,9 @@ class ListBody extends StatelessWidget {
               }),
               //top cover gradient
               CoverLine(),
-              CoverLine(alignment: Alignment.bottomCenter,),
+              CoverLine(
+                alignment: Alignment.bottomCenter,
+              ),
               /*Container(
                   height: Style.mainPadding,
                   decoration: BoxDecoration(
