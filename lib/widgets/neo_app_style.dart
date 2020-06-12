@@ -62,7 +62,7 @@ class NeumorphicAppStyle extends StatelessWidget {
       primaryColor: theme.accentColor,
       accentColor: theme.variantColor,
       unselectedWidgetColor: theme.accentColor,
-      toggleableActiveColor: theme.accentColor,      
+      toggleableActiveColor: theme.accentColor,
       brightness: ThemeData.estimateBrightnessForColor(theme.baseColor),
       primaryColorBrightness:
           ThemeData.estimateBrightnessForColor(theme.accentColor),
@@ -85,8 +85,8 @@ class NeumorphicAppStyle extends StatelessWidget {
       child: MaterialApp(
         title: title,
         color: color,
-        theme: materialTheme,
-        darkTheme: materialDarkTheme,
+        theme: materialTheme as ThemeData,
+        darkTheme: materialDarkTheme as ThemeData,
         initialRoute: initialRoute,
         routes: routes,
         themeMode: themeMode,

@@ -36,6 +36,7 @@ class _AnimatedPercentState extends AnimatedWidgetBaseState<AnimatedPercent> {
   @override
   void forEachTween(TweenVisitor visitor) {
     _percent = visitor(_percent, widget.percent,
-        (dynamic value) => Tween<double>(begin: value));
+            (dynamic value) => Tween<double>(begin: value as double))
+        as Tween<double>;
   }
 }

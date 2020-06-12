@@ -35,7 +35,7 @@ class _MainTimerState extends State<MainTimer> {
   @override
   void initState() {
     now = DateTime.now();
-    timer = Timer.periodic(Duration(seconds: 1), updateNow);
+    timer = Timer.periodic(const Duration(seconds: 1), updateNow);
     super.initState();
   }
 

@@ -78,7 +78,7 @@ class SQLiteProvider implements DbInterface {
           offset: offset));
 
   //TODO: add catch errors
-  
+
   Future<List<Map<String, dynamic>>> customSelect(String query) async =>
       await database.then((db) => db.rawQuery(query));
 
@@ -89,12 +89,12 @@ class SQLiteProvider implements DbInterface {
   @override
   Future<int> update(String table, TodoModel model,
           {String where = 'id = ?'}) async =>
-      await database.then((db) =>
-          db.update(table, model.toMap(), where: where, whereArgs: [model.id]));
+      await database.then((db) => db.update(table, model.toMap(),
+          where: where, whereArgs: <dynamic>[model.id]));
 
   @override
   Future<int> delete(String table, TodoModel model,
           {String where = 'id = ?'}) async =>
-      await database
-          .then((db) => db.delete(table, where: where, whereArgs: [model.id]));
+      await database.then((db) =>
+          db.delete(table, where: where, whereArgs: <dynamic>[model.id]));
 }

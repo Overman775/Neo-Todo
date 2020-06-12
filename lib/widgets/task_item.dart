@@ -3,17 +3,17 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-import '../models/pages_arguments.dart';
-import '../bloc/todo.dart';
-import '../models/todo_models.dart';
 
+import '../bloc/todo.dart';
+import '../models/pages_arguments.dart';
+import '../models/todo_models.dart';
 import '../style.dart';
 
 class TodoItemWidget extends StatelessWidget {
   final TodoItem item;
   final TodoCategory category;
 
-  TodoItemWidget(this.item, this.category);
+  TodoItemWidget(this.item, this.category, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

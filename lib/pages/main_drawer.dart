@@ -1,17 +1,16 @@
 import 'package:animated_background/animated_background.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:package_info/package_info.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:todolist/bloc/settings.dart';
-
-import 'package:todolist/widgets/cover_line.dart';
+import 'package:package_info/package_info.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../bloc/settings.dart';
 import '../style.dart';
+import '../widgets/cover_line.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key key}) : super(key: key);
@@ -21,27 +20,27 @@ class MainDrawer extends StatelessWidget {
     return Drawer(
       child: NeumorphicBackground(
         child: Column(children: <Widget>[
-          HeadDrawer(),
+          const HeadDrawer(),
           ItemDrawer(
             icon: FontAwesomeIcons.language,
             text: 'settings.locale'.tr(),
-            child: DropdownButton(
+            child: DropdownButton<dynamic>(
               value: context.locale,
               dropdownColor: NeumorphicTheme.baseColor(context),
               style:
                   TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
               items: <DropdownMenuItem<dynamic>>[
-                DropdownMenuItem(
+                const DropdownMenuItem<dynamic>(
                   value: Locale('en'),
                   child: Text('Engish'),
                 ),
-                DropdownMenuItem(
+                const DropdownMenuItem<dynamic>(
                   value: Locale('ru'),
                   child: Text('Русский'),
                 )
               ],
-              onChanged: (locale) {
-                context.locale = locale;
+              onChanged: (dynamic locale) {
+                context.locale = locale as Locale;
               },
             ),
           ),
@@ -59,18 +58,19 @@ class MainDrawer extends StatelessWidget {
               },
             ),
           ),
-          Spacer(),
+          const Spacer(),
           //wait version info
           FutureBuilder(
             future: PackageInfo.fromPlatform(),
             builder: (context, snapshot) {
               if (snapshot.hasData && !snapshot.hasError) {
                 return ItemDrawer(
-                  text: 'settings.version'.tr(args: [snapshot.data.version]),
+                  text: 'settings.version'
+                      .tr(args: [snapshot.data.version.toString()]),
                   child: Text('settings.about'.tr()),
                   onTap: () => showAboutDialog(
                     context: context,
-                    applicationVersion: snapshot.data.version,
+                    applicationVersion: snapshot.data.version.toString(),
                     applicationIcon: Image.asset(
                       'assets/icon/icon.png',
                       height: 50,
@@ -93,7 +93,7 @@ class MainDrawer extends StatelessWidget {
                                     ),
                                     onPressed: () => launch(
                                         'https://github.com/Overman775')),
-                                Text('Github')
+                                const Text('Github')
                               ],
                             ),
                             Column(
@@ -107,7 +107,7 @@ class MainDrawer extends StatelessWidget {
                                     ),
                                     onPressed: () =>
                                         launch('https://twitter.com/AlexeyZd')),
-                                Text('Twitter')
+                                const Text('Twitter')
                               ],
                             ),
                             Column(
@@ -121,7 +121,7 @@ class MainDrawer extends StatelessWidget {
                                     ),
                                     onPressed: () => launch(
                                         'https://www.linkedin.com/in/overman775/')),
-                                Text('Linkedin')
+                                const Text('Linkedin')
                               ],
                             )
                           ],
@@ -131,7 +131,7 @@ class MainDrawer extends StatelessWidget {
                   ),
                 );
               } else {
-                return SizedBox.shrink();
+                return const SizedBox.shrink();
               }
             },
           ),
@@ -171,7 +171,7 @@ class _HeadDrawerState extends State<HeadDrawer> with TickerProviderStateMixin {
                         fontSize: 40, fontWeight: FontWeight.bold)),
               ),
             ),
-            CoverLine(
+            const CoverLine(
               height: 32,
             ),
             CoverLine(

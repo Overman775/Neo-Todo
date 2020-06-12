@@ -1,11 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
-import 'package:todolist/widgets/text_field.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
 import '../style.dart';
+import '../widgets/text_field.dart';
 
 class AddItem extends StatefulWidget {
   final ItemPageArguments args;
@@ -38,7 +39,7 @@ class _AddItemState extends State<AddItem> {
     return true;
   }
 
-  void saveItem() async {
+  Future saveItem() async {
     if (_saveEnable) {
       await context.read<Todo>().editItem(widget.args.item,
           widget.args.item.copyWith(title: title, description: description));
@@ -79,7 +80,7 @@ class _AddItemState extends State<AddItem> {
               SizedBox(height: Style.mainPadding),
               Center(
                   child: NeumorphicButton(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 style: NeumorphicStyle(
                     boxShape:
                         NeumorphicBoxShape.roundRect(Style.mainBorderRadius)),

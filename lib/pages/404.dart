@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:todolist/widgets/empty.dart';
+import '../widgets/empty.dart';
 
 class Page404 extends StatelessWidget {
   const Page404({Key key}) : super(key: key);
@@ -12,14 +12,13 @@ class Page404 extends StatelessWidget {
         backgroundColor: NeumorphicTheme.baseColor(context),
         resizeToAvoidBottomPadding: false,
         appBar: NeumorphicAppBar(),
-        body:Center(
+        body: Center(
           child: Column(
             children: <Widget>[
-              Text('Page not found'),
-              EmptyTodo(),
+              const Text('Page not found'),
+              const EmptyTodo(),
             ],
           ),
-        )
-    );
+        ));
   }
 }

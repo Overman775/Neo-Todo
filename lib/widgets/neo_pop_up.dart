@@ -1,4 +1,3 @@
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -25,13 +24,13 @@ class NeumorphicPopupMenuButton<T> extends StatefulWidget {
     this.shape,
     this.color,
     this.captureInheritedThemes = true,
-  }) : assert(itemBuilder != null),
-       assert(offset != null),
-       assert(enabled != null),
-       assert(captureInheritedThemes != null),
-       assert(!(child != null && icon != null),
-           'You can only pass [child] or [icon], not both.'),
-       super(key: key);
+  })  : assert(itemBuilder != null),
+        assert(offset != null),
+        assert(enabled != null),
+        assert(captureInheritedThemes != null),
+        assert(!(child != null && icon != null),
+            'You can only pass [child] or [icon], not both.'),
+        super(key: key);
 
   /// Called when the button is pressed to create the items to show in the menu.
   final PopupMenuItemBuilder<T> itemBuilder;
@@ -65,7 +64,7 @@ class NeumorphicPopupMenuButton<T> extends StatefulWidget {
   /// Matches IconButton's 8 dps padding by default. In some cases, notably where
   /// this button appears as the trailing element of a list item, it's useful to be able
   /// to set the padding to zero.
-  final EdgeInsetsGeometry padding;
+  final EdgeInsets padding;
 
   /// If provided, [child] is the widget used for this button
   /// and the button will utilize an [InkWell] for taps.
@@ -116,14 +115,16 @@ class NeumorphicPopupMenuButton<T> extends StatefulWidget {
   final bool captureInheritedThemes;
 
   @override
-  NeumorphicPopupMenuButtonState<T> createState() => NeumorphicPopupMenuButtonState<T>();
+  NeumorphicPopupMenuButtonState<T> createState() =>
+      NeumorphicPopupMenuButtonState<T>();
 }
 
 /// The [State] for a [NeumorphicPopupMenuButton].
 ///
 /// See [showButtonMenu] for a way to programmatically open the popup menu
 /// of your button state.
-class NeumorphicPopupMenuButtonState<T> extends State<NeumorphicPopupMenuButton<T>> {
+class NeumorphicPopupMenuButtonState<T>
+    extends State<NeumorphicPopupMenuButton<T>> {
   /// A method to show a popup menu with the items supplied to
   /// [NeumorphicPopupMenuButton.itemBuilder] at the position of your [NeumorphicPopupMenuButton].
   ///
@@ -140,7 +141,8 @@ class NeumorphicPopupMenuButtonState<T> extends State<NeumorphicPopupMenuButton<
     final position = RelativeRect.fromRect(
       Rect.fromPoints(
         button.localToGlobal(widget.offset, ancestor: overlay),
-        button.localToGlobal(button.size.bottomRight(Offset.zero), ancestor: overlay),
+        button.localToGlobal(button.size.bottomRight(Offset.zero),
+            ancestor: overlay),
       ),
       Offset.zero & overlay.size,
     );
@@ -156,8 +158,7 @@ class NeumorphicPopupMenuButtonState<T> extends State<NeumorphicPopupMenuButton<
         shape: widget.shape ?? popupMenuTheme.shape,
         color: widget.color ?? nTheme.current.baseColor ?? popupMenuTheme.color,
         captureInheritedThemes: widget.captureInheritedThemes,
-      )
-      .then<void>((T newValue) {
+      ).then<void>((T newValue) {
         if (!mounted) {
           return null;
         }
@@ -195,7 +196,8 @@ class NeumorphicPopupMenuButtonState<T> extends State<NeumorphicPopupMenuButton<
 
     if (widget.child != null) {
       return Tooltip(
-        message: widget.tooltip ?? MaterialLocalizations.of(context).showMenuTooltip,
+        message:
+            widget.tooltip ?? MaterialLocalizations.of(context).showMenuTooltip,
         child: InkWell(
           onTap: widget.enabled ? showButtonMenu : null,
           canRequestFocus: widget.enabled,
@@ -207,7 +209,8 @@ class NeumorphicPopupMenuButtonState<T> extends State<NeumorphicPopupMenuButton<
     return NeumorphicButton(
       child: widget.icon ?? _getIcon(Theme.of(context).platform),
       padding: widget.padding,
-      tooltip: widget.tooltip ?? MaterialLocalizations.of(context).showMenuTooltip,
+      tooltip:
+          widget.tooltip ?? MaterialLocalizations.of(context).showMenuTooltip,
       onPressed: widget.enabled ? showButtonMenu : null,
     );
   }

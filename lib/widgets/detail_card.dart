@@ -29,7 +29,7 @@ class HeroProgress extends StatelessWidget {
                     NeumorphicTheme.defaultTextColor(context).withOpacity(0.5),
                 fontSize: 16.00),
           ).plural(category.totalItems),
-          SizedBox(
+          const SizedBox(
             height: Style.halfPadding,
           ),
           Row(
@@ -38,7 +38,7 @@ class HeroProgress extends StatelessWidget {
                 child: NeumorphicProgress(
                     percent: category.percent,
                     height: 8,
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     style: ProgressStyle(
                         depth: NeumorphicTheme.depth(
                             context) // TODO: fix depth and others
@@ -56,7 +56,7 @@ class HeroProgress extends StatelessWidget {
                       color: NeumorphicTheme.defaultTextColor(context)
                           .withOpacity(0.5),
                       fontSize: 16.00),
-                  duration: Duration(milliseconds: 300),
+                  duration: const Duration(milliseconds: 300),
                   curve: Curves.easeOutCubic,
                 ),
               )
@@ -105,8 +105,8 @@ class HeroIcon extends StatelessWidget {
     return Hero(
       tag: 'icon_${category.id}',
       child: Neumorphic(
-        padding: EdgeInsets.all(16),
-        style: NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
+        padding: const EdgeInsets.all(16),
+        style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
         child: FaIcon(
           category.icon,
           color: Style.primaryColor,

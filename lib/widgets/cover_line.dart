@@ -5,7 +5,8 @@ class CoverLine extends StatelessWidget {
   final Alignment alignment;
   final double height;
 
-  const CoverLine({this.alignment = Alignment.topCenter, this.height = 16, key})
+  const CoverLine(
+      {this.alignment = Alignment.topCenter, this.height = 16, Key key})
       : super(key: key);
 
   @override

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:todolist/pages/404.dart';
+
+import 'models/pages_arguments.dart';
+import 'pages/404.dart';
 import 'pages/add_category.dart';
 import 'pages/add_item.dart';
-import 'models/pages_arguments.dart';
 import 'pages/main.dart';
 import 'pages/todo.dart';
 import 'style.dart';
@@ -13,27 +14,30 @@ Route geneateRoute(RouteSettings settings) {
   //check named route and return page
   switch (settings.name) {
     case '/':
-      return MaterialPageRoute(builder: (context) => MainPage());
+      return MaterialPageRoute<Widget>(builder: (context) => const MainPage());
     case '/item/edit':
-      return MaterialPageRoute(
-          builder: (context) => AddItem(settings.arguments));
+      return MaterialPageRoute<Widget>(
+          builder: (context) =>
+              AddItem(settings.arguments as ItemPageArguments));
     case '/category':
       //return router with card animation
       return CardRoute(
-          widget: TodoPage(settings.arguments), arguments: settings.arguments);
+          widget: TodoPage(settings.arguments as MainPageArguments),
+          arguments: settings.arguments as MainPageArguments);
     case '/category/add':
       return CardRoute(
-          widget: AddCategory(settings.arguments),
-          arguments: settings.arguments);
+          widget: AddCategory(settings.arguments as MainPageArguments),
+          arguments: settings.arguments as MainPageArguments);
     case '/category/edit':
-      return MaterialPageRoute(
-          builder: (context) => AddCategory(settings.arguments));
+      return MaterialPageRoute<Widget>(
+          builder: (context) =>
+              AddCategory(settings.arguments as MainPageArguments));
     default:
-      return MaterialPageRoute(builder: (context) => Page404());
+      return MaterialPageRoute<Widget>(builder: (context) => const Page404());
   }
 }
 
-class CardRoute extends PageRouteBuilder {
+class CardRoute extends PageRouteBuilder<Widget> {
   final Widget widget;
   final MainPageArguments arguments;
 
@@ -94,7 +98,7 @@ class CardTransition extends AnimatedWidget {
         top: animTop,
         bottom: animBottom,
         child: Neumorphic(
-          duration: Duration(),
+          duration: const Duration(),
           style: NeumorphicStyle(
             boxShape: NeumorphicBoxShape.roundRect(borderAnim),
           ),
@@ -105,7 +109,7 @@ class CardTransition extends AnimatedWidget {
           ///TODO: optimization opacity
           child: AnimatedOpacity(
             opacity: animValue,
-            duration: Duration(),
+            duration: const Duration(),
             child:
                 AnimationPageInjection(child: child, animationPage: animation),
           ),

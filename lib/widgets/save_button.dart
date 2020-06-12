@@ -9,7 +9,7 @@ class NeumorphicSaveButton extends StatelessWidget {
       : super(key: key);
 
   final bool canSave;
-  final Function onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +26,8 @@ class NeumorphicSaveButton extends StatelessWidget {
           disableDepth: !canSave),
       child: NeumorphicButton(
           onPressed: onPressed,
-          margin: EdgeInsets.all(3),
-          padding: EdgeInsets.all(14.0),
+          margin: const EdgeInsets.all(3),
+          padding: const EdgeInsets.all(14.0),
           style: NeumorphicStyle(
             boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
             color: canSave ? Style.primaryColor : Style.subTextColor,

@@ -65,7 +65,7 @@ abstract class Style {
   static List<BoxShadow> buttonGlow = [
     BoxShadow(
         color: Style.primaryColor.withOpacity(0.3),
-        offset: Offset(0, 6),
+        offset: const Offset(0, 6),
         blurRadius: 12.0,
         spreadRadius: 6.0)
   ];

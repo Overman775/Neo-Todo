@@ -1,14 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:todolist/bloc/todo.dart';
-import 'package:todolist/models/todo_models.dart';
-import 'package:todolist/widgets/text_field.dart';
+import 'package:provider/provider.dart';
 
+import '../bloc/todo.dart';
+import '../models/todo_models.dart';
 import '../style.dart';
+import '../widgets/text_field.dart';
 
 class AddItemBottomShet extends StatefulWidget {
   final TodoCategory category;
@@ -53,7 +53,7 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
     return true;
   }
 
-  void saveItem() async {
+  Future saveItem() async {
     if (_saveEnable) {
       await context.read<Todo>().addItem(TodoItem(
           category: widget.category.id,
@@ -77,7 +77,7 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
         child: Neumorphic(
             padding: EdgeInsets.all(Style.mainPadding),
             style: NeumorphicStyle(
-                boxShape: NeumorphicBoxShape.roundRect(BorderRadius.only(
+                boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.only(
                     topLeft: Radius.circular(16),
                     topRight: Radius.circular(16))),
                 oppositeShadowLightSource: true),
@@ -98,8 +98,8 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
                 Row(
                   children: <Widget>[
                     NeumorphicButton(
-                      padding: EdgeInsets.all(16),
-                      style: NeumorphicStyle(
+                      padding: const EdgeInsets.all(16),
+                      style: const NeumorphicStyle(
                         boxShape: NeumorphicBoxShape.circle(),
                       ),
                       child: FaIcon(FontAwesomeIcons.bars,
@@ -107,9 +107,9 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
                           color: NeumorphicTheme.defaultTextColor(context)),
                       onPressed: chaneEnableDescription,
                     ),
-                    Spacer(),
+                    const Spacer(),
                     NeumorphicButton(
-                      padding: EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(16),
                       style: NeumorphicStyle(
                           boxShape: NeumorphicBoxShape.roundRect(
                               Style.mainBorderRadius)),
@@ -132,7 +132,7 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
 }
 
 void modalBottomSheet(BuildContext context, TodoCategory category) {
-  showModalBottomSheet(
+  showModalBottomSheet<Widget>(
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       context: context,

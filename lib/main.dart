@@ -5,14 +5,14 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:todolist/widgets/neo_app_style.dart';
+
 import 'bloc/settings.dart';
 import 'bloc/todo.dart';
-import 'style.dart';
-
 import 'router.dart';
+import 'style.dart';
+import 'widgets/neo_app_style.dart';
 
-void main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
 
@@ -27,9 +27,9 @@ void main() async {
 
   runApp(
     EasyLocalization(
-        supportedLocales: [Locale('en'), Locale('ru')],
+        supportedLocales: [const Locale('en'), const Locale('ru')],
         path: 'assets/locales',
-        fallbackLocale: Locale('en'),
+        fallbackLocale: const Locale('en'),
         useOnlyLangCode: true,
         preloaderColor: prefs.getBool('dakMode') == true
             ? Style.bgColorDark
@@ -37,7 +37,7 @@ void main() async {
         child: MultiProvider(providers: [
           ChangeNotifierProvider(create: (_) => Todo(), lazy: false),
           ChangeNotifierProvider(create: (_) => Settings(prefs), lazy: false)
-        ], child: MyApp())),
+        ], child: const MyApp())),
   );
 }
 
@@ -63,9 +63,9 @@ class MyApp extends StatelessWidget {
             lightSource: LightSource.topRight,
             depth: 3,
             appBarTheme: NeumorphicAppBarThemeData(
-                buttonPadding: EdgeInsets.all(14.0),
-                buttonStyle:
-                    NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
+                buttonPadding: const EdgeInsets.all(14.0),
+                buttonStyle: const NeumorphicStyle(
+                    boxShape: NeumorphicBoxShape.circle()),
                 iconTheme: IconThemeData(
                   color: Style.textColor,
                 ),
@@ -82,9 +82,9 @@ class MyApp extends StatelessWidget {
             shadowDarkColor: Colors.black,
             depth: 3,
             appBarTheme: NeumorphicAppBarThemeData(
-                buttonPadding: EdgeInsets.all(14.0),
-                buttonStyle:
-                    NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
+                buttonPadding: const EdgeInsets.all(14.0),
+                buttonStyle: const NeumorphicStyle(
+                    boxShape: NeumorphicBoxShape.circle()),
                 iconTheme: IconThemeData(
                   color: Style.textColorDark,
                 ),

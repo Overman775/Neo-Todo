@@ -1,21 +1,22 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:todolist/models/todo_models.dart';
-import 'package:todolist/widgets/cover_line.dart';
-import 'package:todolist/widgets/neo_pop_up.dart';
-import '../widgets/text_field.dart';
-import '../widgets/detail_card.dart';
+
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
-import '../widgets/empty.dart';
-import '../widgets/task_item.dart';
-import '../style.dart';
+import '../models/todo_models.dart';
 import '../router.dart';
+import '../style.dart';
+import '../widgets/cover_line.dart';
+import '../widgets/detail_card.dart';
+import '../widgets/empty.dart';
+import '../widgets/neo_pop_up.dart';
+import '../widgets/task_item.dart';
+import '../widgets/text_field.dart';
 import 'add_bottom_shet.dart';
 
 class TodoPage extends StatefulWidget {
@@ -24,14 +25,13 @@ class TodoPage extends StatefulWidget {
   TodoPage(this.args, {Key key}) : super(key: key);
 
   @override
-  _TodoPageState createState() => _TodoPageState(args);
+  _TodoPageState createState() => _TodoPageState();
 }
 
 class _TodoPageState extends State<TodoPage> {
-  MainPageArguments args;
   AnimationPageInjection animationPageInjection;
 
-  _TodoPageState(this.args);
+  _TodoPageState();
 
   ///check page transistion end
   bool get _transistionPageEnd =>
@@ -39,7 +39,7 @@ class _TodoPageState extends State<TodoPage> {
 
   @override
   void initState() {
-    context.read<Todo>().getItems(args.category.id);
+    context.read<Todo>().getItems(widget.args.category.id);
 
     /*
     context.read<Todo>().addListener(() {
@@ -64,8 +64,8 @@ class _TodoPageState extends State<TodoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CategoryAppBar(args: args),
-        floatingActionButton: CategoryFAB(args: args),
+        appBar: CategoryAppBar(args: widget.args),
+        floatingActionButton: CategoryFAB(args: widget.args),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         backgroundColor: NeumorphicTheme.baseColor(context),
         resizeToAvoidBottomPadding: false,
@@ -77,14 +77,15 @@ class _TodoPageState extends State<TodoPage> {
                   Style.mainPadding, Style.mainPadding),
               child: Selector<Todo, TodoCategory>(
                 selector: (BuildContext context, Todo todo) => todo.categoryes
-                    .firstWhere((element) => element.id == args.category.id,
+                    .firstWhere(
+                        (element) => element.id == widget.args.category.id,
                         orElse: () => null),
                 shouldRebuild: (old_category, new_category) =>
                     old_category != new_category,
                 builder: (context, category, _) {
                   if (category == null) {
                     //return empty container when category deletet
-                    return SizedBox.shrink();
+                    return const SizedBox.shrink();
                   }
                   return Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -143,7 +144,7 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   final MainPageArguments args;
 
-  void onSelected(String selected, BuildContext context) async {
+  Future onSelected(String selected, BuildContext context) async {
     final block = context.read<Todo>();
     switch (selected) {
       case 'edit':
@@ -156,7 +157,7 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
         break;
       case 'delete':
         await block.deleteCategory(args.category);
-        await Navigator.of(context).pop();
+        Navigator.of(context).pop();
         await block.getCategoryes();
         break;
       default:
@@ -175,7 +176,7 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
           builder: (context, category, _) {
             if (category == null) {
               //return empty container when category deletet
-              return SizedBox.shrink();
+              return const SizedBox.shrink();
             }
             return HeroTitle(category: category);
           }),
@@ -231,12 +232,12 @@ class ListBody extends StatelessWidget {
       child: AnimatedOpacity(
         //show task list when page transistion end
         opacity: _transistionPageEnd ? 1 : 0,
-        duration: Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 300),
         child: Builder(builder: (context) {
           //if page transistion not endede show empty widget
           //beter for perfomance
           if (!_transistionPageEnd) {
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           }
           //Stack for cover begin and end ListView
           return Stack(
@@ -244,8 +245,8 @@ class ListBody extends StatelessWidget {
               Consumer<Todo>(builder: (context, todo, child) {
                 if (todo.items.isNotEmpty) {
                   return ListView(
-                    physics: BouncingScrollPhysics(),
-                    padding: EdgeInsets.only(bottom: 80),
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.only(bottom: 80),
                     children: <Widget>[
                       Padding(
                         padding: EdgeInsets.fromLTRB(
@@ -294,11 +295,11 @@ class ListBody extends StatelessWidget {
                     ],
                   );
                 } else {
-                  return EmptyTodo();
+                  return const EmptyTodo();
                 }
               }),
               //top cover gradient
-              CoverLine(),
+              const CoverLine(),
               CoverLine(
                 alignment: Alignment.bottomCenter,
               ),

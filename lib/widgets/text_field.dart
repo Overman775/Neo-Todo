@@ -11,13 +11,14 @@ class NeumorphicTextField extends StatefulWidget {
   final ValueChanged<String> onChanged;
 
   NeumorphicTextField({
+    Key key,
     this.label,
     this.hint,
     this.text,
-    this.onChanged,
     this.autofocus = false,
     this.multilines = false,
-  });
+    this.onChanged,
+  }) : super(key: key);
 
   @override
   _TextFieldState createState() => _TextFieldState();
@@ -45,12 +46,12 @@ class _TextFieldState extends State<NeumorphicTextField> {
       children: <Widget>[
         if (widget.label != null) TextFieldLabel(widget.label),
         Neumorphic(
-          margin: EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 4),
+          margin: const EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 4),
           style: NeumorphicStyle(
             depth: NeumorphicTheme.embossDepth(context),
-            boxShape: NeumorphicBoxShape.stadium(),
+            boxShape: const NeumorphicBoxShape.stadium(),
           ),
-          padding: EdgeInsets.symmetric(vertical: 0, horizontal: 14),
+          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 14),
           child: TextField(
             onChanged: widget.onChanged,
             controller: _controller,
@@ -58,7 +59,7 @@ class _TextFieldState extends State<NeumorphicTextField> {
             keyboardType: widget.multilines
                 ? TextInputType.multiline
                 : TextInputType.text,
-            maxLines: widget.multilines ? null : 1,            
+            maxLines: widget.multilines ? null : 1,
             decoration: InputDecoration.collapsed(hintText: widget.hint),
           ),
         )

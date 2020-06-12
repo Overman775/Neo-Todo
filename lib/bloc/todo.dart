@@ -27,7 +27,7 @@ class Todo extends ChangeNotifier {
     return count;
   }
 
-  void _init() async {
+  Future _init() async {
     await getCategoryes();
   }
 
@@ -72,7 +72,7 @@ class Todo extends ChangeNotifier {
 
   Future getItems(int categoryId, {bool notify = true}) async {
     var _results = await SQLiteProvider.db.select(TodoItem.table,
-        where: '"category" = ?', whereArgs: [categoryId]);
+        where: '"category" = ?', whereArgs: <dynamic>[categoryId]);
     items = _results.map<TodoItem>((item) => TodoItem.fromMap(item)).toList();
     if (notify) {
       notifyListeners();
@@ -85,12 +85,12 @@ class Todo extends ChangeNotifier {
     await getItems(item.category);
   }
 
-  void toggleItem(TodoItem item) async {
+  Future toggleItem(TodoItem item) async {
     final new_item = item.copyWith(completed: !item.completed);
     await SQLiteProvider.db.update(TodoItem.table, new_item);
     await getCategoryes(notify: false);
     await getItems(new_item.category, notify: false);
-    
+
     /*
     unawaited(SQLiteProvider.db.update(TodoItem.table, new_item));
     //overwrrite TodoItem
@@ -111,14 +111,14 @@ class Todo extends ChangeNotifier {
     log('Item toggle ${item.title}');
   }
 
-  void updateItem(TodoItem item, {index}) {
+  void updateItem(TodoItem item, {int index}) {
     //search item if index not set
     index ??= items.indexWhere((old_item) => old_item.id == item.id);
     //overvrite
     items[index] = item;
   }
 
-  void updateCategory(TodoCategory item, {index}) {
+  void updateCategory(TodoCategory item, {int index}) {
     //search item if index not set
     index ??= categoryes.indexWhere((old_item) => old_item.id == item.id);
     //overvrite

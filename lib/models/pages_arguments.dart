@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:todolist/models/todo_models.dart';
+import 'todo_models.dart';
 
 class ItemPageArguments {
   final TodoItem item;
@@ -24,7 +24,7 @@ class CardPosition {
 
   factory CardPosition.getPosition(BuildContext context) {
     //search widget
-    final RenderBox renderBox = context.findRenderObject();
+    final renderBox = context.findRenderObject() as RenderBox;
     //get position widget
     final position = renderBox.localToGlobal(Offset.zero);
     //get size widget

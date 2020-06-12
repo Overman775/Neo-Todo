@@ -63,7 +63,7 @@ class _CarouselState extends State<Carousel> {
                 _handlePageNotification, //listen scroll and update page
             child: PageView.builder(
               scrollDirection: Axis.horizontal,
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               itemCount:
                   categoryes.length + 1, // +1 need for add CategoryAddCard
               controller: _pageController,
@@ -98,7 +98,7 @@ class CategoryCard extends StatelessWidget {
       scale: scale,
       alignment: Alignment.centerLeft,
       child: Neumorphic(
-        padding: EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(18.0),
         margin: EdgeInsets.fromLTRB(
             0, Style.doublePadding, Style.doublePadding, Style.doublePadding),
         style: NeumorphicStyle(
@@ -116,7 +116,7 @@ class CategoryCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               HeroIcon(category: category),
-              Spacer(),
+              const Spacer(),
               //detail
               HeroTitle(category: category),
               SizedBox(
@@ -143,7 +143,7 @@ class CategoryAddCard extends StatelessWidget {
       scale: scale,
       alignment: Alignment.centerLeft,
       child: Neumorphic(
-        padding: EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(18.0),
         margin: EdgeInsets.fromLTRB(
             0, Style.doublePadding, Style.doublePadding, Style.doublePadding),
         style: NeumorphicStyle(

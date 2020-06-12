@@ -1,13 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:provider/provider.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:todolist/bloc/todo.dart';
-import '../widgets/timer.dart';
-import '../widgets/carousel.dart';
 
+import '../bloc/todo.dart';
 import '../style.dart';
+import '../widgets/carousel.dart';
+import '../widgets/timer.dart';
 import 'main_drawer.dart';
 
 class MainPage extends StatelessWidget {
@@ -17,7 +17,7 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomPadding: false,
-      drawer: MainDrawer(),
+      drawer: const MainDrawer(),
       backgroundColor: NeumorphicTheme.baseColor(context),
       appBar: NeumorphicAppBar(),
       body: Container(
@@ -45,8 +45,8 @@ class MainPage extends StatelessWidget {
                     ).plural(total_items);
                   }),
             ),
-            Carousel(),
-            SizedBox(height: Style.doublePadding)
+            const Carousel(),
+            const SizedBox(height: Style.doublePadding)
           ],
         ),
       ),

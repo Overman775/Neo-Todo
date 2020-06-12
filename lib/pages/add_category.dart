@@ -1,17 +1,18 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
 import '../models/todo_models.dart';
+import '../router.dart';
+import '../style.dart';
 import '../utils/icons.dart';
 import '../widgets/save_button.dart';
 import '../widgets/text_field.dart';
-import '../style.dart';
-import '../router.dart';
 
 class AddCategory extends StatefulWidget {
   final MainPageArguments args;
@@ -56,7 +57,7 @@ class _AddCategoryState extends State<AddCategory> {
     });
   }
 
-  void saveCategory() async {
+  Future saveCategory() async {
     if (_argsHaveCategory) {
       await context.read<Todo>().editCategory(widget.args.category,
           TodoCategory(id: widget.args.category.id, title: title, icon: icon));
@@ -93,8 +94,8 @@ class _AddCategoryState extends State<AddCategory> {
         resizeToAvoidBottomPadding: false,
         appBar: NeumorphicAppBar(
           title: _argsHaveCategory
-              ? Text('add_category.title_edit').tr()
-              : Text('add_category.title_add').tr(),
+              ? const Text('add_category.title_edit').tr()
+              : const Text('add_category.title_add').tr(),
         ),
         body: Padding(
             padding: EdgeInsets.fromLTRB(Style.mainPadding, Style.halfPadding,
@@ -102,11 +103,11 @@ class _AddCategoryState extends State<AddCategory> {
             child: AnimatedOpacity(
               ///run Opacity animation when page transistion end
               opacity: _transistionPageEnd ? 1 : 0,
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               child: Builder(builder: (context) {
                 //if page transistion not end show empty widget
                 if (!_transistionPageEnd) {
-                  return SizedBox.shrink();
+                  return const SizedBox.shrink();
                 }
                 return Wrap(
                     direction: Axis.horizontal,
@@ -131,8 +132,8 @@ class _AddCategoryState extends State<AddCategory> {
                               children: icons_list.entries
                                   .map((item) => NeumorphicRadio(
                                         groupValue: icon,
-                                        padding: EdgeInsets.all(16),
-                                        style: NeumorphicRadioStyle(
+                                        padding: const EdgeInsets.all(16),
+                                        style: const NeumorphicRadioStyle(
                                           boxShape: NeumorphicBoxShape.circle(),
                                         ),
                                         value: item.value,

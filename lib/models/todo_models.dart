@@ -11,7 +11,7 @@ abstract class TodoModel {
   factory TodoModel.fromMap() {
     return null;
   }
-  Map toMap() {
+  Map<String, dynamic> toMap() {
     return null;
   }
 }
@@ -24,7 +24,7 @@ class TodoCategory extends TodoModel {
   final int completed;
   final int totalItems;
 
-  static final String table = 'Categories';
+  static const String table = 'Categories';
 
   const TodoCategory(
       {this.id,
@@ -34,11 +34,11 @@ class TodoCategory extends TodoModel {
       this.totalItems = 0});
 
   factory TodoCategory.fromMap(Map<String, dynamic> map) => TodoCategory(
-        id: map['id'],
-        title: map['title'],
+        id: map['id'] as int,
+        title: map['title'] as String,
         icon: map['icon'].toString().getFontAwesomeIcon,
-        completed: map['completed'],
-        totalItems: map['totalItems'],
+        completed: map['completed'] as int,
+        totalItems: map['totalItems'] as int,
       );
 
   double get percent {
@@ -117,7 +117,7 @@ class TodoItem extends TodoModel {
   final String description;
   final bool completed;
 
-  static final String table = 'Items';
+  static const String table = 'Items';
 
   const TodoItem(
       {this.id,
@@ -142,10 +142,10 @@ class TodoItem extends TodoModel {
   }
 
   factory TodoItem.fromMap(Map<String, dynamic> map) => TodoItem(
-      id: map['id'],
-      category: map['category'],
-      title: map['title'],
-      description: map['description'],
+      id: map['id'] as int,
+      category: map['category'] as int,
+      title: map['title'] as String,
+      description: map['description'] as String,
       completed: map['completed'] == 1);
 
   @override
