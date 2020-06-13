@@ -1,4 +1,4 @@
-# Neo Todo
+# Neo ToDo
 
 ### License
 
