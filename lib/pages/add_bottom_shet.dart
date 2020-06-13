@@ -75,7 +75,7 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
       child: Container(
         height: enableDescription ? 244 : 190,
         child: Neumorphic(
-            padding: EdgeInsets.all(Style.mainPadding),
+            padding: const EdgeInsets.all(Style.mainPadding),
             style: NeumorphicStyle(
                 boxShape: NeumorphicBoxShape.roundRect(const BorderRadius.only(
                     topLeft: Radius.circular(16),
@@ -88,13 +88,13 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
                     hint: 'add_task.title_hint'.tr(),
                     onChanged: itemTitleChanget,
                     autofocus: true),
-                SizedBox(height: Style.mainPadding),
+                const SizedBox(height: Style.mainPadding),
                 if (enableDescription)
                   NeumorphicTextField(
                     hint: 'add_task.description_hint'.tr(),
                     onChanged: itemDescriptionChanget,
                   ),
-                SizedBox(height: Style.mainPadding),
+                const SizedBox(height: Style.mainPadding),
                 Row(
                   children: <Widget>[
                     NeumorphicButton(
