@@ -1,4 +1,3 @@
-import 'package:animated_background/animated_background.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,7 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../bloc/settings.dart';
 import '../style.dart';
-import '../widgets/cover_line.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key key}) : super(key: key);
@@ -152,6 +150,18 @@ class _HeadDrawerState extends State<HeadDrawer> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return DrawerHeader(
+      child: Center(
+        child: NeumorphicText('title'.tr(),
+            textStyle:
+                NeumorphicTextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+      ),
+    );
+  }
+
+  /*
+  @override
+  Widget build(BuildContext context) {
+    return DrawerHeader(
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
       child: ClipRect(
@@ -182,7 +192,7 @@ class _HeadDrawerState extends State<HeadDrawer> with TickerProviderStateMixin {
         ),
       ),
     );
-  }
+  }*/
 }
 
 class ItemDrawer extends StatelessWidget {

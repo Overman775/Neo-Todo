@@ -91,7 +91,7 @@ class _TodoPageState extends State<TodoPage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       HeroIcon(category: category),
-                      SizedBox(width: Style.mainPadding),
+                      const SizedBox(width: Style.mainPadding),
                       Expanded(child: HeroProgress(category: category)),
                     ],
                   );
