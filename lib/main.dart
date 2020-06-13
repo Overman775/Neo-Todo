@@ -80,6 +80,7 @@ class MyApp extends StatelessWidget {
             intensity: 0.6,
             lightSource: LightSource.topRight,
             shadowDarkColor: Colors.black,
+            shadowLightColor: Colors.grey[500],
             depth: 3,
             appBarTheme: NeumorphicAppBarThemeData(
                 buttonPadding: const EdgeInsets.all(14.0),
