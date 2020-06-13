@@ -31,7 +31,7 @@ Future main() async {
         path: 'assets/locales',
         fallbackLocale: const Locale('en'),
         useOnlyLangCode: true,
-        preloaderColor: prefs.getBool('dakMode') == true
+        preloaderColor: prefs.getBool('darkMode') == true
             ? Style.bgColorDark
             : Style.bgColor,
         child: MultiProvider(providers: [
