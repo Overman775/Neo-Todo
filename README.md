@@ -4,7 +4,7 @@ Neo ToDo - Beautiful neumorphism style todo list
 </h1>
 
 
-|<img src="./screenshots/animation.gif" width="300" />|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="+6"><p align="left">• Neomorphism style.</br>• Categories of tasks.</br>• Beautiful animations.</br>• Dark theme.</br>• Font Awesome icons.</br>• Provider.</br>• Sqlite DB.</p></font>|
+|<img src="./screenshots/animation.gif" width="300" />|<font size="+2"><p align="left">• Neomorphism style.</br>• Categories of tasks.</br>• Beautiful animations.</br>• Dark theme.</br>• Font Awesome icons.</br>• Provider.</br>• Sqlite DB.</p></font>|
 |---|---|
 
 
