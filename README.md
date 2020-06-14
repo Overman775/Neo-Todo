@@ -73,5 +73,6 @@ SOFTWARE.
 ## Contacts
 
 > GitHub [@Overman775](https://github.com/Overman775) &nbsp;&middot;&nbsp;
+> Telegram [@Overman775](https://t.me/Overman775) &nbsp;&middot;&nbsp;
 > Linkedin [@Alexey Z](https://www.linkedin.com/in/overman775/) &nbsp;&middot;&nbsp;
 > Twitter [@AlexeyZd](https://twitter.com/AlexeyZd)
