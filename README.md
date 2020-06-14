@@ -42,7 +42,7 @@ You can [download](https://play.google.com/store/apps/details?id=com.flutter.ban
 |---|---|---|
 | ![Screenshot 4](https://raw.github.com/Overman775/Neo-Todo/master/screenshots/flutter_04.png) | ![Screenshot 5](https://raw.github.com/Overman775/Neo-Todo/master/screenshots/flutter_05.png) | ![Screenshot 6](https://raw.github.com/Overman775/Neo-Todo/master/screenshots/flutter_06.png) |
 
-</detail>
+</details>
 
 ## License
 
