@@ -1,8 +1,9 @@
-<h1 align="center">Neo ToDo</br>
-<img src="./assets/icon/icon.png" width="150"/></h1>
+<h1 align="center">Neo ToDo</br></br>
+<img src="./assets/icon/icon.png" width="150"/>
+</h1>
 
 
-|<img src="./screenshots/animation.gif" width="400" />|<font size="+3">• Neomorphism style.</br>• Categories of tasks.</br>• Beautiful animations.</br>• Dark theme.</br>• Font Awesome icons.</br>• Provider.</br>• Sqlite DB.</font>|
+|<img src="./screenshots/animation.gif" width="400" />|<p align="left"><font size="18">• Neomorphism style.</br>• Categories of tasks.</br>• Beautiful animations.</br>• Dark theme.</br>• Font Awesome icons.</br>• Provider.</br>• Sqlite DB.</font></p>|
 |---|---|
 
 <details>
