@@ -69,3 +69,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## Contacts
+
+> GitHub [@Overman775](https://github.com/Overman775) &nbsp;&middot;&nbsp;
+> Linkedin [@Alexey Z](https://www.linkedin.com/in/overman775/) &nbsp;&middot;&nbsp;
+> Twitter [@AlexeyZd](https://twitter.com/AlexeyZd)
