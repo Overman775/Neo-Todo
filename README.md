@@ -1,11 +1,18 @@
-# Neo ToDo
+<h1 align="center">Neo ToDo</br>
+<img src="./assets/icon/icon.png" width="150"/></h1>
 
 
-### Screenshots
+|<img src="./screenshots/animation.gif" width="400" />|<font size="+3">• Neomorphism style.</br>• Categories of tasks.</br>• Beautiful animations.</br>• Dark theme.</br>• Font Awesome icons.</br>• Provider.</br>• Sqlite DB.</font>|
+|---|---|
+
+<details>
+  <summary>Screenshots</summary>
 
 | ![Screenshot 1](https://raw.github.com/Overman775/Neo-Todo/master/screenshots/flutter_01.png) | ![Screenshot 2](https://raw.github.com/Overman775/Neo-Todo/master/screenshots/flutter_02.png) | ![Screenshot 3](https://raw.github.com/Overman775/Neo-Todo/master/screenshots/flutter_03.png) |
 |---|---|---|
 | ![Screenshot 4](https://raw.github.com/Overman775/Neo-Todo/master/screenshots/flutter_04.png) | ![Screenshot 5](https://raw.github.com/Overman775/Neo-Todo/master/screenshots/flutter_05.png) | ![Screenshot 6](https://raw.github.com/Overman775/Neo-Todo/master/screenshots/flutter_06.png) |
+
+</detail>
 
 ### License
 
