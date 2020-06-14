@@ -1,23 +1,10 @@
-<style>
-table {
-    width:100%;
-    border: none;
-    
-}
-th, td {
-  padding: 15px;
-  text-align: left;
-  font-size: 18px;
-}
-</style>
-
 <h1 align="center">
 <img src="./assets/icon/icon.png" width="200"/></br></br>
 Neo ToDo - Beautiful neumorphism style todo list
 </h1>
 
 
-|<img src="./screenshots/animation.gif" width="300" />|<p>• Neomorphism style.</p><p>• Categories of tasks.</p><p>• Beautiful animations.</p><p>• Dark theme.</p><p>• Font Awesome icons.</p><p>• Provider.</p><p>• Sqlite DB.</p>|
+|<img src="./screenshots/animation.gif" width="300" />|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font size="+6"><p align="left">• Neomorphism style.</br>• Categories of tasks.</br>• Beautiful animations.</br>• Dark theme.</br>• Font Awesome icons.</br>• Provider.</br>• Sqlite DB.</p></font>|
 |---|---|
 
 
