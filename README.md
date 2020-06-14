@@ -1,10 +1,23 @@
+<style>
+table {
+    width:100%;
+    border: none;
+    
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+  font-size: 18px;
+}
+</style>
+
 <h1 align="center">
 <img src="./assets/icon/icon.png" width="200"/></br></br>
 Neo ToDo - Beautiful neumorphism style todo list
 </h1>
 
 
-|<img src="./screenshots/animation.gif" width="400" />|<p align="left"><font size="18">• Neomorphism style.</br>• Categories of tasks.</br>• Beautiful animations.</br>• Dark theme.</br>• Font Awesome icons.</br>• Provider.</br>• Sqlite DB.</font></p>|
+|<img src="./screenshots/animation.gif" width="300" />|<p>• Neomorphism style.</p><p>• Categories of tasks.</p><p>• Beautiful animations.</p><p>• Dark theme.</p><p>• Font Awesome icons.</p><p>• Provider.</p><p>• Sqlite DB.</p>|
 |---|---|
 
 
@@ -33,7 +46,7 @@ You can [download](https://play.google.com/store/apps/details?id=com.flutter.ban
  <a href="https://play.google.com/store/apps/details?id=com.flutter.bananavolt.neumorphism.neo.todo"><img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" width="250"></a>
 
 
-### License
+## Screenshots
 
 <details>
   <summary>Screenshots</summary>
@@ -44,7 +57,7 @@ You can [download](https://play.google.com/store/apps/details?id=com.flutter.ban
 
 </detail>
 
-### License
+## License
 
 ```
 MIT License
