@@ -261,37 +261,40 @@ class ListBody extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: Style.halfPadding,
                       ),
-                      ExpandablePanel(
-                          header: TextFieldLabel(
-                            'completed'.tr(),
-                            padding: EdgeInsets.only(left: Style.doublePadding),
-                          ),
-                          theme: ExpandableThemeData(
-                              headerAlignment:
-                                  ExpandablePanelHeaderAlignment.center,
-                              iconPadding:
-                                  EdgeInsets.only(right: Style.doublePadding),
-                              iconColor:
-                                  NeumorphicTheme.defaultTextColor(context),
-                              expandIcon: FontAwesomeIcons.angleDown,
-                              collapseIcon: FontAwesomeIcons.angleDown,
-                              useInkWell: false),
-                          expanded: Padding(
-                            padding: EdgeInsets.fromLTRB(
-                                Style.mainPadding,
-                                Style.halfPadding,
-                                Style.mainPadding,
-                                Style.mainPadding),
-                            child: Column(
-                              children: <Widget>[
-                                ...todo.items_completed.map((item) =>
-                                    TodoItemWidget(item, widget.args.category)),
-                              ],
+                      if (todo.items_completed.isNotEmpty)
+                        ExpandablePanel(
+                            header: TextFieldLabel(
+                              'completed'.tr(),
+                              padding:
+                                  EdgeInsets.only(left: Style.doublePadding),
                             ),
-                          ))
+                            theme: ExpandableThemeData(
+                                headerAlignment:
+                                    ExpandablePanelHeaderAlignment.center,
+                                iconPadding:
+                                    EdgeInsets.only(right: Style.doublePadding),
+                                iconColor:
+                                    NeumorphicTheme.defaultTextColor(context),
+                                expandIcon: FontAwesomeIcons.angleDown,
+                                collapseIcon: FontAwesomeIcons.angleDown,
+                                useInkWell: false),
+                            expanded: Padding(
+                              padding: const EdgeInsets.fromLTRB(
+                                  Style.mainPadding,
+                                  Style.halfPadding,
+                                  Style.mainPadding,
+                                  Style.mainPadding),
+                              child: Column(
+                                children: <Widget>[
+                                  ...todo.items_completed.map((item) =>
+                                      TodoItemWidget(
+                                          item, widget.args.category)),
+                                ],
+                              ),
+                            ))
                     ],
                   );
                 } else {
