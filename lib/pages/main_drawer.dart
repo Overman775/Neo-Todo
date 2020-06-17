@@ -157,42 +157,6 @@ class _HeadDrawerState extends State<HeadDrawer> with TickerProviderStateMixin {
       ),
     );
   }
-
-  /*
-  @override
-  Widget build(BuildContext context) {
-    return DrawerHeader(
-      margin: EdgeInsets.zero,
-      padding: EdgeInsets.zero,
-      child: ClipRect(
-        child: Stack(
-          children: <Widget>[
-            AnimatedBackground(
-              behaviour: RandomParticleBehaviour(
-                  options: ParticleOptions(
-                      baseColor: NeumorphicTheme.accentColor(context),
-                      spawnMinSpeed: 10.0,
-                      spawnMaxSpeed: 15.0,
-                      particleCount: 100)),
-              vsync: this,
-              child: Center(
-                child: NeumorphicText('title'.tr(),
-                    textStyle: NeumorphicTextStyle(
-                        fontSize: 40, fontWeight: FontWeight.bold)),
-              ),
-            ),
-            const CoverLine(
-              height: 32,
-            ),
-            CoverLine(
-              alignment: Alignment.bottomCenter,
-              height: 32,
-            )
-          ],
-        ),
-      ),
-    );
-  }*/
 }
 
 class ItemDrawer extends StatelessWidget {
