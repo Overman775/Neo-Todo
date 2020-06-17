@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class NeumorphicAppStyle extends StatelessWidget {
   final String title;
@@ -53,7 +54,7 @@ class NeumorphicAppStyle extends StatelessWidget {
     if (color is MaterialColor) {
       return ThemeData(
         primarySwatch: color,
-        textTheme: theme.textTheme,
+        textTheme: GoogleFonts.nunitoTextTheme(theme.textTheme),
         scaffoldBackgroundColor: theme.baseColor,
       );
     }
@@ -68,7 +69,7 @@ class NeumorphicAppStyle extends StatelessWidget {
           ThemeData.estimateBrightnessForColor(theme.accentColor),
       accentColorBrightness:
           ThemeData.estimateBrightnessForColor(theme.variantColor),
-      textTheme: theme.textTheme,
+      textTheme: GoogleFonts.nunitoTextTheme(theme.textTheme),
       scaffoldBackgroundColor: theme.baseColor,
     );
   }
