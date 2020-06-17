@@ -58,83 +58,95 @@ class MainDrawer extends StatelessWidget {
           ),
           const Spacer(),
           //wait version info
-          FutureBuilder(
-            future: PackageInfo.fromPlatform(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData && !snapshot.hasError) {
-                return ItemDrawer(
-                  text: 'settings.version'
-                      .tr(args: [snapshot.data.version.toString()]),
-                  child: Text('settings.about'.tr()),
-                  onTap: () => showAboutDialog(
-                    context: context,
-                    applicationVersion: snapshot.data.version.toString(),
-                    applicationIcon: Image.asset(
-                      'assets/icon/icon.png',
-                      height: 50,
-                    ),
-                    children: [
-                      Text('settings.about_text'.tr()),
-                      Padding(
-                        padding: const EdgeInsets.only(top: Style.mainPadding),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                IconButton(
-                                    icon: FaIcon(
-                                      FontAwesomeIcons.github,
-                                      color:
-                                          NeumorphicTheme.accentColor(context),
-                                    ),
-                                    onPressed: () => launch(
-                                        'https://github.com/Overman775')),
-                                const Text('Github')
-                              ],
-                            ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                IconButton(
-                                    icon: FaIcon(
-                                      FontAwesomeIcons.twitter,
-                                      color:
-                                          NeumorphicTheme.accentColor(context),
-                                    ),
-                                    onPressed: () =>
-                                        launch('https://twitter.com/AlexeyZd')),
-                                const Text('Twitter')
-                              ],
-                            ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                IconButton(
-                                    icon: FaIcon(
-                                      FontAwesomeIcons.linkedin,
-                                      color:
-                                          NeumorphicTheme.accentColor(context),
-                                    ),
-                                    onPressed: () => launch(
-                                        'https://www.linkedin.com/in/overman775/')),
-                                const Text('Linkedin')
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              } else {
-                return const SizedBox.shrink();
-              }
-            },
-          ),
+          const About(),
         ]),
       ),
+    );
+  }
+}
+
+class About extends StatelessWidget {
+  const About({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: PackageInfo.fromPlatform(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData && !snapshot.hasError) {
+          return ItemDrawer(
+            text:
+                'settings.version'.tr(args: [snapshot.data.version.toString()]),
+            child: Text(
+              'settings.about'.tr(),
+              style:
+                  TextStyle(color: NeumorphicTheme.defaultTextColor(context)),
+            ),
+            onTap: () => showAboutDialog(
+              context: context,
+              applicationVersion: snapshot.data.version.toString(),
+              applicationIcon: Image.asset(
+                'assets/icon/icon.png',
+                height: 50,
+              ),
+              children: [
+                Text('settings.about_text'.tr()),
+                Padding(
+                  padding: const EdgeInsets.only(top: Style.mainPadding),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          IconButton(
+                              icon: FaIcon(
+                                FontAwesomeIcons.github,
+                                color: NeumorphicTheme.accentColor(context),
+                              ),
+                              onPressed: () =>
+                                  launch('https://github.com/Overman775')),
+                          const Text('Github')
+                        ],
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          IconButton(
+                              icon: FaIcon(
+                                FontAwesomeIcons.twitter,
+                                color: NeumorphicTheme.accentColor(context),
+                              ),
+                              onPressed: () =>
+                                  launch('https://twitter.com/AlexeyZd')),
+                          const Text('Twitter')
+                        ],
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          IconButton(
+                              icon: FaIcon(
+                                FontAwesomeIcons.linkedin,
+                                color: NeumorphicTheme.accentColor(context),
+                              ),
+                              onPressed: () => launch(
+                                  'https://www.linkedin.com/in/overman775/')),
+                          const Text('Linkedin')
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
     );
   }
 }
