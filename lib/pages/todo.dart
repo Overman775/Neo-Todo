@@ -147,7 +147,7 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
   Future onSelected(String selected, BuildContext context) async {
     final block = context.read<Todo>();
     switch (selected) {
-      case 'edit':
+      case 'edit' :
         //fix double editing
         final category = block.categoryes
             .firstWhere((element) => element.id == args.category.id);

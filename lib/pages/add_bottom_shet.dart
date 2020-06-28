@@ -113,7 +113,7 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
                       style: NeumorphicStyle(
                           boxShape: NeumorphicBoxShape.roundRect(
                               Style.mainBorderRadius)),
-                      child: Text('save',
+                      child: Text('add',
                               style: TextStyle(
                                   color: _saveEnable
                                       ? NeumorphicTheme.accentColor(context)
