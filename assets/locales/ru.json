@@ -1,4 +1,5 @@
 {
+	"add": "Добавить",
 	"add_category.icon": "Значок",
 	"add_category.name": "Название",
 	"add_category.title_add": "Новая категория",
@@ -9,7 +10,6 @@
 	"add_task.title_hint": "Новая задача",
 	"completed": "Завершенные",
 	"save": "Сохранить",
-	"add": "Добавить",
 	"settings.about": "О приложении",
 	"settings.about_text": "Разработано Алексеем Здоровых",
 	"settings.dark_mode": "Ночной режим",

@@ -1,4 +1,5 @@
 {
+	"add": "Ajouter",
 	"add_category.icon": "Icône",
 	"add_category.name": "Titre",
 	"add_category.title_add": "Nouvelle catégorie",
@@ -8,8 +9,7 @@
 	"add_task.title": "Titre",
 	"add_task.title_hint": "Nouvelle tâche",
 	"completed": "Terminées",
-	"add": "Ajouter",
-  "save": "Enregistrer",
+	"save": "Enregistrer",
 	"settings.about": "À propos",
 	"settings.about_text": "Développé par Aleksey Zdorovykh",
 	"settings.dark_mode": "Mode sombre",
