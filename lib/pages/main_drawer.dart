@@ -33,6 +33,10 @@ class MainDrawer extends StatelessWidget {
                   child: Text('Engish'),
                 ),
                 const DropdownMenuItem<dynamic>(
+                  value: Locale('fr'),
+                  child: Text('French'),
+                ),
+                const DropdownMenuItem<dynamic>(
                   value: Locale('ru'),
                   child: Text('Русский'),
                 )

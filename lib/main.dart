@@ -35,7 +35,7 @@ Future main() async {
 
   runApp(
     EasyLocalization(
-        supportedLocales: [const Locale('en'), const Locale('ru')],
+        supportedLocales: [const Locale('en'), const Locale('fr'), const Locale('ru')],
         path: 'assets/locales',
         fallbackLocale: const Locale('en'),
         useOnlyLangCode: true,
@@ -57,6 +57,7 @@ class MyApp extends StatelessWidget {
     return NeumorphicAppStyle(
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
+        debugShowCheckedModeBanner: false,
         locale: context.locale,
         title: 'title'.tr(),
         initialRoute: '/',
